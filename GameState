@@ -1,0 +1,36 @@
+class GameState
+{	
+	private:
+		int levelNumber = 1;
+		static GameState *gameState = nullptr;
+		vector<Object>
+
+	public: 
+		void GameState()
+		{
+			//download map - pass level number, 
+			loadMap(levelNumber);
+			
+		}
+
+		//returns the one instance of the GameState
+		static GameState* getGameState()
+		{
+			if(gameState == nullptr)
+			{
+				gameState = new GameState();
+			} 
+			return gameState;
+		}
+};
+
+void startGame()
+{
+	//this code called by new button click event
+	GameState *gameState = getGameState();
+}
+
+void updateGame()
+{
+	//time code
+}
