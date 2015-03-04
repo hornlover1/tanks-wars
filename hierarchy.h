@@ -1,5 +1,4 @@
-class Object : QLabel
-{
+class Object : QLabel {
 	QString objectName; //to identify the type of object
     
 //predifined basic sizes for these objects.  Change here, change everywhere.
@@ -16,8 +15,7 @@ class Object : QLabel
 	static int bulletS, tankBS, specialObs, exploTrapS, turrentS;
 	
 //code to move object
-	virtual Movement() 
-	{ 
+    virtual Movement() {
 //remains empty for walls
 	} 
 
@@ -25,14 +23,14 @@ class Object : QLabel
 //remove that object.
 Object didContact(Object obj) {
 //why can't we compare current object against the objects in the objectsVector
-	vector<QPoint> corners(obj.topLeft(), obj.TopRight(),...
+    //vector<QPoint> corners(obj.topLeft(), obj.TopRight(),...
 	for (object obj2 in world) {
 //why can't this code use the x y height widgth ints? 
-		for (QPoint pt: corners) {
-			if (obj2.getGeometry().contains(pt) {
+        //for (QPoint pt: corners) {
+        if (obj2.getGeometry().contains(obj.getGeometry())) {
 				return obj2;
 			}
-		}
+        //}
 	}
 	return new Object();
 }
@@ -55,17 +53,14 @@ Object didContact(Object obj) {
     virtual explosion {/*tank and bullet need this.*/}
 };
 
-class WallBlock : public Object
-{
+class WallBlock : public Object {
     
 };
 
-class Bullet : public Object
-{
+class Bullet : public Object {
     override isDestroyable = true;
     
-    overrride Movement() 
-	{
+    overrride Movement() {
 	//Increment x and y by 1 to move bullet in straight line (?)
 	
 		Object obj= this->didContact();
@@ -88,11 +83,9 @@ class Bullet : public Object
        */}
 };
 
-class TankBody : public Object
-{
+class TankBody : public Object {
     override isDestroyable = true;
-    override Movement() 
-    {
+    override Movement() {
         /*move based on input.  But his code won't enable upright combination
         if(up arrow) { y++; }
         if(down arrow) { y--; }
@@ -105,20 +98,17 @@ class TankBody : public Object
 };
 
 //special object that may need to be built from the ground up.  May need to consist of two labels instread of one.
-class Turret : public Object
-{
+class Turret : public Object {
     override Movement() {//must be on tankbody, move with tank body}
         
     /*must direct front end toward cursor position.*/
 }
 
 //other possibilities
-class PushableObtacle : public WallBlock
-{
+class PushableObtacle : public WallBlock {
     //obstacles the tank must push past and destroy
 };
 
-class ExplosiveTraps : public Bullet
-{
+class ExplosiveTraps : public Bullet {
     //a big bullet that doesn't move and explodes when touched by tank or bullet.
 };
