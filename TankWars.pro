@@ -16,13 +16,15 @@ SOURCES += main.cpp\
         mainwindow.cpp \
         createGameState.cpp \
         hierarchy.cpp \
-        levelobject.cpp
+        levelobject.cpp \
+    interface.cpp
 
 HEADERS  += mainwindow.h \
         createGameState.h \
         hierarchy.h \
         GameState.h \
         overlapLogic.h \
-        levelobject.h
+        levelobject.h \
+    interface.h
 
 FORMS    += mainwindow.ui

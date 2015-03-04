@@ -1,5 +1,4 @@
-class GameState
-{	
+class GameState {
 	private:
 		//level number must exist from gamestate to gamestate. How? gamestate is reinitialized. The value must be saved somewhere outside this code.
 		static int levelNumber = 1;
@@ -7,15 +6,12 @@ class GameState
 		vector<Object> objectVector = new vector<Object>();		
 
 //only creates a new gameState
-		void newGameState()
-		{
-			if(gameState != nullptr)
-			{
+        void newGameState() {
+            if(gameState != nullptr) {
 //This abruptly destroyes the previous gameState. Does the level number, or anything else need to be preserved?
 				delete gameState;
 				gameState = new GameState();
-			}else
-			{
+            } else {
 				gameState = new GameState();
 			}
 		}
