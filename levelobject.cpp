@@ -17,3 +17,20 @@ QRect LevelObject::getGeometry() {
     QRect geometry(x,y,width,height);
     return geometry;
 }
+
+void LevelObject::destroy() {}
+
+void LevelObject::pause() {
+    timer->stop();
+}
+
+void LevelObject::resume() {
+    timer->start();
+}
+
+LevelObject::~LevelObject() {
+    timer->stop();
+    delete timer;
+}
+
+LevelObject::onTimeOut() {}
