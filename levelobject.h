@@ -2,22 +2,27 @@
 #define LEVELOBJECT_H
 
 #include <QObject>
+#include <QTimer>
 
 class LevelObject : public QObject {
     Q_OBJECT
 
 protected :
-    virtual bool isDestroyable;
+    bool isDestroyable;
 
-    virtual bool isMovable;
+    bool isMovable;
 
     int x, y, height, width;
+    int id;
+    static int nextId;
     //timer to be used to animate movableObjects
-    QTimer timer;
+    QTimer* timer;
 public:
-    explicit LevelObject(QObject* parent = 0);
+    explicit LevelObject(int initX, int initY, int initWidth, int initHeight, QObject *parent = 0);
 
     //getters and setters
+
+    int getId();
 
     //get a rectangle representing the object for calculations especially involving overlapping of objects
     QRect getGeometry();
@@ -30,6 +35,12 @@ public:
 
     //resume the timer to restart animation
     void resume();
+
+    ~LevelObject();
+
+protected slots:
+    //called when the timer goes off
+    virtual void onTimeOut();
 };
 
 //an object that can move around on the screen, such as a tank or bullet

@@ -1,6 +1,8 @@
 #ifndef LEVELMANAGER_H
 #define LEVELMANAGER_H
 
+#include "levelobject.h"
+
 class LevelManager {
     LevelManager();
     static LevelManager instance;
@@ -21,7 +23,7 @@ public:
     void loadLevel(int levelNum);
 
     //on a mousemove, this will reposition the tank's turret
-    void moveMouse();
+    void moveMouse(int x, int y);
 
     //start a bullet moving
     void mouseClick();

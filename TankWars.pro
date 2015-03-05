@@ -14,13 +14,15 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-        levelobject.h \
+        levelobject.cpp \
         interface.cpp \
-        levelmanager.cpp
+        levelmanager.cpp \
+        movablelabel.cpp
 
 HEADERS  += mainwindow.h \
         levelobject.h \
         interface.h \
-        levelmanager.h
+        levelmanager.h \
+        movablelabel.h
 
 FORMS    += mainwindow.ui
