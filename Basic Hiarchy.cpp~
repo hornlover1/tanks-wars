@@ -14,7 +14,7 @@ class Object : QLabel
     //each subclass will redefine this object.
     virtual bool isDestroyable = false
     
-    int x,y,height,width;
+    int x,y;
     
     //constructor
     Object(QImage image) { }
