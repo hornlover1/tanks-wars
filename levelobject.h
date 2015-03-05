@@ -12,6 +12,8 @@ protected :
     virtual bool isMovable;
 
     int x, y, height, width;
+    //timer to be used to animate movableObjects
+    QTimer timer;
 public:
     explicit LevelObject(QObject* parent = 0);
 
@@ -22,6 +24,12 @@ public:
 
     //for objects that are destroyable, blow them up, preferably with cool animation
     virtual void destroy();
+
+    //pause the timer to stop animation
+    void pause();
+
+    //resume the timer to restart animation
+    void resume();
 };
 
 //an object that can move around on the screen, such as a tank or bullet
@@ -49,14 +57,17 @@ public:
     //move the tank to the new location
     void move(int newX, int newY);
 
-    //when the user holds down a particular arrow key, move the tank 5px in the direction he specifies
-    void move(Direction d);
+    //when the user holds down a particular arrow key, start the tank moving
+    void startMotion(Direction d);
 
     //aim the turret in that direction
     void setTurret(int angle);
 
     //blow up the tank, preferably with cool animation
     void destroy();
+public slots:
+    //move 5px in the direction specified
+    void move(Direction d);
 };
 
 class BulletObject: public MovableObject  {
@@ -69,6 +80,10 @@ public:
     //move the bullet
     void move(int newX, int newY);
 
+    //set the timer to start the bullet moving
+    void startMotion();
+
+public slots:
     //move the bullet 5px in the direction specified by <heading>
     void move();
 };

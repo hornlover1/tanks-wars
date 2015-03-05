@@ -14,17 +14,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-        createGameState.cpp \
-        hierarchy.cpp \
-        levelobject.cpp \
-    interface.cpp
+        levelobject.h \
+        interface.cpp \
+        levelmanager.cpp
 
 HEADERS  += mainwindow.h \
-        createGameState.h \
-        hierarchy.h \
-        GameState.h \
-        overlapLogic.h \
         levelobject.h \
-    interface.h
+        interface.h \
+        levelmanager.h
 
 FORMS    += mainwindow.ui
