@@ -4,6 +4,18 @@ LevelManager::LevelManager() {}
 
 LevelManager LevelManager::instance;
 
+int LevelManager::lastUnlockedLevel;
+
+void LevelManager::incrementLastUnlockedLevel(){
+    if(lastUnlockedLevel < 9){
+        lastUnlockedLevel++;
+    }
+}
+
+int LevelManager::getLastUnlockedLevel(){
+    return lastUnlockedLevel;
+}
+
 LevelManager LevelManager::getInstance() {
     return instance;
 }
