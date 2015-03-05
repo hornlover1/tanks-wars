@@ -3,6 +3,7 @@
 
 #include "levelobject.h"
 #include <fstream>
+using namespace std;
 
 class LevelManager {
     LevelManager();
@@ -15,10 +16,20 @@ class LevelManager {
     //position of mouse
     int mouseX, mouseY;
 
+//User Information
     //counter to record which level is available
     static int lastUnlockedLevel = 0;
 
+    //The name of the user
+    QString userName;
+
 public:
+    //get the username
+    QString getUserName();
+
+    //set the username
+    void setUserName(QString name);
+
     //increment levelUnlockedLevel
     static void incrementLastUnlockedLevel();
 
@@ -54,13 +65,17 @@ public:
     void saveGame()
     {
         //open\create the file
+        fstream fs = new fstream("HighScore.txt",fstream::out);
 
+        //write user name
 
-        //save the button states
+        //write high score
 
-        //user name
+        //write last unlocked level
+        fs << LevelManager::getLastUnlockedLevel();
 
-        //write user name and high score to file
+        //close file
+        fs.close();
     }
 };
 

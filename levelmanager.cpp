@@ -6,6 +6,16 @@ LevelManager LevelManager::instance;
 
 int LevelManager::lastUnlockedLevel;
 
+QString LevelManager::getUserName()
+{
+    return userName;
+}
+
+void LevelManager::setUserName(QString name)
+{
+       userName = name;
+}
+
 void LevelManager::incrementLastUnlockedLevel(){
     if(lastUnlockedLevel < 9){
         lastUnlockedLevel++;

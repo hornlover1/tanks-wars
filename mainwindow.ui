@@ -96,6 +96,37 @@
          </widget>
         </item>
         <item>
+         <widget class="QLineEdit" name="leUserName">
+          <property name="placeholderText">
+           <string>Name Here</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rbEasy">
+          <property name="text">
+           <string>Easy</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rbMedium">
+          <property name="text">
+           <string>Medium</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rbHard">
+          <property name="text">
+           <string>Hard</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QGroupBox" name="levels">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -113,33 +144,40 @@
            <string>Levels</string>
           </property>
           <layout class="QGridLayout" name="gridLayout">
+           <item row="2" column="3">
+            <widget class="QPushButton" name="lvl09">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>9</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="lvl08">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>8</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QPushButton" name="lvl07">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>7</string>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="0">
             <widget class="QPushButton" name="lvl01">
              <property name="text">
               <string>1</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QPushButton" name="lvl02">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string>2</string>
-             </property>
-             <property name="checkable">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="3">
-            <widget class="QPushButton" name="lvl03">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string>3</string>
              </property>
             </widget>
            </item>
@@ -163,26 +201,6 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
-            <widget class="QPushButton" name="lvl07">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string>7</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="3">
-            <widget class="QPushButton" name="lvl09">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string>9</string>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="1">
             <widget class="QPushButton" name="lvl05">
              <property name="enabled">
@@ -193,13 +211,26 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
-            <widget class="QPushButton" name="lvl08">
+           <item row="0" column="1">
+            <widget class="QPushButton" name="lvl02">
              <property name="enabled">
               <bool>false</bool>
              </property>
              <property name="text">
-              <string>8</string>
+              <string>2</string>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="QPushButton" name="lvl03">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>3</string>
              </property>
             </widget>
            </item>
