@@ -4,6 +4,16 @@ LevelManager::LevelManager() {}
 
 LevelManager LevelManager::instance;
 
+void LevelManager::setUserHighScore(int score)
+{
+    userHighScore = score;
+}
+
+int LevelManager::getUserHighScore()
+{
+    return userHighScore;
+}
+
 int LevelManager::lastUnlockedLevel;
 
 QString LevelManager::getUserName()
@@ -71,4 +81,38 @@ void LevelManager::keyRelease(Direction d) {
     //TODO: write this method
     //get tank
     //stop tank moving
+}
+
+void LevelManager::saveFile()
+{
+    //open\create the file
+    ofstream fs("saveFile.txt");
+
+    //write last unlocked level
+    fs << "maxLevel \"" << LevelManager::getLastUnlockedLevel() << "\"";
+
+    //write user name
+    fs << "user.name \"" << getUserName() << "\"";
+
+    //close file
+    fs.close();
+}
+
+void LevelManager::saveHighScore()
+{
+    ofstream os("HighScore.txt");
+
+    //write out name
+    os << getUserName() << ":" << endl << endl;
+
+    //write out highscore
+    os << getUserHighScore();
+
+    //close file
+    os.close();
+}
+
+void LevelManager::loadFile()
+{
+
 }

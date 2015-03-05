@@ -23,7 +23,16 @@ class LevelManager {
     //The name of the user
     QString userName;
 
+    //current high score of the user
+    int userHighScore;
+
 public:
+    //set userHighScore
+    void setUserHighScore(int score);
+
+    //returns userHighScore
+    int getUserHighScore();
+
     //get the username
     QString getUserName();
 
@@ -61,22 +70,14 @@ public:
     //stop the tank from moving
     void keyRelease(Direction d);
 
-    //save game
-    void saveGame()
-    {
-        //open\create the file
-        fstream fs = new fstream("HighScore.txt",fstream::out);
+    //save game to a file
+    void saveFile();
 
-        //write user name
+    //save highscore to a file
+    void saveHighScore();
 
-        //write high score
-
-        //write last unlocked level
-        fs << LevelManager::getLastUnlockedLevel();
-
-        //close file
-        fs.close();
-    }
+    //read in the saved file
+    void loadFile();
 };
 
 #endif // LEVELMANAGER_H
