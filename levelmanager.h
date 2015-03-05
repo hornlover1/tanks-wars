@@ -2,6 +2,7 @@
 #define LEVELMANAGER_H
 
 #include "levelobject.h"
+#include <fstream>
 
 class LevelManager {
     LevelManager();
@@ -14,7 +15,16 @@ class LevelManager {
     //position of mouse
     int mouseX, mouseY;
 
+    //counter to record which level is available
+    static int lastUnlockedLevel = 0;
+
 public:
+    //increment levelUnlockedLevel
+    static void incrementLastUnlockedLevel();
+
+    static int getLastUnlockedLevel();
+    //TODO: need to write the code incrementing this after each level completion
+
     //singleton method
     LevelManager getInstance();
 
@@ -39,6 +49,19 @@ public:
 
     //stop the tank from moving
     void keyRelease(Direction d);
+
+    //save game
+    void saveGame()
+    {
+        //open\create the file
+
+
+        //save the button states
+
+        //user name
+
+        //write user name and high score to file
+    }
 };
 
 #endif // LEVELMANAGER_H
