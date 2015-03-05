@@ -107,7 +107,7 @@ class WallObject: public LevelObject {
     //isMovable=false
     //isDestroyable=false
 public:
-    WallObject(QObject* parent = 0);
+    WallObject(int x, int y, int width, int height, QObject* parent = 0);
 };
 
 class Barricade: public LevelObject {
@@ -115,7 +115,7 @@ class Barricade: public LevelObject {
     //isDestroyable=true
 
 public:
-    Barricade(QObject* parent = 0);
+    Barricade(int x, int y, QObject* parent = 0);
 
     //get rid of the barricade
     void destroy();
