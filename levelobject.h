@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QTimer>
+#include <QRect>
 
 class LevelObject : public QObject {
     Q_OBJECT
@@ -12,7 +13,7 @@ protected :
 
     bool isMovable;
 
-    int x, y, height, width;
+    double x, y, height, width;
     int id;
     static int nextId;
     //timer to be used to animate movableObjects
@@ -47,7 +48,7 @@ protected slots:
 class MovableObject: public LevelObject {
     //isMovable = true;
 public:
-    MovableObject(QObject* parent = 0);
+    MovableObject(int initX, int initY, int initWidth, int initHeight, QObject *parent);
 
     //moves the object to the new location
     virtual void move(int newX, int newY);
@@ -63,13 +64,16 @@ class TankObject: public MovableObject {
     //the angle, in degrees, that the turret is facing
     int turretAngle;
 public:
-    TankObject(QObject* parent = 0);
+    TankObject(int x, int y, QObject* parent = 0);
 
     //move the tank to the new location
     void move(int newX, int newY);
 
     //when the user holds down a particular arrow key, start the tank moving
     void startMotion(Direction d);
+
+    //stop the tank from moving
+    void stopMotion();
 
     //aim the turret in that direction
     void setTurret(int angle);
@@ -86,7 +90,7 @@ class BulletObject: public MovableObject  {
     //the angle, in degrees, that the bullet is moving
     int heading;
 public:
-    BulletObject(int heading, QObject* parent = 0);
+    BulletObject(int initX, int initY, int initHeading, QObject* parent = 0);
 
     //move the bullet
     void move(int newX, int newY);
@@ -96,7 +100,7 @@ public:
 
 public slots:
     //move the bullet 5px in the direction specified by <heading>
-    void move();
+    void onTimeOut();
 };
 
 class WallObject: public LevelObject {
