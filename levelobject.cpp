@@ -1,5 +1,9 @@
 #include "levelobject.h"
 #include "levelmanager.h"
+<<<<<<< HEAD
+=======
+#include <math.h>
+>>>>>>> 54cd6bdab0cc873070eea70a819b82b19f392f95
 
 int LevelObject::nextId = 0;
 
@@ -8,6 +12,7 @@ LevelObject::LevelObject(int initX, int initY, int initWidth, int initHeight, QO
     QObject(parent), id(++nextId), x(initX), y(initY), width(initWidth), height(initHeight),
     isMovable(false), isDestroyable(false), timer(new QTimer(this)) {
     connect(timer, SIGNAL(timeout()), this, SLOT(onTimeOut()));
+    timer->setInterval(20);
 }
 
 int LevelObject::getId() {
@@ -36,9 +41,10 @@ LevelObject::~LevelObject() {
 
 LevelObject::onTimeOut() {}
 
-MovableObject::MovableObject(QObject *parent): LevelObject(parent) {}
+MovableObject::MovableObject(int initX, int initY, int initWidth, int initHeight, QObject *parent):
+    LevelObject(initX, initY, initWidth, initHeight, parent), isMovable(true) {}
 
-void MovableObject::move(int newX, int newY) {}
+MovableObject::move(int newX, int newY) {}
 
 LevelObject* MovableObject::getContactedObject() {
     for (LevelObject* obj: LevelManager::getInstance().getObjects()) {
@@ -47,4 +53,69 @@ LevelObject* MovableObject::getContactedObject() {
         }
     }
     return nullptr;
+}
+
+TankObject::TankObject(int x, int y, QObject *parent):
+    MovableObject(x, y, 20, 20, parent), turretAngle(0), isDestroyable(true) {}
+
+TankObject::move(int newX, int newY) {
+    x = newX;
+    y = newY;
+}
+
+TankObject::startMotion(Direction d) {
+    timer->start();
+    connect(timer, SIGNAL(timeout()), this, SLOT(move(d)));
+}
+
+TankObject::stopMotion() {
+    timer->stop();
+}
+
+TankObject::setTurret(int angle) {
+    turretAngle = angle;
+}
+
+TankObject::destroy() {
+    //TODO: define this method
+}
+
+TankObject::move(Direction d) {
+    int amountToMove = 5;
+    switch (d) {
+    case North: y -= amountToMove; break;
+    case South: y += amountToMove; break;
+    case East:  x += amountToMove; break;
+    case West:  x -= amountToMove; break;
+    }
+}
+
+BulletObject::BulletObject(int initX, int initY, int initHeading, QObject *parent):
+    MovableObject(initX,initY, 20, 10, parent), heading(initHeading) {}
+
+BulletObject::move(int newX, int newY) {
+    x = newX;
+    y = newY;
+}
+
+BulletObject::startMotion() {
+    timer->start();
+}
+
+BulletObject::onTimeOut() {
+    int amountToMove = 10;
+    int moveX = cos(heading) * amountToMove;
+    int moveY = sin(heading) * amountToMove;
+    x += moveX;
+    y += moveY;
+}
+
+WallObject::WallObject(int x, int y, int width, int height, QObject *parent):
+    LevelObject(x, y, width, height, parent) {}
+
+Barricade::Barricade(int x, int y, QObject *parent):
+    LevelObject(x, y, 20, 20, parent), isDestroyable(true) {}
+
+Barricade::destroy() {
+    //TODO: write this method
 }

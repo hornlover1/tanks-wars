@@ -26,3 +26,5 @@ HEADERS  += mainwindow.h \
         movablelabel.h
 
 FORMS    += mainwindow.ui
+
+QMAKE_CXXFLAGS += -std=c++0x
