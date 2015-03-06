@@ -1,4 +1,5 @@
 #include "levelobject.h"
+#include "levelmanager.h"
 
 int LevelObject::nextId = 0;
 
@@ -34,3 +35,16 @@ LevelObject::~LevelObject() {
 }
 
 LevelObject::onTimeOut() {}
+
+MovableObject::MovableObject(QObject *parent): LevelObject(parent) {}
+
+void MovableObject::move(int newX, int newY) {}
+
+LevelObject* MovableObject::getContactedObject() {
+    for (LevelObject* obj: LevelManager::getInstance().getObjects()) {
+        if (obj->getGeometry().contains(this->getGeometry())) {
+            return obj;
+        }
+    }
+    return nullptr;
+}
