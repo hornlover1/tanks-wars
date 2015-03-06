@@ -153,7 +153,7 @@ bool LevelManager::loadFile()
                 int i = stoi(s.str());
 
                 //load number into
-                setLastUnlockedLevel(i);
+                LevelManager::setLastUnlockedLevel(i);
 
                 //close file
                 fs.close();
@@ -169,7 +169,7 @@ bool LevelManager::loadFile()
         }
     }
     //set levelNumber
-    setLastUnlockedLevel(0);
+    LevelManager::setLastUnlockedLevel(0);
     
     //if loop cannot find the name, then returns false so a new game can be created.
     return false;
