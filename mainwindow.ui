@@ -79,6 +79,20 @@
       <widget class="QWidget" name="widget_4" native="true">
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
+         <widget class="QLineEdit" name="leUserName">
+          <property name="placeholderText">
+           <string>Name Here</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pbLoad">
+          <property name="text">
+           <string>Start Game</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="Pause">
           <property name="enabled">
            <bool>false</bool>
@@ -92,13 +106,6 @@
          <widget class="QPushButton" name="pushButton_2">
           <property name="text">
            <string>How to Play</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="leUserName">
-          <property name="placeholderText">
-           <string>Name Here</string>
           </property>
          </widget>
         </item>
@@ -176,6 +183,9 @@
            </item>
            <item row="0" column="0">
             <widget class="QPushButton" name="lvl01">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="text">
               <string>1</string>
              </property>

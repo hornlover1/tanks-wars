@@ -3,6 +3,7 @@
 
 #include "levelobject.h"
 #include <fstream>
+#include <sstream>
 using namespace std;
 
 class LevelManager {
@@ -21,7 +22,7 @@ class LevelManager {
     static int lastUnlockedLevel = 0;
 
     //The name of the user
-    QString userName;
+    static string userName;
 
     //current high score of the user
     int userHighScore;
@@ -34,13 +35,16 @@ public:
     int getUserHighScore();
 
     //get the username
-    QString getUserName();
+    static string getUserName();
 
     //set the username
-    void setUserName(QString name);
+    static void setUserName(string name);
 
     //increment levelUnlockedLevel
     static void incrementLastUnlockedLevel();
+
+    //code used by the load method to set the variable.
+    static void setLastUnlockedLevel(int i);
 
     static int getLastUnlockedLevel();
     //TODO: need to write the code incrementing this after each level completion
@@ -80,7 +84,7 @@ public:
     void saveHighScore();
 
     //read in the saved file
-    void loadFile();
+    bool loadFile();
 };
 
 #endif // LEVELMANAGER_H
