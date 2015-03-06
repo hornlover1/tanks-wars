@@ -168,6 +168,9 @@ bool LevelManager::loadFile()
             }
         }
     }
+    //set levelNumber
+    setLastUnlockedLevel(0);
+    
     //if loop cannot find the name, then returns false so a new game can be created.
     return false;
 }
