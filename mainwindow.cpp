@@ -36,7 +36,7 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event) {
         case 39: d = East;  break; // right key
         case 40: d = South; break; // down  key
         }
-        if (key < 37 or key > 40) {
+        if (key < 37 || key > 40) {
             return true;
         }
         LevelManager::getInstance().keyPress(d);
@@ -50,7 +50,7 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event) {
         case 39: d = East;  break; // right key
         case 40: d = South; break; // down  key
         }
-        if (key < 37 or key > 40) {
+        if (key < 37 || key > 40) {
             return true;
         }
         LevelManager::getInstance().keyRelease(d);
