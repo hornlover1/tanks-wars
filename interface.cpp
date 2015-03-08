@@ -1,7 +1,5 @@
 #include "interface.h"
 #include <QString>
-#include <QStyle>
-#include <QCommonStyle>
 
 Interface::Interface() {}
 
@@ -22,10 +20,7 @@ void Interface::drawObject(LevelObject* obj) {
     MovableLabel* lbl = new MovableLabel(ui->gameArea);
     lbl->setText(QString::number(id));
     lbl->setGeometry(obj->getGeometry());
-    QStyle* style = new QCommonStyle();
-    style->setProperty("background-color", "red");
-    style->setProperty("color", "red");
-    lbl->setStyle(style);
+    lbl->setStyleSheet("QLabel {color:red; background-color: red;}");
     lbl->show();
 }
 

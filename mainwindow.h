@@ -18,7 +18,10 @@ private:
     Ui::MainWindow *ui;
 
 private slots:
-    bool eventFilter(QObject *, QEvent *);
+    void mouseMoveEvent(QMouseEvent*);
+    void mousePressEvent(QMouseEvent*);
+    void keyPressEvent(QKeyEvent*);
+    void keyReleaseEvent(QKeyEvent*);
 };
 
 #endif // MAINWINDOW_H

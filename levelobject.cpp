@@ -91,7 +91,7 @@ void TankObject::move(Direction d) {
     }
 }
 
-BulletObject::BulletObject(int initX, int initY, int initHeading, QObject *parent):
+BulletObject::BulletObject(int initX, int initY, double initHeading, QObject *parent):
     MovableObject(initX,initY, 20, 10, parent), heading(initHeading) {}
 
 void BulletObject::move(int newX, int newY) {

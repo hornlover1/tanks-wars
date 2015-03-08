@@ -2,6 +2,7 @@
 #include "interface.h"
 #include <QFile>
 #include <QTextStream>
+#include <math.h>
 
 LevelManager::LevelManager(): timer(new QTimer) {
     timer->setInterval(20);
@@ -57,7 +58,10 @@ void LevelManager::loadLevel(int levelNum) {
     }
     objectsInLevel.clear();
 
-    QFile levelX(":/Resources/level" + QString::number(levelNum));
+    //i.e. level2.txt
+    //QFile levelX("://Resources/level1.txt");
+    QFile levelX("://Resources/level" + QString::number(levelNum) + ".txt");
+    levelX.open(QIODevice::ReadOnly);
     QTextStream strm(&levelX);
 
     QString argType;
@@ -84,6 +88,9 @@ void LevelManager::loadLevel(int levelNum) {
 void LevelManager::onTimeOut() {
     for (LevelObject* obj: objectsInLevel) {
         MovableObject* mv = dynamic_cast<MovableObject*>(obj);
+        if (mv == nullptr) {
+            continue;
+        }
         Interface::getInstance().moveObject(mv);
     }
 }
@@ -96,6 +103,19 @@ void LevelManager::moveMouse(int x, int y) {
 
 void LevelManager::mouseClick() {
     //TODO: fire a bullet at the target
+    for (LevelObject* obj: objectsInLevel) {
+        TankObject* tank = dynamic_cast<TankObject*>(obj);
+        if (tank == nullptr) {
+            continue;
+        }
+        double diffX = mouseX - tank->getX();
+        double diffY = mouseY - tank->getY();
+        double heading = atan(diffY/diffX);
+        BulletObject* obj = new BulletObject(tank->getX(), tank->getY(), heading);
+        objectsInLevel.push_back(obj);
+        Interface::getInstance().drawObject(obj);
+        obj->startMotion();
+    }
 }
 
 void LevelManager::pause() {

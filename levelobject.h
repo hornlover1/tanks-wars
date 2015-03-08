@@ -22,6 +22,8 @@ public:
     //getters and setters
 
     int getId();
+    int getX() {return x;}
+    int getY() {return y;}
 
     //get a rectangle representing the object for calculations especially involving overlapping of objects
     QRect getGeometry();
@@ -92,9 +94,9 @@ class BulletObject: public MovableObject  {
 
     //isDestroyable=false
     //the angle, in degrees, that the bullet is moving
-    int heading;
+    double heading;
 public:
-    BulletObject(int initX, int initY, int initHeading, QObject* parent = 0);
+    BulletObject(int initX, int initY, double initHeading, QObject* parent = 0);
 
     //move the bullet
     void move(int newX, int newY);
