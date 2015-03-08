@@ -19,7 +19,7 @@ MainWindow::~MainWindow() {
     delete ui;
 }
 
-bool MainWindow::eventFilter(QObject* obj, QEvent* event) {
+bool MainWindow::eventFilter(QObject* /*obj*/, QEvent* event) {
     if (event->type() == QEvent::MouseMove) {
         int mouseX = cursor().pos().x() - ui->gameArea->pos().x();
         int mouseY = cursor().pos().y() - ui->gameArea->pos().y();

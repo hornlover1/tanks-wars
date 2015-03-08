@@ -21,6 +21,6 @@ void MovableLabel::mousePressEvent(QMouseEvent *ev) {
 }
 
 //TODO: refine this class for this game
-void MovableLabel::mouseReleaseEvent(QMouseEvent *ev) {
+void MovableLabel::mouseReleaseEvent(QMouseEvent* /*ev*/) {
     mouseDragging = false;
 }

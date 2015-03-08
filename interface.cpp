@@ -58,6 +58,6 @@ void Interface::deleteObject(LevelObject *obj) {
     }
 }
 
-void Interface::setTimeLeft(QString time) {
+void Interface::setTimeLeft(QString /*time*/) {
     //TODO: create the label and set it here
 }

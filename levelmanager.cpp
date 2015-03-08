@@ -110,14 +110,14 @@ void LevelManager::resume() {
     }
 }
 
-void LevelManager::keyPress(Direction d) {
+void LevelManager::keyPress(Direction /*d*/) {
     //TODO: write this method
     //get tank
     //start tank moving
     //update interface when tank moves - how to do?
 }
 
-void LevelManager::keyRelease(Direction d) {
+void LevelManager::keyRelease(Direction /*d*/) {
     //TODO: write this method
     //get tank
     //stop tank moving

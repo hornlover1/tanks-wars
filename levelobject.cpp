@@ -43,7 +43,7 @@ MovableObject::MovableObject(int initX, int initY, int initWidth, int initHeight
     isMovable = true;
 }
 
-void MovableObject::move(int newX, int newY) {}
+void MovableObject::move(int /*newX*/, int /*newY*/) {}
 
 LevelObject* MovableObject::getContactedObject() {
     for (LevelObject* obj: LevelManager::getInstance().getObjects()) {
@@ -64,7 +64,7 @@ void TankObject::move(int newX, int newY) {
     y = newY;
 }
 
-void TankObject::startMotion(Direction d) {
+void TankObject::startMotion(Direction /*d*/) {
     timer->start();
     connect(timer, SIGNAL(timeout()), this, SLOT(move(d)));
 }
