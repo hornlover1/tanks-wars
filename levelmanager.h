@@ -4,9 +4,11 @@
 #include "levelobject.h"
 #include <fstream>
 #include <sstream>
+#include <QTimer>
+#include <QObject>
 using namespace std;
 
-class LevelManager {
+class LevelManager: public QObject {
     LevelManager();
     static LevelManager instance;
     //objects that exist in the level and should be shown on the screen
@@ -16,18 +18,21 @@ class LevelManager {
 
     //position of mouse
     int mouseX, mouseY;
-
+/*
 //User Information
     //counter to record which level is available
-    static int lastUnlockedLevel = 0;
+    static int lastUnlockedLevel;
 
     //The name of the user
-    static string userName;
+    static QString userName;
 
     //current high score of the user
     int userHighScore;
-
+*/
+    //timer to display changes to the model every 20ms
+    QTimer* timer;
 public:
+    /*
     //set userHighScore
     void setUserHighScore(int score);
 
@@ -35,7 +40,7 @@ public:
     int getUserHighScore();
 
     //get the username
-    static string getUserName();
+    static QString getUserName();
 
     //set the username
     static void setUserName(string name);
@@ -48,9 +53,9 @@ public:
 
     static int getLastUnlockedLevel();
     //TODO: need to write the code incrementing this after each level completion
-
+*/
     //singleton method
-    LevelManager getInstance();
+    static LevelManager& getInstance();
 
     //get all objects in the level
     vector<LevelObject*> getObjects();
@@ -85,6 +90,11 @@ public:
 
     //read in the saved file
     bool loadFile();
+
+    ~LevelManager();
+private slots:
+    //fired every 20ms to update the GUI to reflect changes to the model
+    void onTimeOut();
 };
 
 #endif // LEVELMANAGER_H

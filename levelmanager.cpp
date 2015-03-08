@@ -1,48 +1,54 @@
 #include "levelmanager.h"
+#include "interface.h"
+#include <QFile>
+#include <QTextStream>
 
-LevelManager::LevelManager() {}
+LevelManager::LevelManager(): timer(new QTimer) {
+    timer->setInterval(20);
+    connect(timer, SIGNAL(timeout()), this, SLOT(onTimeOut()));
+    timer->start();
+}
 
 LevelManager LevelManager::instance;
-
-void LevelManager::setUserHighScore(int score)
-{
+/*
+void LevelManager::setUserHighScore(int score) {
     userHighScore = score;
 }
 
-int LevelManager::getUserHighScore()
-{
+int LevelManager::getUserHighScore() {
     return userHighScore;
 }
 
-int LevelManager::lastUnlockedLevel;
+int LevelManager::lastUnlockedLevel = 1;
 
-QString LevelManager::getUserName()
-{
+QString LevelManager::getUserName() {
     return userName;
 }
 
-void LevelManager::setUserName(string name)
-{
+void LevelManager::setUserName(string name) {
        userName = name;
 }
 
-void LevelManager::incrementLastUnlockedLevel(){
+void LevelManager::incrementLastUnlockedLevel() {
     if(lastUnlockedLevel < 9){
         lastUnlockedLevel++;
     }
 }
 
-  static void setLastUnlockedLevel(int i)
-  {
-      LevelManager::lastUnlockedLevel = i;
-  }
-
-int LevelManager::getLastUnlockedLevel(){
-    return lastUnlockedLevel;
+static void LevelManager::setLastUnlockedLevel(int i) {
+  lastUnlockedLevel = i;
 }
 
-LevelManager LevelManager::getInstance() {
+int LevelManager::getLastUnlockedLevel() {
+    return lastUnlockedLevel;
+}
+*/
+LevelManager& LevelManager::getInstance() {
     return instance;
+}
+
+vector<LevelObject*> LevelManager::getObjects() {
+    return objectsInLevel;
 }
 
 void LevelManager::loadLevel(int levelNum) {
@@ -50,7 +56,36 @@ void LevelManager::loadLevel(int levelNum) {
         delete obj;
     }
     objectsInLevel.clear();
+
+    QFile levelX(":/Resources/level" + QString::number(levelNum));
+    QTextStream strm(&levelX);
+
+    QString argType;
+    while (!(strm >> argType).atEnd()) {
+        if (argType == "time") {
+            strm >> easyTime >> mediumTime >> hardTime;
+        } else if (argType == "wall") {
+            int x, y, width, height;
+            strm >> x >> y >> width >> height;
+            LevelObject* obj = new WallObject(x, y, width, height);
+            objectsInLevel.push_back(obj);
+            Interface::getInstance().drawObject(obj);
+        } else if (argType == "tank") {
+            int x, y;
+            strm >> x >> y;
+            LevelObject* obj = new TankObject(x, y);
+            objectsInLevel.push_back(obj);
+            Interface::getInstance().drawObject(obj);
+        }
+    }
     //TODO: load the next level from file
+}
+
+void LevelManager::onTimeOut() {
+    for (LevelObject* obj: objectsInLevel) {
+        MovableObject* mv = dynamic_cast<MovableObject*>(obj);
+        Interface::getInstance().moveObject(mv);
+    }
 }
 
 void LevelManager::moveMouse(int x, int y) {
@@ -88,9 +123,13 @@ void LevelManager::keyRelease(Direction d) {
     //stop tank moving
 }
 
-void LevelManager::saveFile()
-{
-    //open\create the file
+LevelManager::~LevelManager() {
+    delete timer;
+}
+
+/*
+void LevelManager::saveFile() {
+    //open/create the file
     ofstream fs("saveFile.txt");
 
     //write user name
@@ -103,8 +142,7 @@ void LevelManager::saveFile()
     fs.close();
 }
 
-void LevelManager::saveHighScore()
-{
+void LevelManager::saveHighScore() {
     ofstream os("HighScore.txt");
 
     //write out name
@@ -121,8 +159,7 @@ void LevelManager::saveHighScore()
 //if found, then returns true so that an instance of the game can be called with
 //that levelNumber
 //if returns false then program can start a new game.
-bool LevelManager::loadFile()
-{
+bool LevelManager::loadFile() {
     //to convert the char *a to a string
     stringstream s;
 
@@ -131,11 +168,9 @@ bool LevelManager::loadFile()
     char a[20];
 
     //check if file open
-    if(fs.is_open() == true)
-    {
+    if(fs.is_open() == true) {
         //keep going till end of file
-        while (!fs.peek()==EOF)
-        {
+        while (!fs.peek()==EOF) {
             //read line of file, which should be a name
             getLine(fs,a);
 
@@ -143,8 +178,7 @@ bool LevelManager::loadFile()
             s = a;
 
             //if name equals userName, then load levelNumber and end loop
-            if(LevelManager::getUserName() == s.str())
-            {
+            if(LevelManager::getUserName() == s.str()) {
                 //since we found user name, then read the user's levelNumber
                 getLine(fs, a);
 
@@ -160,10 +194,8 @@ bool LevelManager::loadFile()
 
                 //return true so the program knows that the levelNumber was found
                 return true;
-            }
             //if the name in the file is not what i want, then throw away the levelNumber
-            else if (!LevelManager::getUserName() == s.str())
-            {
+            } else if (!LevelManager::getUserName() == s.str()){
                 getLine(fs, a);
             }
         }
@@ -174,3 +206,6 @@ bool LevelManager::loadFile()
     //if loop cannot find the name, then returns false so a new game can be created.
     return false;
 }
+
+int LevelManager::lastUnlockedLevel = 1;
+*/

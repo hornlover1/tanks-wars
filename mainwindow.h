@@ -16,6 +16,9 @@ public:
     
 private:
     Ui::MainWindow *ui;
+
+private slots:
+    bool eventFilter(QObject *, QEvent *);
 };
 
 #endif // MAINWINDOW_H

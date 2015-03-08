@@ -1,9 +1,6 @@
 #include "levelobject.h"
 #include "levelmanager.h"
-<<<<<<< HEAD
-=======
 #include <math.h>
->>>>>>> 54cd6bdab0cc873070eea70a819b82b19f392f95
 
 int LevelObject::nextId = 0;
 
@@ -39,12 +36,14 @@ LevelObject::~LevelObject() {
     delete timer;
 }
 
-LevelObject::onTimeOut() {}
+void LevelObject::onTimeOut() {}
 
 MovableObject::MovableObject(int initX, int initY, int initWidth, int initHeight, QObject *parent):
-    LevelObject(initX, initY, initWidth, initHeight, parent), isMovable(true) {}
+    LevelObject(initX, initY, initWidth, initHeight, parent) {
+    isMovable = true;
+}
 
-MovableObject::move(int newX, int newY) {}
+void MovableObject::move(int newX, int newY) {}
 
 LevelObject* MovableObject::getContactedObject() {
     for (LevelObject* obj: LevelManager::getInstance().getObjects()) {
@@ -56,31 +55,33 @@ LevelObject* MovableObject::getContactedObject() {
 }
 
 TankObject::TankObject(int x, int y, QObject *parent):
-    MovableObject(x, y, 20, 20, parent), turretAngle(0), isDestroyable(true) {}
+    MovableObject(x, y, 20, 20, parent), turretAngle(0) {
+    isDestroyable = true;
+}
 
-TankObject::move(int newX, int newY) {
+void TankObject::move(int newX, int newY) {
     x = newX;
     y = newY;
 }
 
-TankObject::startMotion(Direction d) {
+void TankObject::startMotion(Direction d) {
     timer->start();
     connect(timer, SIGNAL(timeout()), this, SLOT(move(d)));
 }
 
-TankObject::stopMotion() {
+void TankObject::stopMotion() {
     timer->stop();
 }
 
-TankObject::setTurret(int angle) {
+void TankObject::setTurret(int angle) {
     turretAngle = angle;
 }
 
-TankObject::destroy() {
+void TankObject::destroy() {
     //TODO: define this method
 }
 
-TankObject::move(Direction d) {
+void TankObject::move(Direction d) {
     int amountToMove = 5;
     switch (d) {
     case North: y -= amountToMove; break;
@@ -93,16 +94,16 @@ TankObject::move(Direction d) {
 BulletObject::BulletObject(int initX, int initY, int initHeading, QObject *parent):
     MovableObject(initX,initY, 20, 10, parent), heading(initHeading) {}
 
-BulletObject::move(int newX, int newY) {
+void BulletObject::move(int newX, int newY) {
     x = newX;
     y = newY;
 }
 
-BulletObject::startMotion() {
+void BulletObject::startMotion() {
     timer->start();
 }
 
-BulletObject::onTimeOut() {
+void BulletObject::onTimeOut() {
     int amountToMove = 10;
     int moveX = cos(heading) * amountToMove;
     int moveY = sin(heading) * amountToMove;
@@ -114,8 +115,10 @@ WallObject::WallObject(int x, int y, int width, int height, QObject *parent):
     LevelObject(x, y, width, height, parent) {}
 
 Barricade::Barricade(int x, int y, QObject *parent):
-    LevelObject(x, y, 20, 20, parent), isDestroyable(true) {}
+    LevelObject(x, y, 20, 20, parent) {
+    isDestroyable = true;
+}
 
-Barricade::destroy() {
+void Barricade::destroy() {
     //TODO: write this method
 }

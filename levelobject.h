@@ -8,13 +8,11 @@
 class LevelObject : public QObject {
     Q_OBJECT
 
-protected :
-    bool isDestroyable;
-
-    bool isMovable;
-
-    double x, y, height, width;
+protected:
     int id;
+    double x, y, width, height;
+    bool isMovable;
+    bool isDestroyable;
     static int nextId;
     //timer to be used to animate movableObjects
     QTimer* timer;
@@ -46,6 +44,8 @@ protected slots:
 
 //an object that can move around on the screen, such as a tank or bullet
 class MovableObject: public LevelObject {
+    Q_OBJECT
+
     //isMovable = true;
 public:
     MovableObject(int initX, int initY, int initWidth, int initHeight, QObject *parent);
@@ -60,6 +60,8 @@ public:
 enum Direction {North, South, East, West};
 
 class TankObject: public MovableObject {
+    Q_OBJECT
+
     //isDestroyable=true
     //the angle, in degrees, that the turret is facing
     int turretAngle;
@@ -86,6 +88,8 @@ public slots:
 };
 
 class BulletObject: public MovableObject  {
+    Q_OBJECT
+
     //isDestroyable=false
     //the angle, in degrees, that the bullet is moving
     int heading;
@@ -104,6 +108,8 @@ public slots:
 };
 
 class WallObject: public LevelObject {
+    Q_OBJECT
+
     //isMovable=false
     //isDestroyable=false
 public:
@@ -111,6 +117,8 @@ public:
 };
 
 class Barricade: public LevelObject {
+    Q_OBJECT
+
     //isMovable=false
     //isDestroyable=true
 
