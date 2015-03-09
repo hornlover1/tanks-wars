@@ -94,7 +94,7 @@ public slots:
 class BulletObject: public MovableObject  {
     Q_OBJECT
 
-    //isDestroyable=false
+    //isDestroyable=true
     //the angle, in degrees, that the bullet is moving
     double heading;
 public:

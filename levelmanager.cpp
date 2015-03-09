@@ -153,6 +153,16 @@ void LevelManager::keyRelease(Direction /*d*/) {
     }
 }
 
+void LevelManager::destroy(LevelObject *obj) {
+    for (auto i = objectsInLevel.begin(); i <= objectsInLevel.end(); i++) {
+        if ((*i)->getId() == obj->getId()) {
+            Interface::getInstance().deleteObject(obj);
+            objectsInLevel.erase(i);
+            delete (*i);
+        }
+    }
+}
+
 LevelManager::~LevelManager() {
 
 }

@@ -90,6 +90,8 @@ public:
 
     void updateUI();
 
+    void destroy(LevelObject* obj);
+
     ~LevelManager();
 };
 

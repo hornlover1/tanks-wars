@@ -74,6 +74,9 @@
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
            <widget class="QLineEdit" name="leUserName">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="placeholderText">
              <string>Name Here</string>
             </property>
@@ -309,7 +312,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>19</width>
+              <width>821</width>
               <height>20</height>
              </size>
             </property>

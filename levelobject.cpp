@@ -21,7 +21,11 @@ QRect LevelObject::getGeometry() {
     return geometry;
 }
 
-void LevelObject::destroy() {}
+void LevelObject::destroy() {
+    if (isDestroyable) {
+        LevelManager::getInstance().destroy(this);
+    }
+}
 
 void LevelObject::pause() {
     timer->stop();
@@ -47,7 +51,7 @@ void MovableObject::move(int /*newX*/, int /*newY*/) {}
 
 LevelObject* MovableObject::getContactedObject() {
     for (LevelObject* obj: LevelManager::getInstance().getObjects()) {
-        if (obj->getGeometry().contains(this->getGeometry())) {
+        if (obj->getGeometry().contains(this->getGeometry()) && obj->getId() != this->getId()) {
             return obj;
         }
     }
@@ -93,7 +97,9 @@ void TankObject::onTimeOut() {
 }
 
 BulletObject::BulletObject(int initX, int initY, double initHeading, QObject *parent):
-    MovableObject(initX,initY, 20, 10, parent), heading(initHeading) {}
+    MovableObject(initX,initY, 20, 10, parent), heading(initHeading) {
+    isDestroyable = true;
+}
 
 void BulletObject::move(int newX, int newY) {
     x = newX;
@@ -112,9 +118,7 @@ void BulletObject::onTimeOut() {
     y += moveY;
     LevelObject* objectHit = getContactedObject();
     if (objectHit != nullptr) {
-        if (objectHit->isDestroyable) {
-            objectHit->destroy();
-        }
+        objectHit->destroy();
         this->destroy();
     }
     LevelManager::getInstance().updateUI();
