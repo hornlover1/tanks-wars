@@ -64,9 +64,9 @@ void TankObject::move(int newX, int newY) {
     y = newY;
 }
 
-void TankObject::startMotion(Direction /*d*/) {
+void TankObject::startMotion(Direction dToMove) {
+    d = dToMove;
     timer->start();
-    connect(timer, SIGNAL(timeout()), this, SLOT(move(d)));
 }
 
 void TankObject::stopMotion() {
@@ -81,7 +81,7 @@ void TankObject::destroy() {
     //TODO: define this method
 }
 
-void TankObject::move(Direction d) {
+void TankObject::onTimeOut() {
     int amountToMove = 5;
     switch (d) {
     case North: y -= amountToMove; break;
@@ -89,6 +89,7 @@ void TankObject::move(Direction d) {
     case East:  x += amountToMove; break;
     case West:  x -= amountToMove; break;
     }
+    LevelManager::getInstance().updateUI();
 }
 
 BulletObject::BulletObject(int initX, int initY, double initHeading, QObject *parent):
@@ -109,6 +110,14 @@ void BulletObject::onTimeOut() {
     int moveY = sin(heading) * amountToMove;
     x += moveX;
     y += moveY;
+    LevelObject* objectHit = getContactedObject();
+    if (objectHit != nullptr) {
+        if (objectHit->isDestroyable) {
+            objectHit->destroy();
+        }
+        this->destroy();
+    }
+    LevelManager::getInstance().updateUI();
 }
 
 WallObject::WallObject(int x, int y, int width, int height, QObject *parent):

@@ -67,6 +67,8 @@ class TankObject: public MovableObject {
     //isDestroyable=true
     //the angle, in degrees, that the turret is facing
     int turretAngle;
+    //what direction to move
+    Direction d;
 public:
     TankObject(int x, int y, QObject* parent = 0);
 
@@ -86,7 +88,7 @@ public:
     void destroy();
 public slots:
     //move 5px in the direction specified
-    void move(Direction d);
+    void onTimeOut();
 };
 
 class BulletObject: public MovableObject  {

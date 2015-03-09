@@ -5,10 +5,9 @@
 #include <fstream>
 #include <sstream>
 #include <QTimer>
-#include <QObject>
 using namespace std;
 
-class LevelManager: public QObject {
+class LevelManager {
     LevelManager();
     static LevelManager instance;
     //objects that exist in the level and should be shown on the screen
@@ -29,8 +28,6 @@ class LevelManager: public QObject {
     //current high score of the user
     int userHighScore;
 */
-    //timer to display changes to the model every 20ms
-    QTimer* timer;
 public:
     /*
     //set userHighScore
@@ -91,10 +88,9 @@ public:
     //read in the saved file
     bool loadFile();
 
+    void updateUI();
+
     ~LevelManager();
-private slots:
-    //fired every 20ms to update the GUI to reflect changes to the model
-    void onTimeOut();
 };
 
 #endif // LEVELMANAGER_H

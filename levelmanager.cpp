@@ -4,11 +4,7 @@
 #include <QTextStream>
 #include <math.h>
 
-LevelManager::LevelManager(): timer(new QTimer) {
-    timer->setInterval(20);
-    connect(timer, SIGNAL(timeout()), this, SLOT(onTimeOut()));
-    timer->start();
-}
+LevelManager::LevelManager() {}
 
 LevelManager LevelManager::instance;
 /*
@@ -85,7 +81,7 @@ void LevelManager::loadLevel(int levelNum) {
     //TODO: load the next level from file
 }
 
-void LevelManager::onTimeOut() {
+void LevelManager::updateUI() {
     for (LevelObject* obj: objectsInLevel) {
         MovableObject* mv = dynamic_cast<MovableObject*>(obj);
         if (mv == nullptr) {
@@ -130,21 +126,35 @@ void LevelManager::resume() {
     }
 }
 
-void LevelManager::keyPress(Direction /*d*/) {
+void LevelManager::keyPress(Direction d) {
     //TODO: write this method
     //get tank
     //start tank moving
     //update interface when tank moves - how to do?
+    for (LevelObject* obj: objectsInLevel) {
+        TankObject* tank = dynamic_cast<TankObject*>(obj);
+        if (tank == nullptr) {
+            continue;
+        }
+        tank->startMotion(d);
+    }
 }
 
 void LevelManager::keyRelease(Direction /*d*/) {
     //TODO: write this method
     //get tank
     //stop tank moving
+    for (LevelObject* obj: objectsInLevel) {
+        TankObject* tank = dynamic_cast<TankObject*>(obj);
+        if (tank == nullptr) {
+            continue;
+        }
+        tank->stopMotion();
+    }
 }
 
 LevelManager::~LevelManager() {
-    delete timer;
+
 }
 
 /*
