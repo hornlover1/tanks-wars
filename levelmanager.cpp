@@ -6,6 +6,8 @@
 
 QString LevelManager::userName = "";
 
+int LevelManager::lastUnlockedLevel = 1;
+
 LevelManager::LevelManager() {}
 
 LevelManager LevelManager::instance;
@@ -18,7 +20,6 @@ int LevelManager::getUserHighScore() {
     return userHighScore;
 }
 
-int LevelManager::lastUnlockedLevel = 1;
 
 QString LevelManager::getUserName() {
     return LevelManager::userName;
@@ -50,7 +51,7 @@ vector<LevelObject*> LevelManager::getObjects() {
     return objectsInLevel;
 }
 
-void LevelManager::loadLevel(int levelNum) {
+void LevelManager::loadLevel(/*int levelNum*/) {
     for (LevelObject* obj: objectsInLevel) {
         delete obj;
     }
@@ -58,7 +59,8 @@ void LevelManager::loadLevel(int levelNum) {
 
     //i.e. level2.txt
     //QFile levelX("://Resources/level1.txt");
-    QFile levelX("://Resources/level" + QString::number(levelNum) + ".txt");
+    QFile levelX("://Resources/level" + QString::number(/*levelNum*/
+                           LevelManager::getLastUnlockedLevel()) + ".txt");
     levelX.open(QIODevice::ReadOnly);
     QTextStream strm(&levelX);
 
@@ -200,11 +202,10 @@ void LevelManager::saveHighScore() {
     os.close();
 }
 
-//attempts to load a saved levelNumber by comparing username to saveFile.txt
-//if found, then returns true so that an instance of the game can be called with
-//that levelNumber
+//attempts to load a saved lastUnlockedLevel by comparing username to saveFile.txt
+//if found, then sets the static lastUnlockedLevel for use by the LevelLoading method
 //if returns false then program can start a new game.
-bool LevelManager::loadFile() {
+void LevelManager::loadFile() {
     //to convert the char *a to a string
     stringstream s;
 
@@ -219,14 +220,15 @@ bool LevelManager::loadFile() {
             //read line of file, which should be a name
             fs.getline(a, 20);
 
-            //if name equals userName, then load levelNumber and end loop
+            //if name equals userName, then load lastUnlockedLevelber and end loop
             if(LevelManager::getUserName() == QString(a)) {
-                //since we found user name, then read the user's levelNumber
+                //since we found user name, then read the user's lastUnlockedLevel
                 fs.getline(a, 20);
 
                 //convert a to a number - how? this work?
                 s << a;
                 int i = stoi(s.str());
+                s.str("");
 
                 //load number into
                 LevelManager::setLastUnlockedLevel(i);
@@ -234,18 +236,13 @@ bool LevelManager::loadFile() {
                 //close file
                 fs.close();
 
-                //return true so the program knows that the levelNumber was found
-                return true;
-            //if the name in the file is not what i want, then throw away the levelNumber
+            //if the name in the file is not what i want, then throw away the lastUnlockedLevel
             } else if (LevelManager::getUserName() != QString(a)){
                 fs.getline(a, 20);
             }
         }
     }
-    //set levelNumber
-    LevelManager::setLastUnlockedLevel(0);
-    
-    //if loop cannot find the name, then returns false so a new game can be created.
-    return false;
+    //set lastUnlockedLevel
+    LevelManager::setLastUnlockedLevel(1);
 }
 
