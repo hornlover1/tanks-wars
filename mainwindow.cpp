@@ -51,3 +51,12 @@ void MainWindow::keyReleaseEvent(QKeyEvent* ev) {
 }
 
 //TODO: write this file to call levelManager
+
+void MainWindow::on_pbLoad_clicked()
+{
+    QString name = ui->leUserName->text();
+
+    name.toUpper();
+
+    //LevelManager::s
+}

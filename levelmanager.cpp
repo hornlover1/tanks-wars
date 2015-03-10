@@ -4,10 +4,12 @@
 #include <QTextStream>
 #include <math.h>
 
+QString LevelManager::userName = "";
+
 LevelManager::LevelManager() {}
 
 LevelManager LevelManager::instance;
-/*
+
 void LevelManager::setUserHighScore(int score) {
     userHighScore = score;
 }
@@ -19,11 +21,11 @@ int LevelManager::getUserHighScore() {
 int LevelManager::lastUnlockedLevel = 1;
 
 QString LevelManager::getUserName() {
-    return userName;
+    return LevelManager::userName;
 }
 
-void LevelManager::setUserName(string name) {
-       userName = name;
+void LevelManager::setUserName(QString name) {
+       LevelManager::userName = name;
 }
 
 void LevelManager::incrementLastUnlockedLevel() {
@@ -32,14 +34,14 @@ void LevelManager::incrementLastUnlockedLevel() {
     }
 }
 
-static void LevelManager::setLastUnlockedLevel(int i) {
+void LevelManager::setLastUnlockedLevel(int i) {
   lastUnlockedLevel = i;
 }
 
 int LevelManager::getLastUnlockedLevel() {
     return lastUnlockedLevel;
 }
-*/
+
 LevelManager& LevelManager::getInstance() {
     return instance;
 }
@@ -167,13 +169,16 @@ LevelManager::~LevelManager() {
 
 }
 
-/*
 void LevelManager::saveFile() {
     //open/create the file
-    ofstream fs("saveFile.txt");
+    ofstream fs("saveFile.txt", ofstream::out);
 
     //write user name
-    fs << "user.name \"" << LevelManager::getUserName() << "\"" << endl;
+    fs << "user.name \"";
+
+    fs << LevelManager::getUserName().cbegin();
+
+    fs << "\"" << endl;
 
     //write last unlocked level
     fs << "maxLevel \"" << LevelManager::getLastUnlockedLevel() << "\"" << endl;
@@ -186,7 +191,7 @@ void LevelManager::saveHighScore() {
     ofstream os("HighScore.txt");
 
     //write out name
-    os << LevelManager::getUserName() << ":" << endl << endl;
+    os << LevelManager::getUserName().cbegin() << ":" << endl << endl;
 
     //write out highscore
     os << getUserHighScore();
@@ -212,18 +217,15 @@ bool LevelManager::loadFile() {
         //keep going till end of file
         while (!fs.peek()==EOF) {
             //read line of file, which should be a name
-            getLine(fs,a);
-
-            //load into a stringsteam for easy manipulation
-            s = a;
+            fs.getline(a, 20);
 
             //if name equals userName, then load levelNumber and end loop
-            if(LevelManager::getUserName() == s.str()) {
+            if(LevelManager::getUserName() == QString(a)) {
                 //since we found user name, then read the user's levelNumber
-                getLine(fs, a);
+                fs.getline(a, 20);
 
                 //convert a to a number - how? this work?
-                s = a;
+                s << a;
                 int i = stoi(s.str());
 
                 //load number into
@@ -235,8 +237,8 @@ bool LevelManager::loadFile() {
                 //return true so the program knows that the levelNumber was found
                 return true;
             //if the name in the file is not what i want, then throw away the levelNumber
-            } else if (!LevelManager::getUserName() == s.str()){
-                getLine(fs, a);
+            } else if (LevelManager::getUserName() != QString(a)){
+                fs.getline(a, 20);
             }
         }
     }
@@ -247,5 +249,3 @@ bool LevelManager::loadFile() {
     return false;
 }
 
-int LevelManager::lastUnlockedLevel = 1;
-*/
