@@ -51,7 +51,7 @@ vector<LevelObject*> LevelManager::getObjects() {
     return objectsInLevel;
 }
 
-void LevelManager::loadLevel(/*int levelNum*/) {
+void LevelManager::loadLevel(int levelNum) {
     for (LevelObject* obj: objectsInLevel) {
         delete obj;
     }
@@ -59,8 +59,7 @@ void LevelManager::loadLevel(/*int levelNum*/) {
 
     //i.e. level2.txt
     //QFile levelX("://Resources/level1.txt");
-    QFile levelX("://Resources/level" + QString::number(/*levelNum*/
-                           LevelManager::getLastUnlockedLevel()) + ".txt");
+    QFile levelX("://Resources/level" + QString::number(levelNum) + ".txt");
     levelX.open(QIODevice::ReadOnly);
     QTextStream strm(&levelX);
 

@@ -85,7 +85,7 @@
           <item>
            <widget class="QPushButton" name="pbLoad">
             <property name="text">
-             <string>Start Game</string>
+             <string>Load Game</string>
             </property>
            </widget>
           </item>
@@ -149,7 +149,7 @@
             </property>
             <layout class="QGridLayout" name="gridLayout">
              <item row="2" column="3">
-              <widget class="QPushButton" name="lvl09">
+              <widget class="QPushButton" name="bt9">
                <property name="enabled">
                 <bool>false</bool>
                </property>
@@ -159,7 +159,7 @@
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QPushButton" name="lvl08">
+              <widget class="QPushButton" name="bt8">
                <property name="enabled">
                 <bool>false</bool>
                </property>
@@ -169,7 +169,7 @@
               </widget>
              </item>
              <item row="2" column="0">
-              <widget class="QPushButton" name="lvl07">
+              <widget class="QPushButton" name="bt7">
                <property name="enabled">
                 <bool>false</bool>
                </property>
@@ -179,7 +179,7 @@
               </widget>
              </item>
              <item row="0" column="0">
-              <widget class="QPushButton" name="lvl01">
+              <widget class="QPushButton" name="bt1">
                <property name="enabled">
                 <bool>false</bool>
                </property>
@@ -189,7 +189,7 @@
               </widget>
              </item>
              <item row="1" column="0">
-              <widget class="QPushButton" name="lvl04">
+              <widget class="QPushButton" name="bt4">
                <property name="enabled">
                 <bool>false</bool>
                </property>
@@ -199,7 +199,7 @@
               </widget>
              </item>
              <item row="1" column="3">
-              <widget class="QPushButton" name="lvl06">
+              <widget class="QPushButton" name="bt6">
                <property name="enabled">
                 <bool>false</bool>
                </property>
@@ -209,7 +209,7 @@
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QPushButton" name="lvl05">
+              <widget class="QPushButton" name="bt5">
                <property name="enabled">
                 <bool>false</bool>
                </property>
@@ -219,7 +219,7 @@
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QPushButton" name="lvl02">
+              <widget class="QPushButton" name="bt2">
                <property name="enabled">
                 <bool>false</bool>
                </property>
@@ -232,7 +232,7 @@
               </widget>
              </item>
              <item row="0" column="3">
-              <widget class="QPushButton" name="lvl03">
+              <widget class="QPushButton" name="bt3">
                <property name="enabled">
                 <bool>false</bool>
                </property>

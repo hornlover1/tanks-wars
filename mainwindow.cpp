@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow) {
     ui->setupUi(this);
     Interface::getInstance().setUi(ui);
-    LevelManager::getInstance().loadLevel(/*1*/);
+    LevelManager::getInstance().loadLevel(1);
     qApp->installEventFilter(this);
     ui->leUserName->setEnabled(false);
     ui->rbEasy->setEnabled(false);
@@ -66,6 +66,17 @@ void MainWindow::keyReleaseEvent(QKeyEvent* ev) {
 
 void MainWindow::on_pbLoad_clicked()
 {
+    //void all buttons beforehand so a new lastUnlockedLevel may take effect
+    ui->bt1->setEnabled(false);
+    ui->bt2->setEnabled(false);
+    ui->bt3->setEnabled(false);
+    ui->bt4->setEnabled(false);
+    ui->bt5->setEnabled(false);
+    ui->bt6->setEnabled(false);
+    ui->bt7->setEnabled(false);
+    ui->bt8->setEnabled(false);
+    ui->bt9->setEnabled(false);
+    
     //get the name
     QString name = ui->leUserName->text();
 
@@ -77,6 +88,15 @@ void MainWindow::on_pbLoad_clicked()
     //will use default values
     LevelManager::getInstance().loadFile();
 
-    //start game
-    LevelManager::getInstance().loadLevel();
+    //free up the buttons based on lastUnlockedLevel so
+    //that the player may start a game by selecting that button.
+    if(LevelManager::getLastUnlockedLevel() > 1) {ui->bt1->setEnabled(true); }
+    if(LevelManager::getLastUnlockedLevel() > 2) {ui->bt2->setEnabled(true); }
+    if(LevelManager::getLastUnlockedLevel() > 3) {ui->bt3->setEnabled(true); }
+    if(LevelManager::getLastUnlockedLevel() > 4) {ui->bt4->setEnabled(true); }
+    if(LevelManager::getLastUnlockedLevel() > 5) {ui->bt5->setEnabled(true); }
+    if(LevelManager::getLastUnlockedLevel() > 6) {ui->bt6->setEnabled(true); }
+    if(LevelManager::getLastUnlockedLevel() > 7) {ui->bt7->setEnabled(true); }
+    if(LevelManager::getLastUnlockedLevel() > 8) {ui->bt8->setEnabled(true); }
+    if(LevelManager::getLastUnlockedLevel() > 9) {ui->bt9->setEnabled(true); }
 }
