@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow) {
     ui->setupUi(this);
     Interface::getInstance().setUi(ui);
-    LevelManager::getInstance().loadLevel(1);
+    LevelManager::getInstance().loadLevel(/*1*/);
     qApp->installEventFilter(this);
     ui->leUserName->setEnabled(false);
     ui->rbEasy->setEnabled(false);
@@ -63,3 +63,20 @@ void MainWindow::keyReleaseEvent(QKeyEvent* ev) {
 }
 
 //TODO: write this file to call levelManager
+
+void MainWindow::on_pbLoad_clicked()
+{
+    //get the name
+    QString name = ui->leUserName->text();
+
+    name.toUpper();
+
+    LevelManager::setUserName(name);
+
+    //check for a savedfile. if found values will be set. if not
+    //will use default values
+    LevelManager::getInstance().loadFile();
+
+    //start game
+    LevelManager::getInstance().loadLevel();
+}

@@ -22,6 +22,7 @@ private slots:
     void mousePressEvent(QMouseEvent*);
     void keyPressEvent(QKeyEvent*);
     void keyReleaseEvent(QKeyEvent*);
+    void on_pbLoad_clicked();
 };
 
 #endif // MAINWINDOW_H

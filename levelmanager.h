@@ -17,7 +17,7 @@ class LevelManager {
 
     //position of mouse
     int mouseX, mouseY;
-/*
+
 //User Information
     //counter to record which level is available
     static int lastUnlockedLevel;
@@ -27,9 +27,9 @@ class LevelManager {
 
     //current high score of the user
     int userHighScore;
-*/
+
 public:
-    /*
+
     //set userHighScore
     void setUserHighScore(int score);
 
@@ -40,7 +40,7 @@ public:
     static QString getUserName();
 
     //set the username
-    static void setUserName(string name);
+    static void setUserName(QString name);
 
     //increment levelUnlockedLevel
     static void incrementLastUnlockedLevel();
@@ -50,7 +50,7 @@ public:
 
     static int getLastUnlockedLevel();
     //TODO: need to write the code incrementing this after each level completion
-*/
+
     //singleton method
     static LevelManager& getInstance();
 
@@ -59,7 +59,7 @@ public:
 
     //delete everything currently stored in level and load a new level from a file.
     //the level files will be in the root of the project directory with the names level1.txt, level2.txt...
-    void loadLevel(int levelNum);
+    void loadLevel(/*int levelNum*/);
 
     //on a mousemove, this will reposition the tank's turret
     void moveMouse(int x, int y);
@@ -86,7 +86,7 @@ public:
     void saveHighScore();
 
     //read in the saved file
-    bool loadFile();
+    void loadFile();
 
     void updateUI();
 
