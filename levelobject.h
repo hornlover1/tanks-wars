@@ -97,8 +97,9 @@ class BulletObject: public MovableObject  {
     //isDestroyable=true
     //the angle, in degrees, that the bullet is moving
     double heading;
+    TankObject* tank;
 public:
-    BulletObject(int initX, int initY, double initHeading, QObject* parent = 0);
+    BulletObject(int initX, int initY, double initHeading, TankObject* initTank, QObject* parent = 0);
 
     //move the bullet
     void move(int newX, int newY);

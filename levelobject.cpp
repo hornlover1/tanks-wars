@@ -51,7 +51,7 @@ void MovableObject::move(int /*newX*/, int /*newY*/) {}
 
 LevelObject* MovableObject::getContactedObject() {
     for (LevelObject* obj: LevelManager::getInstance().getObjects()) {
-        if (obj->getGeometry().contains(this->getGeometry()) && obj->getId() != this->getId()) {
+        if (obj->getGeometry().intersects(this->getGeometry()) && obj->getId() != this->getId()) {
             return obj;
         }
     }
@@ -93,11 +93,20 @@ void TankObject::onTimeOut() {
     case East:  x += amountToMove; break;
     case West:  x -= amountToMove; break;
     }
+    if (getContactedObject() != nullptr) {
+        // undo move
+        switch (d) {
+        case North: y += amountToMove; break;
+        case South: y -= amountToMove; break;
+        case East:  x -= amountToMove; break;
+        case West:  x += amountToMove; break;
+        }
+    }
     LevelManager::getInstance().updateUI();
 }
 
-BulletObject::BulletObject(int initX, int initY, double initHeading, QObject *parent):
-    MovableObject(initX,initY, 20, 10, parent), heading(initHeading) {
+BulletObject::BulletObject(int initX, int initY, double initHeading, TankObject* initTank, QObject *parent):
+    MovableObject(initX,initY, 20, 10, parent), heading(initHeading), tank(initTank) {
     isDestroyable = true;
 }
 
@@ -117,7 +126,7 @@ void BulletObject::onTimeOut() {
     x += moveX;
     y += moveY;
     LevelObject* objectHit = getContactedObject();
-    if (objectHit != nullptr) {
+    if (objectHit != nullptr && objectHit != tank) { // don't shoot myself
         objectHit->destroy();
         this->destroy();
     }

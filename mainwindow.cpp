@@ -3,6 +3,7 @@
 #include "ui_mainwindow.h"
 #include "levelmanager.h"
 #include "interface.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,6 +12,12 @@ MainWindow::MainWindow(QWidget *parent) :
     Interface::getInstance().setUi(ui);
     LevelManager::getInstance().loadLevel(1);
     qApp->installEventFilter(this);
+    ui->leUserName->setEnabled(false);
+    ui->rbEasy->setEnabled(false);
+    ui->rbHard->setEnabled(false);
+//    ui->rbMedium->setEnabled(false);
+    ui->gameArea->setMouseTracking(true);
+    ui->gameArea->installEventFilter(this);
 }
 
 MainWindow::~MainWindow() {
@@ -24,16 +31,21 @@ void MainWindow::mouseMoveEvent(QMouseEvent*) {
 }
 
 void MainWindow::mousePressEvent(QMouseEvent*) {
+    qDebug() << "cursor x: " << cursor().pos().x() << ", gameArea x: " + ui->gameArea->pos().x();
+    qDebug() << "cursor y: " << cursor().pos().y() << ", gameArea y: " + ui->gameArea->pos().y();
+    int mouseX = cursor().pos().x() - 275;//ui->gameArea->pos().x();
+    int mouseY = cursor().pos().y() - 208;//ui->gameArea->pos().y();
+    LevelManager::getInstance().moveMouse(mouseX, mouseY);
     LevelManager::getInstance().mouseClick();
 }
 
 Direction getDirection(int key) {
     Direction d;
     switch (key) {
-    case 37: d = West;  break; // left  key
-    case 38: d = North; break; // up    key
-    case 39: d = East;  break; // right key
-    case 40: d = South; break; // down  key
+    case Qt::Key_Left:  d = West;  break; // left  key
+    case Qt::Key_Up:    d = North; break; // up    key
+    case Qt::Key_Right: d = East;  break; // right key
+    case Qt::Key_Down:  d = South; break; // down  key
     }
     return d;
 }

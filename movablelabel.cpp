@@ -7,8 +7,9 @@
 #include "interface.h"
 
 MovableLabel::MovableLabel(QWidget *parent): QLabel(parent), win(parent) {
-    setMouseTracking(true); // enable mouse move events
+    //setMouseTracking(true); // enable mouse move events
     mouseDragging = false;
+    this->setEnabled(false);
 }
 void MovableLabel::mouseMoveEvent(QMouseEvent *ev) {
     if (mouseDragging)
