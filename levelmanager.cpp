@@ -53,6 +53,7 @@ vector<LevelObject*> LevelManager::getObjects() {
 
 void LevelManager::loadLevel(int levelNum) {
     for (LevelObject* obj: objectsInLevel) {
+        Interface::getInstance().deleteObject(obj);
         delete obj;
     }
     objectsInLevel.clear();
