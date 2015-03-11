@@ -32,7 +32,12 @@ void checkLevelOne() {
     assert(LevelManager::getInstance().getEasyTime() == 30);
     assert(LevelManager::getInstance().getMediumTime() == 25);
     assert(LevelManager::getInstance().getHardTime() == 20);
+
     //write more tests to test the other lines in the file
+    WallObject* wall = dynamic_cast<WallObject*>(objects.at(0));
+        assert(wall->getX() == 0);
+        assert(wall->getY() == 0);
+
 }
 
 void checkMovingTank() {

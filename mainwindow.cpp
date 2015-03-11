@@ -93,18 +93,6 @@ void MainWindow::on_pbLoad_clicked() {
         }
         ui->leUserName->setEnabled(false); //need to reset to true after a successful game
     }
-    /*
-    if(LevelManager::getLastUnlockedLevel() > 1) {ui->bt1->setEnabled(true); }
-    if(LevelManager::getLastUnlockedLevel() > 2) {ui->bt2->setEnabled(true); }
-    if(LevelManager::getLastUnlockedLevel() > 3) {ui->bt3->setEnabled(true); }
-    if(LevelManager::getLastUnlockedLevel() > 4) {ui->bt4->setEnabled(true); }
-    if(LevelManager::getLastUnlockedLevel() > 5) {ui->bt5->setEnabled(true); }
-    if(LevelManager::getLastUnlockedLevel() > 6) {ui->bt6->setEnabled(true); }
-    if(LevelManager::getLastUnlockedLevel() > 7) {ui->bt7->setEnabled(true); }
-    if(LevelManager::getLastUnlockedLevel() > 8) {ui->bt8->setEnabled(true); }
-    if(LevelManager::getLastUnlockedLevel() > 9) {ui->bt9->setEnabled(true); }
-*/
-    //find code to display changes to screen
 }
 
 void MainWindow::levelButtonClicked() {
