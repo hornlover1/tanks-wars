@@ -91,6 +91,7 @@ void MainWindow::on_pbLoad_clicked() {
                 button->setEnabled(false);
             }
         }
+        ui->leUserName->setEnabled(false); //need to reset to true after a successful game
     }
     /*
     if(LevelManager::getLastUnlockedLevel() > 1) {ui->bt1->setEnabled(true); }

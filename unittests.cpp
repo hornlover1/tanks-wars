@@ -29,9 +29,9 @@ void checkLevelOne() {
     qDebug() << objects.size();
     assert(objects.size() == 10); //tank2 and time don't count
     //need getters
-//    assert(LevelManager::getInstance().getEasyTime() == 30);
-//    assert(LevelManager::getInstance().getMediumTime() == 25);
-//    assert(LevelManager::getInstance().getHardTime() == 20);
+    assert(LevelManager::getInstance().getEasyTime() == 30);
+    assert(LevelManager::getInstance().getMediumTime() == 25);
+    assert(LevelManager::getInstance().getHardTime() == 20);
     //write more tests to test the other lines in the file
 }
 

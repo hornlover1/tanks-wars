@@ -29,6 +29,10 @@ class LevelManager {
     int userHighScore;
 
 public:
+//for unit tests
+    int getEasyTime();
+    int getMediumTime();
+    int getHardTime();
 
     //set userHighScore
     void setUserHighScore(int score);
