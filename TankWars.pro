@@ -17,13 +17,15 @@ SOURCES += main.cpp\
         levelobject.cpp \
         interface.cpp \
         levelmanager.cpp \
-        movablelabel.cpp
+        movablelabel.cpp \
+    unittests.cpp
 
 HEADERS  += mainwindow.h \
         levelobject.h \
         interface.h \
         levelmanager.h \
-        movablelabel.h
+        movablelabel.h \
+    unittests.h
 
 FORMS    += mainwindow.ui
 
