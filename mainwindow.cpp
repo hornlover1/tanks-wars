@@ -77,10 +77,12 @@ void MainWindow::on_pbLoad_clicked()
     ui->bt8->setEnabled(false);
     ui->bt9->setEnabled(false);
     
+    //safety check if user put in a name
+
     //get the name
     QString name = ui->leUserName->text();
 
-    name.toUpper();
+    name = name.toUpper();
 
     LevelManager::setUserName(name);
 
@@ -99,4 +101,51 @@ void MainWindow::on_pbLoad_clicked()
     if(LevelManager::getLastUnlockedLevel() > 7) {ui->bt7->setEnabled(true); }
     if(LevelManager::getLastUnlockedLevel() > 8) {ui->bt8->setEnabled(true); }
     if(LevelManager::getLastUnlockedLevel() > 9) {ui->bt9->setEnabled(true); }
+
+    //find code to display changes to screen
+}
+
+void MainWindow::on_bt1_clicked()
+{
+    LevelManager::getInstance().loadLevel(1);
+}
+
+void MainWindow::on_bt2_clicked()
+{
+    LevelManager::getInstance().loadLevel(2);
+}
+
+void MainWindow::on_bt3_clicked()
+{
+    LevelManager::getInstance().loadLevel(3);
+}
+
+void MainWindow::on_bt4_clicked()
+{
+    LevelManager::getInstance().loadLevel(4);
+}
+
+void MainWindow::on_bt5_clicked()
+{
+    LevelManager::getInstance().loadLevel(5);
+}
+
+void MainWindow::on_bt6_clicked()
+{
+    LevelManager::getInstance().loadLevel(6);
+}
+
+void MainWindow::on_bt7_clicked()
+{
+    LevelManager::getInstance().loadLevel(7);
+}
+
+void MainWindow::on_bt8_clicked()
+{
+    LevelManager::getInstance().loadLevel(8);
+}
+
+void MainWindow::on_bt9_clicked()
+{
+    LevelManager::getInstance().loadLevel(9);
 }
