@@ -23,6 +23,8 @@ private slots:
     void keyPressEvent(QKeyEvent*);
     void keyReleaseEvent(QKeyEvent*);
     void on_pbLoad_clicked();
+    void levelButtonClicked();
+    /*
     void on_bt1_clicked();
     void on_bt2_clicked();
     void on_bt3_clicked();
@@ -32,6 +34,7 @@ private slots:
     void on_bt7_clicked();
     void on_bt8_clicked();
     void on_bt9_clicked();
+    */
 };
 
 #endif // MAINWINDOW_H

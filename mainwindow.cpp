@@ -64,19 +64,7 @@ void MainWindow::keyReleaseEvent(QKeyEvent* ev) {
 
 //TODO: write this file to call levelManager
 
-void MainWindow::on_pbLoad_clicked()
-{
-    //void all buttons beforehand so a new lastUnlockedLevel may take effect
-    ui->bt1->setEnabled(false);
-    ui->bt2->setEnabled(false);
-    ui->bt3->setEnabled(false);
-    ui->bt4->setEnabled(false);
-    ui->bt5->setEnabled(false);
-    ui->bt6->setEnabled(false);
-    ui->bt7->setEnabled(false);
-    ui->bt8->setEnabled(false);
-    ui->bt9->setEnabled(false);
-    
+void MainWindow::on_pbLoad_clicked() {
     //safety check if user put in a name
 
     //get the name
@@ -92,6 +80,19 @@ void MainWindow::on_pbLoad_clicked()
 
     //free up the buttons based on lastUnlockedLevel so
     //that the player may start a game by selecting that button.
+    //and stop repetitive coding
+    for (QObject* obj: ui->levels->children()) {
+        QPushButton* button = dynamic_cast<QPushButton*>(obj);
+        if (button != nullptr) {
+            if (button->text().toInt() <= LevelManager::getLastUnlockedLevel()) {
+                button->setEnabled(true);
+                connect(button, SIGNAL(clicked()), this, SLOT(levelButtonClicked()));
+            } else {
+                button->setEnabled(false);
+            }
+        }
+    }
+    /*
     if(LevelManager::getLastUnlockedLevel() > 1) {ui->bt1->setEnabled(true); }
     if(LevelManager::getLastUnlockedLevel() > 2) {ui->bt2->setEnabled(true); }
     if(LevelManager::getLastUnlockedLevel() > 3) {ui->bt3->setEnabled(true); }
@@ -101,22 +102,28 @@ void MainWindow::on_pbLoad_clicked()
     if(LevelManager::getLastUnlockedLevel() > 7) {ui->bt7->setEnabled(true); }
     if(LevelManager::getLastUnlockedLevel() > 8) {ui->bt8->setEnabled(true); }
     if(LevelManager::getLastUnlockedLevel() > 9) {ui->bt9->setEnabled(true); }
-
+*/
     //find code to display changes to screen
 }
 
-void MainWindow::on_bt1_clicked()
-{
+void MainWindow::levelButtonClicked() {
+    QPushButton* button = dynamic_cast<QPushButton*>(sender());
+    if (button != nullptr) {
+        int levelNum = button->text().toInt();
+        LevelManager::getInstance().loadLevel(levelNum);
+    }
+}
+
+/*
+void MainWindow::on_bt1_clicked() {
     LevelManager::getInstance().loadLevel(1);
 }
 
-void MainWindow::on_bt2_clicked()
-{
+void MainWindow::on_bt2_clicked() {
     LevelManager::getInstance().loadLevel(2);
 }
 
-void MainWindow::on_bt3_clicked()
-{
+void MainWindow::on_bt3_clicked() {
     LevelManager::getInstance().loadLevel(3);
 }
 
@@ -149,3 +156,4 @@ void MainWindow::on_bt9_clicked()
 {
     LevelManager::getInstance().loadLevel(9);
 }
+*/
