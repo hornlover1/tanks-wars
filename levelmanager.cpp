@@ -111,8 +111,9 @@ void LevelManager::mouseClick() {
         double diffX = mouseX - tank->getX();
         double diffY = mouseY - tank->getY();
         double heading = atan(diffY/diffX);
+        double pi = 3.14159265358979323846264338327950288;
         if (diffX <= 0) {
-            heading += M_PI; // add pi to rotate it 180 degrees so that it shoots in the right direction
+            heading += pi; // add pi to rotate it 180 degrees so that it shoots in the right direction
         }
         BulletObject* Bobj = new BulletObject(tank->getX(), tank->getY(), heading, tank);
         objectsInLevel.push_back(Bobj);
