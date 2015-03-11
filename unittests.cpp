@@ -33,11 +33,77 @@ void checkLevelOne() {
     assert(LevelManager::getInstance().getMediumTime() == 25);
     assert(LevelManager::getInstance().getHardTime() == 20);
 
+    qDebug() << "The times were sucessfully loaded from the file.";
+
     //write more tests to test the other lines in the file
     WallObject* wall = dynamic_cast<WallObject*>(objects.at(0));
         assert(wall->getX() == 0);
         assert(wall->getY() == 0);
 
+        qDebug() << "Object 0";
+
+    wall = dynamic_cast<WallObject*>(objects.at(1));
+        assert(wall->getX() == 0);
+        assert(wall->getY() == 400);
+
+        qDebug() << "obj 1";
+
+    TankObject* tank = dynamic_cast<TankObject*>(objects.at(2));
+        assert(tank->getX() == 50);
+        assert(tank->getY() == 300);
+
+        qDebug() << "obj 2";
+
+    wall = dynamic_cast<WallObject*>(objects.at(3));
+        assert(wall->getX() == 380);
+        assert(wall->getY() == 100);
+
+        qDebug() << "obj 3";
+
+    wall = dynamic_cast<WallObject*>(objects.at(4));
+        assert(wall->getX() == 600);
+        assert(wall->getY() == 0);
+
+        qDebug() << "obj 4";
+
+        tank = dynamic_cast<TankObject*>(objects.at(5));
+                assert(tank->getX() == 550);
+                assert(tank->getY() == 200);
+
+        qDebug() << "obj 5";
+
+    wall = dynamic_cast<WallObject*>(objects.at(6));
+
+    qDebug() << "wall->getX() = " << wall->getX();
+
+        assert(wall->getX() == 600);
+        assert(wall->getY() == 400);
+
+        qDebug() << "obj 6";
+
+    wall = dynamic_cast<WallObject*>(objects.at(7));
+        assert(wall->getX() == 0);
+        assert(wall->getY() == -50);
+
+         qDebug() << "obj 7";
+
+    wall = dynamic_cast<WallObject*>(objects.at(8));
+        assert(wall->getX() == -50);
+        assert(wall->getY() == 0);
+
+         qDebug() << "obj 8";
+
+    wall = dynamic_cast<WallObject*>(objects.at(9));
+        assert(wall->getX() == 0);
+        assert(wall->getY() == 600);
+
+         qDebug() << "obj 9";
+
+    wall = dynamic_cast<WallObject*>(objects.at(10));
+        assert(wall->getX() == 800);
+        assert(wall->getY() == 0);
+
+        qDebug() << "All objects were loaded from the map into the vector of objects for the game.";
 }
 
 void checkMovingTank() {
