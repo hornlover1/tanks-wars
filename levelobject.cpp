@@ -1,6 +1,7 @@
 #include "levelobject.h"
 #include "levelmanager.h"
 #include <math.h>
+#include <QMessageBox>
 
 int LevelObject::nextId = 0;
 
@@ -143,4 +144,17 @@ Barricade::Barricade(int x, int y, QObject *parent):
 
 void Barricade::destroy() {
     //TODO: write this method
+}
+
+FlagObject::FlagObject(int x, int y, QObject *parent):
+    LevelObject(x, y, 30, 30, parent) {
+
+}
+
+void FlagObject::contact(){
+    for (LevelObject* obj: LevelManager::getInstance().getObjects()) {
+        if (obj->getGeometry().intersects(this->getGeometry()) && obj->getId() != this->getId()) {
+            QMessageBox(parent, "CONGRADULATIONS!", "You have reached the goal. Good job, soldier." );
+            //add functionality to move to next level.
+        }
 }

@@ -80,6 +80,13 @@ void LevelManager::loadLevel(int levelNum) {
             objectsInLevel.push_back(obj);
             Interface::getInstance().drawObject(obj);
         }
+        else if (argType == "flag"){
+            int x, y;
+            strm >> x >> y;
+            LevelObject* obj = new FlagObject(x, y);
+            objectsInLevel.push_back(obj);
+            Interface::getInstance().drawObject(obj);
+        }
     }
     //TODO: load the next level from file
 }

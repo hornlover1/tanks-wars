@@ -134,4 +134,15 @@ public:
     void destroy();
 };
 
+class FlagObject: public LevelObject {
+    Q_OBJECT
+
+    //isMovable = false
+    //isDestroyable = false
+public:
+    FlagObject(int x, int y, QObject* parent = 0);
+
+    void contact();
+};
+
 #endif // LEVELOBJECT_H
