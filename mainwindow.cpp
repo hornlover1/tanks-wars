@@ -101,7 +101,7 @@ void MainWindow::levelButtonClicked() {
 void MainWindow::on_btCheat_clicked()
 {
     Interface::getInstance().setUi(ui);
-    LevelManager::getInstance().loadLevel(1);
+    LevelManager::getInstance().loadLevel(0);
     qApp->installEventFilter(this);
     ui->leUserName->setEnabled(false);
     ui->rbEasy->setEnabled(false);
