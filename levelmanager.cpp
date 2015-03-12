@@ -190,22 +190,53 @@ LevelManager::~LevelManager() {
 
 }
 
+//writes userName and lastUnlockedLevel to a file. Accounts for previous saves.
 void LevelManager::saveFile() {
-    //open/create the file
-    ofstream fs("saveFile.txt", ofstream::out);
+    //c_string to read bytes into
+    char c[20];
 
-    //write user name
-    fs << "user.name \"";
+    //open the current saveFile
+    ifstream in("saveFile.txt");
 
-    fs << LevelManager::getUserName().cbegin();
+    //create a new file to write data into
+    ofstream out("tempFile.txt");
 
-    fs << "\"" << endl;
+    //loop through every line in file
+    while(in.peek() != EOF)
+    {
+        //read data and put into a QString for comparison
+        in.getline(c,20);
+        QString info = QString(c);
 
-    //write last unlocked level
-    fs << "maxLevel \"" << LevelManager::getLastUnlockedLevel() << "\"" << endl;
+        //if line not the userName
+        if(info != LevelManager::getUserName())
+        {
+            //write this line and the next one
+            out << c << endl;
 
-    //close file
-    fs.close();
+            in.getline(c,20);
+
+            out << c << endl;
+        }
+        //if line is userName, then do not write this line
+        if(info == LevelManager::getUserName())
+        {
+            //read next line, but do not write
+            in.getline(c,20);
+        }
+        else
+        {
+            //write new info into temp.txt
+            QString s = LevelManager::getUserName();
+            out << s.begin() << endl;
+            out << LevelManager::getLastUnlockedLevel() << endl;
+        }
+    }
+
+    in.close();
+    remove("saveFile.txt");
+    out.close();
+    rename("tempFile.txt","saveFile.txt");
 }
 
 void LevelManager::saveHighScore() {
