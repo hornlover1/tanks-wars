@@ -99,12 +99,12 @@ void checkLevelOne() {
 }
 
 void checkMovingTank() {
-    /*LevelManager::getInstance().keyPress(South); // should be able to move 80px south, which should take 320ms
+    LevelManager::getInstance().keyPress(South); // should be able to move 80px south, which should take 320ms
     QThread::msleep(500);
     LevelManager::getInstance().keyRelease(South);
     qDebug() << LevelManager::getInstance().getObjects()[2]->getY();
     assert(LevelManager::getInstance().getObjects()[2]->getY() == 380);
-    */assert(LevelManager::getInstance().getObjects()[2]->getX() == 50);
+    assert(LevelManager::getInstance().getObjects()[2]->getX() == 50);
 }
 
 void checkFiringBullet() {
