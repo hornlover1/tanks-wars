@@ -53,6 +53,7 @@ vector<LevelObject*> LevelManager::getObjects() {
 
 void LevelManager::loadLevel(int levelNum) {
     for (LevelObject* obj: objectsInLevel) {
+        Interface::getInstance().deleteObject(obj);
         delete obj;
     }
     objectsInLevel.clear();
@@ -107,6 +108,7 @@ void LevelManager::moveMouse(int x, int y) {
     //TODO: write logic to move the turret
 }
 
+//Jordan manipulated obj
 void LevelManager::mouseClick() {
     //TODO: fire a bullet at the target
     for (LevelObject* obj: objectsInLevel) {
@@ -117,13 +119,14 @@ void LevelManager::mouseClick() {
         double diffX = mouseX - tank->getX();
         double diffY = mouseY - tank->getY();
         double heading = atan(diffY/diffX);
+        double pi = 3.14159265358979323846264338327950288;
         if (diffX <= 0) {
-            heading += M_PI; // add pi to rotate it 180 degrees so that it shoots in the right direction
+            heading += pi; // add pi to rotate it 180 degrees so that it shoots in the right direction
         }
-        BulletObject* obj = new BulletObject(tank->getX(), tank->getY(), heading, tank);
-        objectsInLevel.push_back(obj);
-        Interface::getInstance().drawObject(obj);
-        obj->startMotion();
+        BulletObject* Bobj = new BulletObject(tank->getX(), tank->getY(), heading, tank);
+        objectsInLevel.push_back(Bobj);
+        Interface::getInstance().drawObject(Bobj);
+        Bobj->startMotion();
     }
 }
 
@@ -235,9 +238,13 @@ void LevelManager::loadFile() {
                 fs.getline(a, 20);
 
                 //convert a to a number - how? this work?
-                s << a;
+                //THIS code works in the VM but not my mack
+/*                s << a;
                 int i = stoi(s.str());
-                s.str("");
+                s.str("");    */
+
+                //REPLACEMENT code
+                int i = *a;
 
                 //load number into
                 LevelManager::setLastUnlockedLevel(i);
