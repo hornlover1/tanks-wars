@@ -154,7 +154,8 @@ FlagObject::FlagObject(int x, int y, QObject *parent):
 void FlagObject::contact(){
     for (LevelObject* obj: LevelManager::getInstance().getObjects()) {
         if (obj->getGeometry().intersects(this->getGeometry()) && obj->getId() != this->getId()) {
-            QMessageBox(parent, "CONGRADULATIONS!", "You have reached the goal. Good job, soldier." );
+            QMessageBox("CONGRADULATIONS!", "You have reached the goal. Good job, soldier.", QMessageBox::Icon, 50, 50, 100, parent, Qt::WindowFlags);
             //add functionality to move to next level.
         }
+}
 }
