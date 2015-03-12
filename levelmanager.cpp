@@ -12,6 +12,11 @@ LevelManager::LevelManager() {}
 
 LevelManager LevelManager::instance;
 
+int LevelManager::getEasyTime() {return easyTime;}
+int LevelManager::getMediumTime() {return mediumTime;}
+int LevelManager::getHardTime() {return hardTime;}
+
+
 void LevelManager::setUserHighScore(int score) {
     userHighScore = score;
 }
