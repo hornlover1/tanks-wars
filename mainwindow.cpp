@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    Interface::getInstance().setUi(ui);
 }
 
 MainWindow::~MainWindow() {
@@ -98,9 +99,7 @@ void MainWindow::levelButtonClicked() {
 }
 
 //enables testing of ideas
-void MainWindow::on_btCheat_clicked()
-{
-    Interface::getInstance().setUi(ui);
+void MainWindow::on_btCheat_clicked() {
     LevelManager::getInstance().loadLevel(0);
     qApp->installEventFilter(this);
     ui->leUserName->setEnabled(false);
