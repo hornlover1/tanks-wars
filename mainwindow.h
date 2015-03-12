@@ -24,6 +24,7 @@ private slots:
     void keyReleaseEvent(QKeyEvent*);
     void on_pbLoad_clicked();
     void levelButtonClicked();
+    void on_btCheat_clicked();
 };
 
 #endif // MAINWINDOW_H
