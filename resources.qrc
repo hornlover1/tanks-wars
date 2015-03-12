@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>Resources/level1.txt</file>
+        <file>Resources/level0.txt</file>
     </qresource>
     <qresource prefix="/images">
         <file>Resources/Tank-Wars Image.png</file>

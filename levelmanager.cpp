@@ -3,6 +3,9 @@
 #include <QFile>
 #include <QTextStream>
 #include <math.h>
+#include <cassert>
+#include <iostream>
+using namespace std;
 
 QString LevelManager::userName = "";
 
@@ -76,12 +79,18 @@ void LevelManager::loadLevel(int levelNum) {
         } else if (argType == "wall") {
             int x, y, width, height;
             strm >> x >> y >> width >> height;
+
+            cout << "x" << x << "y" << y << "w" << width << "h" << height;
+
             LevelObject* obj = new WallObject(x, y, width, height);
             objectsInLevel.push_back(obj);
             Interface::getInstance().drawObject(obj);
         } else if (argType == "tank") {
             int x, y;
             strm >> x >> y;
+
+            cout << "x" << x << "y" << y;
+
             LevelObject* obj = new TankObject(x, y);
             objectsInLevel.push_back(obj);
             Interface::getInstance().drawObject(obj);

@@ -9,15 +9,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow) {
     ui->setupUi(this);
-    Interface::getInstance().setUi(ui);
-    LevelManager::getInstance().loadLevel(1);
-    qApp->installEventFilter(this);
-    ui->leUserName->setEnabled(false);
-    ui->rbEasy->setEnabled(false);
-    ui->rbHard->setEnabled(false);
-//    ui->rbMedium->setEnabled(false);
-    ui->gameArea->setMouseTracking(true);
-    ui->gameArea->installEventFilter(this);
 }
 
 MainWindow::~MainWindow() {
@@ -98,51 +89,24 @@ void MainWindow::on_pbLoad_clicked() {
 void MainWindow::levelButtonClicked() {
     QPushButton* button = dynamic_cast<QPushButton*>(sender());
     if (button != nullptr) {
+        Interface::getInstance().setUi(ui);
         int levelNum = button->text().toInt();
         LevelManager::getInstance().loadLevel(levelNum);
+        qApp->installEventFilter(this);
+        ui->leUserName->setEnabled(false);
     }
 }
 
-/*
-void MainWindow::on_bt1_clicked() {
-    LevelManager::getInstance().loadLevel(1);
-}
-
-void MainWindow::on_bt2_clicked() {
-    LevelManager::getInstance().loadLevel(2);
-}
-
-void MainWindow::on_bt3_clicked() {
-    LevelManager::getInstance().loadLevel(3);
-}
-
-void MainWindow::on_bt4_clicked()
+//enables testing of ideas
+void MainWindow::on_btCheat_clicked()
 {
-    LevelManager::getInstance().loadLevel(4);
+    Interface::getInstance().setUi(ui);
+    LevelManager::getInstance().loadLevel(0);
+    qApp->installEventFilter(this);
+    ui->leUserName->setEnabled(false);
+    ui->rbEasy->setEnabled(false);
+    ui->rbHard->setEnabled(false);
+//    ui->rbMedium->setEnabled(false);
+    ui->gameArea->setMouseTracking(true);
+    ui->gameArea->installEventFilter(this);
 }
-
-void MainWindow::on_bt5_clicked()
-{
-    LevelManager::getInstance().loadLevel(5);
-}
-
-void MainWindow::on_bt6_clicked()
-{
-    LevelManager::getInstance().loadLevel(6);
-}
-
-void MainWindow::on_bt7_clicked()
-{
-    LevelManager::getInstance().loadLevel(7);
-}
-
-void MainWindow::on_bt8_clicked()
-{
-    LevelManager::getInstance().loadLevel(8);
-}
-
-void MainWindow::on_bt9_clicked()
-{
-    LevelManager::getInstance().loadLevel(9);
-}
-*/
