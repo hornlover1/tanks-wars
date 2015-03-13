@@ -316,6 +316,10 @@ outStream.close();
         remove("HighScore.txt");
         rename("temp.txt", "HighScore.txt");
     }
+    else
+    {
+        remove("temp.txt");
+    }
 }
 
 //attempts to load a saved lastUnlockedLevel by comparing username to saveFile.txt
