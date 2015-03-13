@@ -5,6 +5,7 @@
 #include <math.h>
 #include <cassert>
 #include <iostream>
+#include <QDebug>
 using namespace std;
 
 QString LevelManager::userName = "";
@@ -80,7 +81,7 @@ void LevelManager::loadLevel(int levelNum) {
             int x, y, width, height;
             strm >> x >> y >> width >> height;
 
-            cout << "x" << x << "y" << y << "w" << width << "h" << height;
+            qDebug() << "x" << x << "y" << y << "w" << width << "h" << height;
 
             LevelObject* obj = new WallObject(x, y, width, height);
             objectsInLevel.push_back(obj);
@@ -89,7 +90,7 @@ void LevelManager::loadLevel(int levelNum) {
             int x, y;
             strm >> x >> y;
 
-            cout << "x" << x << "y" << y;
+            qDebug() << "x" << x << "y" << y;
 
             LevelObject* obj = new TankObject(x, y);
             objectsInLevel.push_back(obj);
@@ -133,7 +134,7 @@ void LevelManager::mouseClick() {
         double diffX = mouseX - tank->getX();
         double diffY = mouseY - tank->getY();
         double heading = atan(diffY/diffX);
-        double pi = 3.14159265358979323846264338327950288;
+        double pi = 3.14159265358979323846264338327950288419716;
         if (diffX <= 0) {
             heading += pi; // add pi to rotate it 180 degrees so that it shoots in the right direction
         }
@@ -197,24 +198,56 @@ LevelManager::~LevelManager() {
 
 }
 
+//writes userName and lastUnlockedLevel to a file. Accounts for previous saves.
 void LevelManager::saveFile() {
-    //open/create the file
-    ofstream fs("saveFile.txt", ofstream::out);
+    //c_string to read bytes into
+    char c[20];
 
-    //write user name
-    fs << "user.name \"";
+    //open the current saveFile
+    ifstream in("saveFile.txt");
 
-    fs << LevelManager::getUserName().cbegin();
+    //create a new file to write data into
+    ofstream out("tempFile.txt");
 
-    fs << "\"" << endl;
+    //loop through every line in file
+    while(in.peek() != EOF)
+    {
+        //read data and put into a QString for comparison
+        in.getline(c,20);
+        QString info = QString(c);
 
-    //write last unlocked level
-    fs << "maxLevel \"" << LevelManager::getLastUnlockedLevel() << "\"" << endl;
+        //if line not the userName
+        if(info != LevelManager::getUserName())
+        {
+            //write this line and the next one
+            out << c << endl;
 
-    //close file
-    fs.close();
+            in.getline(c,20);
+
+            out << c << endl;
+        }
+        //if line is userName, then do not write this line
+        if(info == LevelManager::getUserName())
+        {
+            //read next line, but do not write
+            in.getline(c,20);
+        }
+        else
+        {
+            //write new info into temp.txt
+            QString s = LevelManager::getUserName();
+            out << s.begin() << endl;
+            out << LevelManager::getLastUnlockedLevel() << endl;
+        }
+    }
+
+    in.close();
+    remove("saveFile.txt");
+    out.close();
+    rename("tempFile.txt","saveFile.txt");
 }
 
+//the current code only writes to the file. will build the file into high pile of all scores ever gained in games
 void LevelManager::saveHighScore() {
     ofstream os("HighScore.txt");
 
@@ -226,6 +259,64 @@ void LevelManager::saveHighScore() {
 
     //close file
     os.close();
+
+/* THIS CODE EXTRACTS VALUES, ORGANIZES THEM, AND THEN OUTPUTS THEM TO THE FILE
+
+ //WARINGING: THIS CODE ASSUMES VALUES IN THE HIGHSCORE FILE; WILL PROBABLY PUT IN FALSE VALUES FOR USER TO COMPETE AGAINST
+
+class
+{
+    QString name;
+    int HighScore;
+
+public: //getters and setters
+
+}
+
+vector<class> vec;
+char c[20];
+ifstream in("saveFile.txt");
+
+//load the contents of the file into a vector of comparing with new values
+for (int i = 0; i < 5; i++)
+{
+    class cl = new class();
+
+    in.getline(c, 20);
+
+    cl.setName(QString(c));
+
+    in.getline(c, 20);
+
+    cl.setHighScore(*c); //need one setter to take a pointer
+
+    vec.push_back(cl);
+}
+
+auto counter = vec.begin();
+class cl;
+
+//search through every element
+for (element : vec)
+{
+    //if an element is smaller, then create a new class
+    if(element.getName() < LevelManager::getUserName())
+    {
+        cl = new class();
+        cl.setName(LevelManager::getUserName());
+        cl.setHighScore(LevelManager::getHighScore()); // need another setter to take a simple int variable
+
+        //this line will explode if the userScore is higher than the highest score.
+        vec.insert(counter - 1, cl); //FIND A WAY TO INSERT CODE AT THE BEGINNING OF A VECTOR OR LEAVE THE FIRST ELEMENT OPEN SO THAT AN ELEMENT MAY BE INSERTED THERE.
+    }
+    ++counter;
+}
+
+//write the elements to a new HighScore.txt
+
+//destroy the vector and delete elements
+
+*/
 }
 
 //attempts to load a saved lastUnlockedLevel by comparing username to saveFile.txt
@@ -251,13 +342,7 @@ void LevelManager::loadFile() {
                 //since we found user name, then read the user's lastUnlockedLevel
                 fs.getline(a, 20);
 
-                //convert a to a number - how? this work?
-                //THIS code works in the VM but not my mack
-/*                s << a;
-                int i = stoi(s.str());
-                s.str("");    */
-
-                //REPLACEMENT code
+                //convert to number
                 int i = *a;
 
                 //load number into

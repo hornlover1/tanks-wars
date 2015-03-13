@@ -9,7 +9,7 @@
 #include <QThread>
 
 /*
-Level 1 should look like:
+Level 0 should look like:
 time 30 25 20
 wall 0 0 200 200
 wall 0 400 200 200
@@ -117,7 +117,7 @@ void checkFiringBullet() {
 }
 
 void runUnitTests() {
-    LevelManager::getInstance().loadLevel(1);
+    LevelManager::getInstance().loadLevel(0);
     checkLevelOne();
     checkMovingTank();
     checkFiringBullet();
