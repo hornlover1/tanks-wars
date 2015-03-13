@@ -253,63 +253,69 @@ void LevelManager::saveHighScore() {
     //close file
     os.close();
 
-/* THIS CODE EXTRACTS VALUES, ORGANIZES THEM, AND THEN OUTPUTS THEM TO THE FILE
-
- //WARINGING: THIS CODE ASSUMES VALUES IN THE HIGHSCORE FILE; WILL PROBABLY PUT IN FALSE VALUES FOR USER TO COMPETE AGAINST
-
-class
-{
-    QString name;
-    int HighScore;
-
-public: //getters and setters
-
-}
-
-vector<class> vec;
+//ASSUMES THE EXISTANCE OF A TEXT FILE WITH VALUES THEREIN
 char c[20];
-ifstream in("saveFile.txt");
+ofstream outStream("temp.txt");
+ifstream inStream("HighScore.txt");
 
-//load the contents of the file into a vector of comparing with new values
-for (int i = 0; i < 5; i++)
+inStream.getline(c,20);//disregard first name
+int counter = 0;
+bool isInserted = false;
+
+while(inStream.peek() != EOF)
 {
-    class cl = new class();
+    //inStream number
+    inStream.getline(c,20);
+    int number = *c;
 
-    in.getline(c, 20);
-
-    cl.setName(QString(c));
-
-    in.getline(c, 20);
-
-    cl.setHighScore(*c); //need one setter to take a pointer
-
-    vec.push_back(cl);
-}
-
-auto counter = vec.begin();
-class cl;
-
-//search through every element
-for (element : vec)
-{
-    //if an element is smaller, then create a new class
-    if(element.getName() < LevelManager::getUserName())
+    if (userHighScore > number)
     {
-        cl = new class();
-        cl.setName(LevelManager::getUserName());
-        cl.setHighScore(LevelManager::getHighScore()); // need another setter to take a simple int variable
+        isInserted = true;
+        inStream.clear(); //reset stream state
 
-        //this line will explode if the userScore is higher than the highest score.
-        vec.insert(counter - 1, cl); //FIND A WAY TO INSERT CODE AT THE BEGINNING OF A VECTOR OR LEAVE THE FIRST ELEMENT OPEN SO THAT AN ELEMENT MAY BE INSERTED THERE.
+        int i = 0; //this value keeps track of how many insertions have been made to temp.txt
+        while (i <= counter)
+        {
+            for(int integer = 0; integer < 3; i++)
+            {
+                inStream.getline(c,20);
+                outStream << c; //I assume this will write the whole line, no more no less
+            }
+            i++;
+        }
+
+        outStream << LevelManager::getUserName().begin() << endl;
+        outStream << userHighScore << endl;
+        outStream << endl;
+        i++;
+
+        while(i < 5)
+        {
+            for(int integer = 0; integer < 3; i++)
+            {
+                inStream.getline(c,20);
+                outStream << c; //I assume this will write the whole line, no more no less
+            }
+            i++;
+            break;
+        }
     }
-    ++counter;
+    else
+    {
+        inStream.getline(c, 20);
+    }
+
+    counter++; //this goes up every time a set of data is read. {name, highscore, whiteSpace}
 }
 
-//write the elements to a new HighScore.txt
+inStream.close();
+outStream.close();
 
-//destroy the vector and delete elements
-
-*/
+    if (isInserted == true)
+    {
+        remove("HighScore.txt");
+        rename("temp.txt", "HighScore.txt");
+    }
 }
 
 //attempts to load a saved lastUnlockedLevel by comparing username to saveFile.txt
