@@ -5,6 +5,7 @@
 #include <math.h>
 #include <cassert>
 #include <iostream>
+#include <QDebug>
 using namespace std;
 
 QString LevelManager::userName = "";
@@ -80,7 +81,7 @@ void LevelManager::loadLevel(int levelNum) {
             int x, y, width, height;
             strm >> x >> y >> width >> height;
 
-            cout << "x" << x << "y" << y << "w" << width << "h" << height;
+            qDebug() << "x" << x << "y" << y << "w" << width << "h" << height;
 
             LevelObject* obj = new WallObject(x, y, width, height);
             objectsInLevel.push_back(obj);
@@ -89,7 +90,7 @@ void LevelManager::loadLevel(int levelNum) {
             int x, y;
             strm >> x >> y;
 
-            cout << "x" << x << "y" << y;
+            qDebug() << "x" << x << "y" << y;
 
             LevelObject* obj = new TankObject(x, y);
             objectsInLevel.push_back(obj);
@@ -126,7 +127,7 @@ void LevelManager::mouseClick() {
         double diffX = mouseX - tank->getX();
         double diffY = mouseY - tank->getY();
         double heading = atan(diffY/diffX);
-        double pi = 3.14159265358979323846264338327950288;
+        double pi = 3.14159265358979323846264338327950288419716;
         if (diffX <= 0) {
             heading += pi; // add pi to rotate it 180 degrees so that it shoots in the right direction
         }

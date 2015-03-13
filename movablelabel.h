@@ -11,11 +11,11 @@
 #include <QMouseEvent>
 
 class MovableLabel : public QLabel {
-    QWidget *win;
+    QWidget* win;
     bool mouseDragging;
     QPoint offset;
 public:
-    explicit MovableLabel(QWidget* parent);
+    MovableLabel(QWidget* parent);
     void mouseMoveEvent(QMouseEvent* ev);
     void mousePressEvent(QMouseEvent* ev);
     void mouseReleaseEvent(QMouseEvent* ev);

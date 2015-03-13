@@ -1,5 +1,7 @@
 #include "interface.h"
 #include <QString>
+#include <QDebug>
+#include <QLabel>
 
 Interface::Interface() {}
 
@@ -12,12 +14,13 @@ Interface Interface::getInstance() {
 }
 
 void Interface::setUi(Ui::MainWindow *initUi) {
-    Interface::ui = initUi;
+    ui = initUi;
 }
 
 void Interface::drawObject(LevelObject* obj) {
     int id = obj->getId();
-    MovableLabel* lbl = new MovableLabel(ui->gameArea);
+    QWidget* area = (ui->gameArea);
+    QLabel* lbl = new QLabel(area);
     lbl->setText(QString::number(id));
     lbl->setGeometry(obj->getGeometry());
     lbl->setStyleSheet("QLabel {color:red; background-color: red;}");
@@ -26,7 +29,7 @@ void Interface::drawObject(LevelObject* obj) {
 
 void Interface::moveObject(LevelObject *obj) {
     for(QObject* obj2: ui->gameArea->children()) {
-        MovableLabel* lbl = dynamic_cast<MovableLabel*>(obj2);
+        QLabel* lbl = dynamic_cast<QLabel*>(obj2);
         if (lbl == nullptr) {
             continue;
         }
@@ -40,7 +43,7 @@ void Interface::moveObject(LevelObject *obj) {
 
 void Interface::deleteObject(LevelObject *obj) {
     for(QObject* obj2: ui->gameArea->children()) {
-        MovableLabel* lbl = dynamic_cast<MovableLabel*>(obj2);
+        QLabel* lbl = dynamic_cast<QLabel*>(obj2);
         if (lbl == nullptr) {
             continue;
         }
