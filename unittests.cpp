@@ -27,7 +27,7 @@ wall 800 0 50 600
 void checkLevelOne() {
     vector<LevelObject*> objects = LevelManager::getInstance().getObjects();
     qDebug() << objects.size();
-    assert(objects.size() == 10); //tank2 and time don't count
+    assert(objects.size() == 11); //time don't count
     //need getters
     assert(LevelManager::getInstance().getEasyTime() == 30);
     assert(LevelManager::getInstance().getMediumTime() == 25);
@@ -66,31 +66,33 @@ void checkLevelOne() {
 
         qDebug() << "obj 4";
 
-    wall = dynamic_cast<WallObject*>(objects.at(5));
+        // tests for tank2 go here
+
+    wall = dynamic_cast<WallObject*>(objects.at(6));
         assert(wall->getX() == 600);
         assert(wall->getY() == 400);
 
         qDebug() << "obj 5";
 
-    wall = dynamic_cast<WallObject*>(objects.at(6));
+    wall = dynamic_cast<WallObject*>(objects.at(7));
         assert(wall->getX() == 0);
         assert(wall->getY() == -50);
 
          qDebug() << "obj 6";
 
-    wall = dynamic_cast<WallObject*>(objects.at(7));
+    wall = dynamic_cast<WallObject*>(objects.at(8));
         assert(wall->getX() == -50);
         assert(wall->getY() == 0);
 
          qDebug() << "obj 7";
 
-    wall = dynamic_cast<WallObject*>(objects.at(8));
+    wall = dynamic_cast<WallObject*>(objects.at(9));
         assert(wall->getX() == 0);
         assert(wall->getY() == 600);
 
          qDebug() << "obj 8";
 
-    wall = dynamic_cast<WallObject*>(objects.at(9));
+    wall = dynamic_cast<WallObject*>(objects.at(10));
         assert(wall->getX() == 800);
         assert(wall->getY() == 0);
 
