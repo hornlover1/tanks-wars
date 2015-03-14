@@ -100,7 +100,7 @@ public:
 
     ~LevelManager();
 
-    void Victory();
+    bool Victory();
 };
 
 #endif // LEVELMANAGER_H

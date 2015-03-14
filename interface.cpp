@@ -61,8 +61,3 @@ void Interface::setTimeLeft(QString /*time*/) {
     //TODO: create the label and set it here
 }
 
-void Interface::victoryBanner(){
-    QMessageBox *won = new QMessageBox(ui->gameArea);
-    won->setText("Good work! You have completed the mission soldier. Return to base for debrief.");
-    won->show();
-}

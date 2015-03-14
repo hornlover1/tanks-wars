@@ -147,4 +147,8 @@ public:
     void destroy();
 };
 
+class Target: public LevelObject {
+
+};
+
 #endif // LEVELOBJECT_H

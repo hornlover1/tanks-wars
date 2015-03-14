@@ -17,6 +17,8 @@ public:
 private:
     Ui::MainWindow *ui;
 
+    void Message();
+
 private slots:
     void mouseMoveEvent(QMouseEvent*);
     void mousePressEvent(QMouseEvent*);

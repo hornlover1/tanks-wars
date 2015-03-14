@@ -377,7 +377,7 @@ void LevelManager::loadFile() {
     LevelManager::setLastUnlockedLevel(1);
 }
 
-void LevelManager::Victory(){
+bool LevelManager::Victory(){
     bool vic;
     for(int i; i < objectsInLevel.size(); ++i){
         LevelObject *obj = objectsInLevel.at(i);
@@ -389,10 +389,7 @@ void LevelManager::Victory(){
             vic = false;
         }
     }//for
-    if(vic == true){/*continue*/}//if
-    else{
-       Interface::getInstance().victoryBanner();
-    }
+    return vic;
 }
 
 void LevelManager::fireBullet(int x, int y, int heading, TankObject* tank) {
@@ -401,4 +398,3 @@ void LevelManager::fireBullet(int x, int y, int heading, TankObject* tank) {
     Interface::getInstance().drawObject(Bobj);
     Bobj->startMotion();
 }
-
