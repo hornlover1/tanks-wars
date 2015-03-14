@@ -144,3 +144,10 @@ Barricade::Barricade(int x, int y, QObject *parent):
 void Barricade::destroy() {
     //TODO: write this method
 }
+
+Target::Target(int initX, int initY, QObject *parent):
+    TankObject(initX, initY, parent){}
+
+void Target::destroy() {
+    //code for winning game
+}

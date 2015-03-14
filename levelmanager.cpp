@@ -95,6 +95,15 @@ void LevelManager::loadLevel(int levelNum) {
             LevelObject* obj = new TankObject(x, y);
             objectsInLevel.push_back(obj);
             Interface::getInstance().drawObject(obj);
+        } else if (argType == "tank2") {
+            int x, y;
+            strm >> x >> y;
+
+            qDebug() << "x" << x << "y" << y;
+
+            LevelObject* obj = new Target(x, y);
+            objectsInLevel.push_back(obj);
+            Interface::getInstance().drawObject(obj);
         }
     }
     //TODO: load the next level from file
@@ -360,3 +369,9 @@ void LevelManager::loadFile() {
     LevelManager::setLastUnlockedLevel(1);
 }
 
+void LevelManager::fireBullet(int x, int y, int heading, TankObject* tank) {
+    BulletObject* Bobj = new BulletObject(x, y, heading, tank);
+    objectsInLevel.push_back(Bobj);
+    Interface::getInstance().drawObject(Bobj);
+    Bobj->startMotion();
+}
