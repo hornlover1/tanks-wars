@@ -96,6 +96,8 @@ public:
 
     void destroy(LevelObject* obj);
 
+    void fireBullet(int x, int y, int heading, TankObject* tank);
+
     ~LevelManager();
 
     void Victory();

@@ -155,6 +155,3 @@ FlagObject::FlagObject(int x, int y, QObject *parent):
 void FlagObject::destroy() {
     LevelObject::destroy();
 }
-
-
-
