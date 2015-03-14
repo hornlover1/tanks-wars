@@ -39,6 +39,7 @@ public:
 
     ~LevelObject();
 
+    virtual bool hasFlag() {return false;}
 protected slots:
     //called when the timer goes off
     virtual void onTimeOut();
@@ -57,6 +58,7 @@ public:
 
     //if the object overlaps with another object, get the object it is in contact with, otherwise return nullptr
     LevelObject * getContactedObject();
+
 };
 
 enum Direction {North, South, East, West};
@@ -138,11 +140,11 @@ class FlagObject: public LevelObject {
     Q_OBJECT
 
     //isMovable = false
-    //isDestroyable = false
+    //isDestroyable = true
 public:
     FlagObject(int x, int y, QObject* parent = 0);
-
-    void contact();
+    bool hasFlag() {return true;}
+    void destroy();
 };
 
 #endif // LEVELOBJECT_H

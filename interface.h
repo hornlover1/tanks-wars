@@ -29,6 +29,8 @@ public:
 
     //set the time in the header
     void setTimeLeft(QString time);
+
+    void victoryBanner();
 };
 
 #endif // INTERFACE_H

@@ -4,6 +4,7 @@
 #include "levelmanager.h"
 #include "interface.h"
 #include <QDebug>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -109,3 +110,5 @@ void MainWindow::on_btCheat_clicked() {
     ui->gameArea->setMouseTracking(true);
     ui->gameArea->installEventFilter(this);
 }
+
+

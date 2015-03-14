@@ -6,6 +6,7 @@
 #include <cassert>
 #include <iostream>
 #include <QDebug>
+#include <QMessageBox>
 using namespace std;
 
 QString LevelManager::userName = "";
@@ -365,5 +366,23 @@ void LevelManager::loadFile() {
     }
     //set lastUnlockedLevel
     LevelManager::setLastUnlockedLevel(1);
+}
+
+void LevelManager::Victory(){
+    bool vic;
+    for(int i; i < objectsInLevel.size(); ++i){
+        LevelObject *obj = objectsInLevel.at(i);
+        if(obj->hasFlag() == true ){
+            vic = true;
+            break;
+        }//if
+        else{
+            vic = false;
+        }
+    }//for
+    if(vic == true){/*continue*/}//if
+    else{
+       Interface::getInstance().victoryBanner();
+    }
 }
 

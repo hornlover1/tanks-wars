@@ -128,8 +128,9 @@ void BulletObject::onTimeOut() {
     y += moveY;
     LevelObject* objectHit = getContactedObject();
     if (objectHit != nullptr && objectHit != tank) { // don't shoot myself
-        objectHit->destroy();
         this->destroy();
+        objectHit->destroy();
+        LevelManager::getInstance().Victory();
     }
     LevelManager::getInstance().updateUI();
 }
@@ -148,14 +149,12 @@ void Barricade::destroy() {
 
 FlagObject::FlagObject(int x, int y, QObject *parent):
     LevelObject(x, y, 30, 30, parent) {
-
+    isDestroyable = true;
 }
 
-void FlagObject::contact(){
-    for (LevelObject* obj: LevelManager::getInstance().getObjects()) {
-        if (obj->getGeometry().intersects(this->getGeometry()) && obj->getId() != this->getId()) {
-            QMessageBox("CONGRADULATIONS!", "You have reached the goal. Good job, soldier.", QMessageBox::Icon, 50, 50, 100, parent, Qt::WindowFlags);
-            //add functionality to move to next level.
-        }
+void FlagObject::destroy() {
+    LevelObject::destroy();
 }
-}
+
+
+

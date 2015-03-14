@@ -22,12 +22,13 @@ wall 0 -50 800 50
 wall -50 0 50 600
 wall 0 600 800 50
 wall 800 0 50 600
+flag 600 300
 */
 
 void checkLevelOne() {
     vector<LevelObject*> objects = LevelManager::getInstance().getObjects();
     qDebug() << objects.size();
-    assert(objects.size() == 10); //tank2 and time don't count
+    assert(objects.size() == 11); //tank2 and time don't count
     //need getters
     assert(LevelManager::getInstance().getEasyTime() == 30);
     assert(LevelManager::getInstance().getMediumTime() == 25);

@@ -97,6 +97,8 @@ public:
     void destroy(LevelObject* obj);
 
     ~LevelManager();
+
+    void Victory();
 };
 
 #endif // LEVELMANAGER_H
