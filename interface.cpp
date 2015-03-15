@@ -76,8 +76,8 @@ void Interface::showVictory(){
         else{
         LevelManager::getInstance().setLastUnlockedLevel(lvl);
         if(LevelManager::getInstance().getLastUnlockedLevel() == 2){ui->bt2->setEnabled(true);}
-
     }
+  }
 }
 
 void Interface::howTo(){
