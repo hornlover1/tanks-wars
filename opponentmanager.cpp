@@ -27,10 +27,10 @@ void OpponentManager::stopTankMoving() {
 }
 
 void OpponentManager::fireBullet(int x, int y, int heading) {
-   /* for (LevelObject* obj: LevelManager::getInstance().getObjects()) {
+    for (LevelObject* obj: LevelManager::getInstance().getObjects()) {
         Target* targ = dynamic_cast<Target*>(obj);
         if (targ != nullptr) {
             LevelManager::getInstance().fireBullet(x, y, heading, targ);
         }
-    }*/
+    }
 }

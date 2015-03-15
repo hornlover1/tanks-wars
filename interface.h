@@ -26,6 +26,8 @@ public:
 
     //take the object representing the LevelObject off the screen
     void deleteObject(LevelObject* obj);
+
+    void setVictory();
 };
 
 #endif // INTERFACE_H

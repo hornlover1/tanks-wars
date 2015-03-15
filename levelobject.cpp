@@ -131,6 +131,7 @@ void BulletObject::onTimeOut() {
     if (objectHit != nullptr && objectHit != tank) { // don't shoot myself
         this->destroy();
         objectHit->destroy();
+        LevelManager::getInstance().Victory();
     }
     LevelManager::getInstance().updateUI();
 }
@@ -147,6 +148,7 @@ void Barricade::destroy() {
     //TODO: write this method
 }
 
+//objective to destroy in level
 FlagObject::FlagObject(int x, int y, QObject *parent):
     LevelObject(x, y, 30, 30, parent) {
     isDestroyable = true;

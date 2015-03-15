@@ -57,4 +57,7 @@ void Interface::deleteObject(LevelObject *obj) {
     }
 }
 
+void Interface::setVictory(){
+
+}
 

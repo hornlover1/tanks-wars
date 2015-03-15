@@ -19,8 +19,7 @@ SOURCES += main.cpp\
         levelmanager.cpp \
         movablelabel.cpp \
     unittests.cpp \
-    opponentmanager.cpp \
-    mastertimer.cpp
+    opponentmanager.cpp
 
 HEADERS  += mainwindow.h \
         levelobject.h \
@@ -28,8 +27,7 @@ HEADERS  += mainwindow.h \
         levelmanager.h \
         movablelabel.h \
     unittests.h \
-    opponentmanager.h \
-    mastertimer.h
+    opponentmanager.h
 
 FORMS    += mainwindow.ui
 

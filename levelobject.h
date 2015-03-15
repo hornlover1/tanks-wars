@@ -152,6 +152,7 @@ class Target: public TankObject {
 
 public:
     Target(int x, int y, QObject* parent = 0);
+    bool hasFlag() {return true;}
 
     //when the enemy tank gets hit, destroy it and win the game
     void destroy();

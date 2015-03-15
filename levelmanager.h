@@ -31,11 +31,16 @@ class LevelManager {
     //used to find the correct level file to save the highScores to
     int levelNumber;
 
+    //boolean to hold victory condition
+    bool victory;
 public:
 //for unit tests
     int getEasyTime();
     int getMediumTime();
     int getHardTime();
+
+    //bool to get victory
+    bool getVictory();
 
     //set userHighScore
     void setUserHighScore(int score);
@@ -103,7 +108,7 @@ public:
 
     ~LevelManager();
 
-    bool Victory();
+    void Victory();
 };
 
 #endif // LEVELMANAGER_H
