@@ -110,10 +110,11 @@ void LevelManager::loadLevel(int levelNum) {
             qDebug() << "x" << x << "y" << y;
 
             LevelObject* obj = new Target(x, y);
-            objectsInLevel.push_back(obj);
-            Interface::getInstance().drawObject(obj);
+            //objectsInLevel.push_back(obj);
+            //Interface::getInstance().drawObject(obj);
         }
         else if (argType == "flag"){
+            FlagObject::incrementMaxFlagNum();
             int x, y;
             strm >> x >> y;
             LevelObject* obj = new FlagObject(x, y);
@@ -381,7 +382,18 @@ void LevelManager::loadFile() {
 }
 
 void LevelManager::Victory(){
-    for(int i; i < objectsInLevel.size(); ++i){
+    //replacement code
+    if(FlagObject::getMaxFlagNum() == FlagObject::getFlagCounter())
+    {
+        //is this reduntant?
+        victory = true;
+        Interface::getInstance().showVictory();
+    }
+    else
+    {
+        victory = false;
+    }
+  /*  for(int i; i < objectsInLevel.size(); ++i){
         FlagObject *obj = dynamic_cast<FlagObject*>(objectsInLevel.at(i));
         if(obj == nullptr){
             victory = true;
@@ -390,8 +402,8 @@ void LevelManager::Victory(){
             victory = false;
             break;
         }
-    }//for
-    Interface::getInstance().setVictory();
+    }//for   */
+
 }
 
 void LevelManager::fireBullet(int x, int y, int heading, TankObject* tank) {

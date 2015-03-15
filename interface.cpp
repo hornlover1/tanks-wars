@@ -58,7 +58,7 @@ void Interface::deleteObject(LevelObject *obj) {
     }
 }
 
-void Interface::setVictory(){
+void Interface::showVictory(){
     bool vic = LevelManager::getInstance().getVictory();
     if (vic = true){
         QMessageBox *banner = new QMessageBox(ui->gameArea);
