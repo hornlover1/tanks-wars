@@ -26,9 +26,6 @@ public:
 
     //take the object representing the LevelObject off the screen
     void deleteObject(LevelObject* obj);
-
-    //set the time in the header
-    void setTimeLeft(QString time);
 };
 
 #endif // INTERFACE_H

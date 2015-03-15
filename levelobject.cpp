@@ -1,5 +1,6 @@
 #include "levelobject.h"
 #include "levelmanager.h"
+#include "mainwindow.h"
 #include <math.h>
 #include <QMessageBox>
 
@@ -130,7 +131,6 @@ void BulletObject::onTimeOut() {
     if (objectHit != nullptr && objectHit != tank) { // don't shoot myself
         this->destroy();
         objectHit->destroy();
-        LevelManager::getInstance().Victory();
     }
     LevelManager::getInstance().updateUI();
 }
@@ -154,4 +154,11 @@ FlagObject::FlagObject(int x, int y, QObject *parent):
 
 void FlagObject::destroy() {
     LevelObject::destroy();
+}
+
+Target::Target(int initX, int initY, QObject *parent):
+    TankObject(initX, initY, parent){}
+
+void Target::destroy() {
+    //code for winning game
 }

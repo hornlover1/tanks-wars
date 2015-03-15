@@ -112,12 +112,3 @@ void MainWindow::on_btCheat_clicked() {
     ui->gameArea->installEventFilter(this);
 }
 
-void MainWindow::Message(){
-    bool show = LevelManager::getInstance().Victory();
-    if(show == true){
-    QMessageBox *won = new QMessageBox(ui->gameArea);
-    won->setText("Good work! You have completed the mission soldier. Return to base for debrief.");
-    won->show();
-    }
-
-}

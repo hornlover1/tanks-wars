@@ -147,8 +147,14 @@ public:
     void destroy();
 };
 
-class Target: public LevelObject {
+class Target: public TankObject {
+    Q_OBJECT
 
+public:
+    Target(int x, int y, QObject* parent = 0);
+
+    //when the enemy tank gets hit, destroy it and win the game
+    void destroy();
 };
 
 #endif // LEVELOBJECT_H
