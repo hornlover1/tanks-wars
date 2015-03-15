@@ -17,10 +17,40 @@ LevelManager::LevelManager() {}
 
 LevelManager LevelManager::instance;
 
-//for unit tests
 int LevelManager::getEasyTime() {return easyTime;}
 int LevelManager::getMediumTime() {return mediumTime;}
 int LevelManager::getHardTime() {return hardTime;}
+
+void LevelManager::decrementEasyTime() {easyTime--;}
+void LevelManager::decrementMediumTime() {mediumTime--;}
+void LevelManager::decrementHardTime() {hardTime--;}
+
+//called by a QTimer to decremented the user's selected time
+void LevelManager::decrementTime()
+{
+    if(userTime == "Easy")
+    {
+        easyTime--;
+    }
+    else if(userTime == "Medium")
+    {
+        mediumTime--;
+    }
+    else if (userTime == "Hard")
+    {
+        hardTime--;
+    }
+
+    if(easyTime||mediumTime||hardTime == 0)
+    {
+        Interface::getInstance().showDefeat();
+    }
+}
+
+void LevelManager::selectTime(QString s)
+{
+    userTime = s;
+}
 
 void LevelManager::setUserHighScore(int score) {
     userHighScore = score;

@@ -29,7 +29,11 @@ public:
 
     void showVictory();
 
+
     void howTo();
+
+    void showDefeat();
+
 };
 
 #endif // INTERFACE_H

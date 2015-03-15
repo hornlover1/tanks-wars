@@ -12,6 +12,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow) {
     ui->setupUi(this);
     Interface::getInstance().setUi(ui);
+
+    //this timer will decrement the time selected by the user
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(LevelManager::getInstance().decrementTime();));
+    timer->start(1000);
 }
 
 MainWindow::~MainWindow() {
@@ -100,6 +105,21 @@ void MainWindow::levelButtonClicked() {
     }
 }
 
+void MainWindow::on_rbEasy_clicked()
+{
+    LevelManager::getInstance().selectTime(ui->rbEasy->text());
+}
+
+void MainWindow::on_rbMedium_clicked()
+{
+    LevelManager::getInstance().selectTime(ui->rbMedium->text());
+}
+
+void MainWindow::on_rbHard_clicked()
+{
+    LevelManager::getInstance().selectTime(ui->rbHard->text());
+}
+
 //enables testing of ideas
 void MainWindow::on_btCheat_clicked() {
     LevelManager::getInstance().loadLevel(0);
@@ -112,8 +132,8 @@ void MainWindow::on_btCheat_clicked() {
     ui->gameArea->installEventFilter(this);
 }
 
-
 void MainWindow::on_pushButton_2_clicked()
 {
     Interface::getInstance().howTo();
 }
+

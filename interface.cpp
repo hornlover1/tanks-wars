@@ -62,6 +62,7 @@ void Interface::showVictory(){
     bool vic = LevelManager::getInstance().getVictory();
     if (vic = true){
         QMessageBox *banner = new QMessageBox(ui->gameArea);
+
         if(LevelManager::getInstance().getLevel() < 9){
             banner->setText("Congratulations. You've completed this mission soldier.\n\n\n  ---New Mission Unlocked---");
             banner->show();
@@ -83,4 +84,12 @@ void Interface::howTo(){
     QMessageBox *explain = new QMessageBox(ui->gameArea);
     explain->setText("This is a simple overview of the game's controls.\nControls:\n\n -Right arrow moves the tank right.\n -Down arrow moves the tank down.\n -Left arrow moves the tank left.\n -Up arrow moves the tank up.\n -Click the mouse on the playing field to shoot.\n\nTo beat the game, simply be the last tank standing, or destroy any objectives in the area. Good luck.");
     explain->show();
+}
+
+void Interface::showDefeat()
+{
+    QMessageBox *banner = new QMessageBox(ui->gameArea);
+    banner->setText("Sorry. You lose.");
+    banner->show();
+
 }

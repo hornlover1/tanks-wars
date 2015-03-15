@@ -12,8 +12,12 @@ class LevelManager {
     static LevelManager instance;
     //objects that exist in the level and should be shown on the screen
     vector<LevelObject*> objectsInLevel;
+
     //number of seconds given for a particular difficulty level
     int easyTime, mediumTime, hardTime;
+
+    //the time selected by the user
+    QString userTime;
 
     //position of mouse
     int mouseX, mouseY;
@@ -34,12 +38,23 @@ class LevelManager {
     //boolean to hold victory condition
     bool victory;
 public:
-//for unit tests
+//to access times
     int getEasyTime();
     int getMediumTime();
     int getHardTime();
 
 //for other functionality
+    void decrementEasyTime();
+    void decrementMediumTime();
+    void decrementHardTime();
+
+    //sets a QString that tells the timer method which time to decrement
+    void selectTime(QString s);
+
+    //called by a QTimer to decremented the user's selected time
+    void decrementTime();
+
+    //bool to get victory
     bool getVictory();
     int getLevel();
 
