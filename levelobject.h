@@ -138,9 +138,21 @@ public:
 class FlagObject: public LevelObject {
     Q_OBJECT
 
+    //is incremented by loadlevel
+    static int maxFlagNum;
+    //is incremented by ?
+    static int flagCounter;
     //isMovable = false
     //isDestroyable = true
 public:
+    static int getMaxFlagNum();
+
+    static void incrementMaxFlagNum();
+
+    static int getFlagCounter();
+
+    static void incrementFlagCounter();
+
     FlagObject(int x, int y, QObject* parent = 0);
     bool hasFlag() {return true;}
 
