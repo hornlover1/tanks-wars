@@ -63,7 +63,7 @@ void Interface::showVictory(){
     if (vic = true){
         QMessageBox *banner = new QMessageBox(ui->gameArea);
         if(LevelManager::getInstance().getLevel() < 9){
-            banner->setText("Congradulations. You've completed your mission soldier.\n\n\n  ---New Mission Unlocked---");
+            banner->setText("Congratulations. You've completed this mission soldier.\n\n\n  ---New Mission Unlocked---");
             banner->show();
         }
         else{
@@ -74,7 +74,8 @@ void Interface::showVictory(){
         if(lvl < LevelManager::getLastUnlockedLevel()){}
         else{
         LevelManager::getInstance().setLastUnlockedLevel(lvl);
-        }
+        if(LevelManager::getInstance().getLastUnlockedLevel() == 2){ui->bt2->setEnabled(true);}
+
     }
 }
 

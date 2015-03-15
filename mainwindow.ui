@@ -286,6 +286,25 @@
         <widget class="QWidget" name="widget_5" native="true">
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_6" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
            <widget class="QWidget" name="gameArea" native="true">
             <property name="minimumSize">
              <size>
@@ -305,25 +324,6 @@
             <layout class="QHBoxLayout" name="horizontalLayout_3"/>
            </widget>
           </item>
-          <item>
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QWidget" name="widget_6" native="true">
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
            <spacer name="horizontalSpacer_3">
             <property name="orientation">
