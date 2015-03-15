@@ -62,8 +62,14 @@ void Interface::showVictory(){
     bool vic = LevelManager::getInstance().getVictory();
     if (vic = true){
         QMessageBox *banner = new QMessageBox(ui->gameArea);
-        banner->setText("Congradulations. You've completed your mission soldier.");
+        banner->setText("Good job. You've completed your mission, soldier.");
         banner->show();
     }
 }
 
+void Interface::showDefeat()
+{
+    QMessageBox *banner = new QMessageBox(ui->gameArea);
+    banner->setText("Sorry. You lose.");
+    banner->show();
+}

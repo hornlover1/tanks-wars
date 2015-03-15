@@ -28,6 +28,8 @@ public:
     void deleteObject(LevelObject* obj);
 
     void showVictory();
+
+    void showDefeat();
 };
 
 #endif // INTERFACE_H
