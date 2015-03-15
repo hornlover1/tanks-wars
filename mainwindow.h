@@ -13,6 +13,8 @@ class MainWindow : public QMainWindow {
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+
 private:
     Ui::MainWindow *ui;
 
@@ -24,6 +26,7 @@ private slots:
     void on_pbLoad_clicked();
     void levelButtonClicked();
     void on_btCheat_clicked();
+    void on_pushButton_2_clicked();
 };
 
 #endif // MAINWINDOW_H

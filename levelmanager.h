@@ -39,8 +39,9 @@ public:
     int getMediumTime();
     int getHardTime();
 
-    //bool to get victory
+//for other functionality
     bool getVictory();
+    int getLevel();
 
     //set userHighScore
     void setUserHighScore(int score);
@@ -61,7 +62,6 @@ public:
     static void setLastUnlockedLevel(int i);
 
     static int getLastUnlockedLevel();
-    //TODO: need to write the code incrementing this after each level completion
 
     //singleton method
     static LevelManager& getInstance();

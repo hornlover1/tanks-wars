@@ -63,7 +63,7 @@ vector<LevelObject*> LevelManager::getObjects() {
 
 bool LevelManager::getVictory() {return victory;}
 
-
+int LevelManager::getLevel() {return levelNumber;}
 
 void LevelManager::loadLevel(int levelNum) {
     for (LevelObject* obj: objectsInLevel) {
@@ -391,7 +391,7 @@ void LevelManager::Victory(){
             break;
         }
     }//for
-    Interface::getInstance().setVictory();
+    Interface::getInstance().showVictory();
 }
 
 void LevelManager::fireBullet(int x, int y, int heading, TankObject* tank) {

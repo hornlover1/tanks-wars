@@ -271,6 +271,15 @@
            </spacer>
           </item>
          </layout>
+         <zorder>leUserName</zorder>
+         <zorder>pbLoad</zorder>
+         <zorder>Pause</zorder>
+         <zorder>rbEasy</zorder>
+         <zorder>rbMedium</zorder>
+         <zorder>rbHard</zorder>
+         <zorder>levels</zorder>
+         <zorder>btCheat</zorder>
+         <zorder>pushButton_2</zorder>
         </widget>
        </item>
        <item>
@@ -342,7 +351,7 @@
      <x>0</x>
      <y>0</y>
      <width>1065</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

@@ -112,3 +112,8 @@ void MainWindow::on_btCheat_clicked() {
     ui->gameArea->installEventFilter(this);
 }
 
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    Interface::getInstance().howTo();
+}
