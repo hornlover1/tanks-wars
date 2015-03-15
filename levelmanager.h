@@ -17,7 +17,7 @@ class LevelManager {
     int easyTime, mediumTime, hardTime;
 
     //the time selected by the user
-    QString userTime;
+    QString userTime = "Easy";
 
     //position of mouse
     int mouseX, mouseY;

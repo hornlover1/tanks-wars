@@ -14,9 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Interface::getInstance().setUi(ui);
 
     //this timer will decrement the time selected by the user
-    QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(LevelManager::getInstance().decrementTime();));
-    timer->start(1000);
 }
 
 MainWindow::~MainWindow() {
@@ -86,6 +84,9 @@ void MainWindow::on_pbLoad_clicked() {
             if (button->text().toInt() <= LevelManager::getLastUnlockedLevel()) {
                 button->setEnabled(true);
                 connect(button, SIGNAL(clicked()), this, SLOT(levelButtonClicked()));
+
+                //start the timer counting down till user defeat
+                timer->start(1000);
             } else {
                 button->setEnabled(false);
             }
