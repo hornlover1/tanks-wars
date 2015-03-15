@@ -17,10 +17,10 @@ LevelManager::LevelManager() {}
 
 LevelManager LevelManager::instance;
 
+//for unit tests
 int LevelManager::getEasyTime() {return easyTime;}
 int LevelManager::getMediumTime() {return mediumTime;}
 int LevelManager::getHardTime() {return hardTime;}
-
 
 void LevelManager::setUserHighScore(int score) {
     userHighScore = score;
@@ -67,6 +67,9 @@ void LevelManager::loadLevel(int levelNum) {
         delete obj;
     }
     objectsInLevel.clear();
+
+    //Jordan's line
+    levelNumber = levelNum; //i need this number for saveHighScore()
 
     //i.e. level2.txt
     //QFile levelX("://Resources/level1.txt");
@@ -257,81 +260,77 @@ void LevelManager::saveFile() {
     rename("tempFile.txt","saveFile.txt");
 }
 
-//the current code only writes to the file. will build the file into high pile of all scores ever gained in games
+//saves new HighScore; assumes an existing HighScore.txt
+//currently stores only the 5 highest scores in the whole game
 void LevelManager::saveHighScore() {
-    ofstream os("HighScore.txt");
 
-    //write out name
-    os << LevelManager::getUserName().cbegin() << ":" << endl << endl;
+    char c[20];
+    ofstream outStream("temp.txt");
+    QString filename = QString("://Resources/HighScore/highscore") + QString::number(levelNumber) + QString(".txt");
+    ifstream inStream(filename.toStdString().c_str());
 
-    //write out highscore
-    os << getUserHighScore();
+    inStream.getline(c,20);//disregard first name
+    int counter = 0;
+    bool isInserted = false;
 
-    //close file
-    os.close();
-
-//ASSUMES THE EXISTANCE OF A TEXT FILE WITH VALUES THEREIN
-char c[20];
-ofstream outStream("temp.txt");
-ifstream inStream("HighScore.txt");
-
-inStream.getline(c,20);//disregard first name
-int counter = 0;
-bool isInserted = false;
-
-while(inStream.peek() != EOF)
-{
-    //inStream number
-    inStream.getline(c,20);
-    int number = *c;
-
-    if (userHighScore > number)
+    while(inStream.peek() != EOF)
     {
-        isInserted = true;
-        inStream.clear(); //reset stream state
+        //inStream number
+        inStream.getline(c,20);
+        int number = *c;
 
-        int i = 0; //this value keeps track of how many insertions have been made to temp.txt
-        while (i <= counter)
+        if (userHighScore > number)
         {
-            for(int integer = 0; integer < 3; i++)
+            isInserted = true;
+            inStream.clear(); //reset stream state
+
+            int i = 0; //this value keeps track of how many insertions have been made to temp.txt
+            while (i <= counter)
             {
-                inStream.getline(c,20);
-                outStream << c; //I assume this will write the whole line, no more no less
+                for(int integer = 0; integer < 3; i++)
+                {
+                    inStream.getline(c,20);
+                    outStream << c; //I assume this will write the whole line, no more no less
+                }
+                i++;
             }
+
+            outStream << LevelManager::getUserName().begin() << endl;
+            outStream << userHighScore << endl;
+            outStream << endl;
             i++;
+
+            while(i < 5)
+            {
+                for(int integer = 0; integer < 3; i++)
+                {
+                    inStream.getline(c,20);
+                    outStream << c; //I assume this will write the whole line, no more no less
+                }
+                i++;
+                break;
+            }
+        }
+        else
+        {
+            inStream.getline(c, 20);
         }
 
-        outStream << LevelManager::getUserName().begin() << endl;
-        outStream << userHighScore << endl;
-        outStream << endl;
-        i++;
-
-        while(i < 5)
-        {
-            for(int integer = 0; integer < 3; i++)
-            {
-                inStream.getline(c,20);
-                outStream << c; //I assume this will write the whole line, no more no less
-            }
-            i++;
-            break;
-        }
-    }
-    else
-    {
-        inStream.getline(c, 20);
+        counter++; //this goes up every time a set of data is read. {name, highscore, whiteSpace}
     }
 
-    counter++; //this goes up every time a set of data is read. {name, highscore, whiteSpace}
-}
-
-inStream.close();
-outStream.close();
+    inStream.close();
+    outStream.close();
 
     if (isInserted == true)
     {
         remove("HighScore.txt");
-        rename("temp.txt", "HighScore.txt");
+        QString filename = QString("HighScore") + QString::number(levelNumber) + QString(".txt");
+        rename("temp.txt", filename.toStdString().c_str());
+    }
+    else
+    {
+        remove("temp.txt");
     }
 }
 

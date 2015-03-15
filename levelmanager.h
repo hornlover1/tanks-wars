@@ -28,6 +28,9 @@ class LevelManager {
     //current high score of the user
     int userHighScore;
 
+    //used to find the correct level file to save the highScores to
+    int levelNumber;
+
 public:
 //for unit tests
     int getEasyTime();
