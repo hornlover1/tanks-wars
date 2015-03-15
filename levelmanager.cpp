@@ -382,13 +382,13 @@ void LevelManager::loadFile() {
 
 void LevelManager::Victory(){
     for(int i; i < objectsInLevel.size(); ++i){
-        LevelObject *obj = objectsInLevel.at(i);
-        if(obj->hasFlag() == false){
-            victory = false;
-            break;
+        FlagObject *obj = dynamic_cast<FlagObject*>(objectsInLevel.at(i));
+        if(obj == nullptr){
+            victory = true;
         }//if
         else{
-            victory = true;
+            victory = false;
+            break;
         }
     }//for
     Interface::getInstance().setVictory();

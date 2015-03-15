@@ -1,4 +1,5 @@
 #include "interface.h"
+#include "levelmanager.h"
 #include <QString>
 #include <QDebug>
 #include <QLabel>
@@ -58,6 +59,11 @@ void Interface::deleteObject(LevelObject *obj) {
 }
 
 void Interface::setVictory(){
-
+    bool vic = LevelManager::getInstance().getVictory();
+    if (vic = true){
+        QMessageBox *banner = new QMessageBox(ui->gameArea);
+        banner->setText("Congradulations. You've completed your mission soldier.");
+        banner->show();
+    }
 }
 
