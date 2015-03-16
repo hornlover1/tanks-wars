@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 #include "unittests.h"
+#include "interface.h"
+
 using namespace std;
 
 int main(int argc, char *argv[]) {
@@ -16,6 +18,8 @@ int main(int argc, char *argv[]) {
             runUnitTests();
         }
     }
+
+    Interface::getInstance().blankUI();
 
     w.show();
 
