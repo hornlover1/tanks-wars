@@ -29,9 +29,12 @@ void LevelManager::decrementHardTime() {hardTime--;}
 void LevelManager::setBullet_obj(bool x) {bullet_obj = x;}
 
 //called by a QTimer to decremented the user's selected time
-void LevelManager::decrementTime()
-{
-    if(userTime == "Easy") {
+void LevelManager::decrementTime() {
+    if (easyTime < 0 || mediumTime < 0 || hardTime < 0) {
+        //TODO:stop game
+        return;
+    }
+    if (userTime == "Easy") {
         easyTime--;
         Interface::getInstance().showTime(QString::number(easyTime));
     } else if(userTime == "Medium") {
