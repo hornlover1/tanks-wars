@@ -27,6 +27,8 @@ public:
     //take the object representing the LevelObject off the screen
     void deleteObject(LevelObject* obj);
 
+    void showTime(QString);
+
     void showVictory();
 
     void showDefeat();

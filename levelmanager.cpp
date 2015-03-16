@@ -13,7 +13,9 @@ QString LevelManager::userName = "";
 
 int LevelManager::lastUnlockedLevel = 1;
 
-LevelManager::LevelManager() {}
+LevelManager::LevelManager() {
+    userTime = "Easy";
+}
 
 LevelManager LevelManager::instance;
 
@@ -28,21 +30,18 @@ void LevelManager::decrementHardTime() {hardTime--;}
 //called by a QTimer to decremented the user's selected time
 void LevelManager::decrementTime()
 {
-    if(userTime == "Easy")
-    {
+    if(userTime == "Easy") {
         easyTime--;
-    }
-    else if(userTime == "Medium")
-    {
+        Interface::getInstance().showTime(QString::number(easyTime));
+    } else if(userTime == "Medium") {
         mediumTime--;
-    }
-    else if (userTime == "Hard")
-    {
+        Interface::getInstance().showTime(QString::number(mediumTime));
+    } else if (userTime == "Hard") {
         hardTime--;
+        Interface::getInstance().showTime(QString::number(hardTime));
     }
 
-    if(easyTime||mediumTime||hardTime == 0)
-    {
+    if (easyTime == 0 || mediumTime == 0 || hardTime == 0) {
         Interface::getInstance().showDefeat();
     }
 }
@@ -140,8 +139,8 @@ void LevelManager::loadLevel(int levelNum) {
             qDebug() << "x" << x << "y" << y;
 
             LevelObject* obj = new Target(x, y);
-            //objectsInLevel.push_back(obj);
-            //Interface::getInstance().drawObject(obj);
+            objectsInLevel.push_back(obj);
+            Interface::getInstance().drawObject(obj);
         }
         else if (argType == "flag"){
             FlagObject::incrementMaxFlagNum();
@@ -176,7 +175,8 @@ void LevelManager::mouseClick() {
     //TODO: fire a bullet at the target
     for (LevelObject* obj: objectsInLevel) {
         TankObject* tank = dynamic_cast<TankObject*>(obj);
-        if (tank == nullptr) {
+        Target* target = dynamic_cast<Target*>(obj);
+        if (tank == nullptr || target != nullptr) {
             continue;
         }
         double diffX = mouseX - tank->getX();
@@ -212,7 +212,9 @@ void LevelManager::keyPress(Direction d) {
     //update interface when tank moves - how to do?
     for (LevelObject* obj: objectsInLevel) {
         TankObject* tank = dynamic_cast<TankObject*>(obj);
-        if (tank == nullptr) {
+        Target* target = dynamic_cast<Target*>(obj);
+        if (tank == nullptr || target != nullptr) {
+            //We're looking for the tank, not the tank2
             continue;
         }
         tank->startMotion(d);

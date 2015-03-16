@@ -58,17 +58,20 @@ void Interface::deleteObject(LevelObject *obj) {
     }
 }
 
-void Interface::showVictory(){
+void Interface::showTime(QString str) {
+    ui->timeLeft->setText(str);
+}
+
+void Interface::showVictory() {
     bool vic = LevelManager::getInstance().getVictory();
-    if (vic = true){
+    if (vic == true){
         QMessageBox *banner = new QMessageBox(ui->gameArea);
         banner->setText("Good job. You've completed your mission, soldier.");
         banner->show();
     }
 }
 
-void Interface::showDefeat()
-{
+void Interface::showDefeat() {
     QMessageBox *banner = new QMessageBox(ui->gameArea);
     banner->setText("Sorry. You lose.");
     banner->show();
