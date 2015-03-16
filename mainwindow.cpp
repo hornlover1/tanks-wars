@@ -140,18 +140,14 @@ void MainWindow::on_btCheat_clicked() {
 }
 
 void MainWindow::updateTime() {
-    if(LevelManager::getInstance().getStopTimer() == true)
-    {
+    if(LevelManager::getInstance().getStopTimer() == true) {
         timer->stop();
-    }
-    else
-    {
+    } else {
         LevelManager::getInstance().decrementTime();
     }
 }
 
-void MainWindow::on_pushButton_2_clicked()
-{
+void MainWindow::on_pushButton_2_clicked() {
     Interface::getInstance().howTo();
 }
 

@@ -107,6 +107,9 @@ void LevelManager::loadLevel(int levelNum) {
         Interface::getInstance().deleteObject(obj);
         delete obj;
     }
+    //start the timer back up again so that the countdown works
+    stopTimer = false;
+
     objectsInLevel.clear();
     //bool bullet_obj = false;
     //Jordan's line
