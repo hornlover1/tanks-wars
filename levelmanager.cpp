@@ -258,7 +258,7 @@ void LevelManager::saveFile() {
     char c[20];
 
     //open the current saveFile
-    ifstream in("saveFile.txt");
+    ifstream in("://Resources/saveFile.txt");
 
     //create a new file to write data into
     ofstream out("tempFile.txt");

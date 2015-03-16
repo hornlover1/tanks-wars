@@ -70,9 +70,11 @@ void Interface::showVictory() {
             banner->setText("Congratulations. You've completed this mission soldier.\n\n\n  ---New Mission Unlocked---");
             banner->show();
 
-            //increment the lastUnlockedLevel
+            //house cleaning
             LevelManager::getInstance().incrementLastUnlockedLevel();
+            LevelManager::getInstance().saveFile();
             updateGUI();
+           // LevelManager::getInstance().saveFile();
     }
 }
 
