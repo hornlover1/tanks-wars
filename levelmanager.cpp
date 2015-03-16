@@ -30,7 +30,7 @@ void LevelManager::setBullet_obj(bool x) {bullet_obj = x;}
 
 //called by a QTimer to decremented the user's selected time
 void LevelManager::decrementTime() {
-    if (easyTime < 0 || mediumTime < 0 || hardTime < 0) {
+    if (easyTime <= 0 || mediumTime <= 0 || hardTime <= 0) {
         //TODO:stop game
         return;
     }

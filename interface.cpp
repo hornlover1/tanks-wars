@@ -63,8 +63,8 @@ void Interface::showTime(QString str) {
 }
 
 void Interface::showVictory() {
-    bool vic = LevelManager::getInstance().getVictory();
-    if (vic == true){
+    //bool vic = LevelManager::getInstance().getVictory();
+    //if (vic == true){
         QMessageBox *banner = new QMessageBox(ui->gameArea);
 
         if(LevelManager::getInstance().getLevel() < 9){
@@ -81,7 +81,7 @@ void Interface::showVictory() {
         LevelManager::getInstance().setLastUnlockedLevel(lvl);
         if(LevelManager::getInstance().getLastUnlockedLevel() == 2){ui->bt2->setEnabled(true);}
     }
-  }
+  //}
 }
 
 void Interface::howTo(){

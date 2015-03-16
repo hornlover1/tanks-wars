@@ -38,7 +38,6 @@ class LevelManager {
     //boolean to hold victory condition
     bool victory;
 
-
     //this bool will control when bullets can be created. May be duplicated for opposing
     //tank logic
     bool bullet_obj;
