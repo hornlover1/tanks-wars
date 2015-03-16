@@ -119,9 +119,10 @@ void MainWindow::levelButtonClicked() {
         }
 
         //start the timer counting down till user defeat
-        timer->start(1000);
-        ui->rbMedium->setEnabled(false);
-        ui->rbHard->setEnabled(false);
+        timer->start();
+        if (!ui->rbEasy->isChecked()) { ui->rbEasy->setEnabled(false); }
+        if (!ui->rbMedium->isChecked()) { ui->rbMedium->setEnabled(false); }
+        if (!ui->rbHard->isChecked()) { ui->rbHard->setEnabled(false); }
     }
 }
 
