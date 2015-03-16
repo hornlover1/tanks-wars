@@ -117,8 +117,6 @@ public:
     void fireBullet(int x, int y, int heading, TankObject* tank);
 
     ~LevelManager();
-
-    void Victory();
 };
 
 #endif // LEVELMANAGER_H

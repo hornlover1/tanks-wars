@@ -134,7 +134,6 @@ void BulletObject::onTimeOut() {
     if (objectHit != nullptr && objectHit != tank) { // don't shoot myself
         this->destroy();
         objectHit->destroy();
-        LevelManager::getInstance().Victory();
     }
     LevelManager::getInstance().updateUI();
 }
@@ -151,44 +150,11 @@ void Barricade::destroy() {
     //TODO: write this method
 }
 
-int FlagObject::maxFlagNum = 0;
-int FlagObject::flagCounter = 0;
-
-//objective to destroy in level
-FlagObject::FlagObject(int x, int y, QObject *parent):
-    LevelObject(x, y, 30, 30, parent) {
-    isDestroyable = true;
-}
-
-int FlagObject::getMaxFlagNum()
-{
-    return maxFlagNum;
-}
-
-void FlagObject::incrementMaxFlagNum()
-{
-    maxFlagNum++;
-}
-
-int FlagObject::getFlagCounter()
-{
-    return flagCounter;
-}
-
-void FlagObject::incrementFlagCounter()
-{
-    flagCounter++;
-}
-
-
-void FlagObject::destroy() {
-    FlagObject::incrementFlagCounter();
-    LevelObject::destroy();
-}
-
 Target::Target(int initX, int initY, QObject *parent):
     TankObject(initX, initY, parent){}
 
 void Target::destroy() {
+    QString s = "Enemy Tank destroyed";
+    Interface::getInstance().showVictory();
     //code for winning game
 }
