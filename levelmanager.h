@@ -36,7 +36,7 @@ class LevelManager {
     int levelNumber;
 
     //boolean to hold whether game timer should be stopped
-    bool stopTimer = false;
+    bool stopTimer;// = false;
 
     //this bool will control when bullets can be created. May be duplicated for opposing
     //tank logic

@@ -34,6 +34,8 @@ public:
     void howTo();
 
     void showDefeat(QString);
+
+    void blankUI();
 };
 
 #endif // INTERFACE_H

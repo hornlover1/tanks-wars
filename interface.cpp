@@ -20,6 +20,13 @@ void Interface::setUi(Ui::MainWindow *initUi) {
 }
 
 void Interface::drawObject(LevelObject* obj) {
+    for (QObject* obj: ui->gameArea->children()) {
+        QLabel* lbl = dynamic_cast<QLabel*>(obj);
+        if (lbl != nullptr && lbl->width() == 800 and lbl->height() == 600) {
+            lbl->hide();
+            lbl->deleteLater();
+        }
+    }
     int id = obj->getId();
     QWidget* area = (ui->gameArea);
     QLabel* lbl = new QLabel(area);
@@ -63,23 +70,26 @@ void Interface::showTime(QString str) {
 }
 
 void Interface::showVictory() {
+    blankUI();
     //bool vic = LevelManager::getInstance().getVictory();
     //if (vic == true){
-        QMessageBox *banner = new QMessageBox(ui->gameArea);
+    QMessageBox *banner = new QMessageBox(ui->gameArea);
 
-        if(LevelManager::getInstance().getLevel() < 9){
-            banner->setText("Congratulations. You've completed this mission soldier.\n\n\n  ---New Mission Unlocked---");
-            banner->show();
-        }
-        else{
-            banner->setText("Mission accomplished, soldier! You've done your country proud.");
-            banner->show();
-        }
-        int lvl = (LevelManager::getInstance().getLevel() + 1);
-        if(lvl < LevelManager::getLastUnlockedLevel()){}
-        else{
+    if (LevelManager::getInstance().getLevel() < 9){
+        banner->setText("Congratulations. You've completed this mission soldier.\n\n\n  ---New Mission Unlocked---");
+        banner->show();
+    } else{
+        banner->setText("Mission accomplished, soldier! You've done your country proud.");
+        banner->show();
+    }
+    int lvl = (LevelManager::getInstance().getLevel() + 1);
+
+    if(lvl < LevelManager::getLastUnlockedLevel()) {
+    } else {
         LevelManager::getInstance().setLastUnlockedLevel(lvl);
-        if(LevelManager::getInstance().getLastUnlockedLevel() == 2){ui->bt2->setEnabled(true);}
+        if(LevelManager::getInstance().getLastUnlockedLevel() == 2) {
+            ui->bt2->setEnabled(true);
+        }
     }
   //}
 }
@@ -91,8 +101,25 @@ void Interface::howTo(){
 }
 
 void Interface::showDefeat(QString msg){
+    blankUI();
     QMessageBox *banner = new QMessageBox(ui->gameArea);
     banner->setText(msg);
     banner->show();
 
+}
+
+void Interface::blankUI() {
+    for (QObject* obj: ui->gameArea->children()) {
+        QLabel* lbl = dynamic_cast<QLabel*>(obj);
+        if (lbl != nullptr) {
+            lbl->hide();
+            lbl->deleteLater();
+        }
+    }
+    QLabel* lbl = new QLabel(ui->gameArea);
+    lbl->setGeometry(0, 0, 800, 600); // fill up the screen
+    lbl->setScaledContents(true);
+    QPixmap picture(":/Resources/logo.png");
+    lbl->setPixmap(picture);
+    lbl->show();
 }

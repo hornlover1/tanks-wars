@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //this timer will decrement the time selected by the user
     connect(timer, SIGNAL(timeout()), this, SLOT(updateTime()));
 
+    Interface::getInstance().blankUI();
 }
 
 MainWindow::~MainWindow() {
@@ -116,6 +117,8 @@ void MainWindow::levelButtonClicked() {
 
         //start the timer counting down till user defeat
         timer->start(1000);
+        ui->rbMedium->setEnabled(false);
+        ui->rbHard->setEnabled(false);
     }
 }
 
