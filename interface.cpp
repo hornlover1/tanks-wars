@@ -58,9 +58,13 @@ void Interface::deleteObject(LevelObject *obj) {
     }
 }
 
-void Interface::showVictory(){
+void Interface::showTime(QString str) {
+    ui->timeLeft->setText(str);
+}
+
+void Interface::showVictory() {
     bool vic = LevelManager::getInstance().getVictory();
-    if (vic = true){
+    if (vic == true){
         QMessageBox *banner = new QMessageBox(ui->gameArea);
 
         if(LevelManager::getInstance().getLevel() < 9){
@@ -86,10 +90,9 @@ void Interface::howTo(){
     explain->show();
 }
 
-void Interface::showDefeat()
-{
+void Interface::showDefeat(QString msg){
     QMessageBox *banner = new QMessageBox(ui->gameArea);
-    banner->setText("Sorry. You lose.");
+    banner->setText(msg);
     banner->show();
 
 }
