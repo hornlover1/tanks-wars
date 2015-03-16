@@ -9,13 +9,15 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow) {
+    ui(new Ui::MainWindow),
+    timer(new QTimer(this)) {
     ui->setupUi(this);
     Interface::getInstance().setUi(ui);
 
+    timer->setInterval(1000);
     //this timer will decrement the time selected by the user
-    timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(LevelManager::getInstance().decrementTime();));
+
+    connect(timer, SIGNAL(timeout()), this, SLOT(updateTime()));
 }
 
 MainWindow::~MainWindow() {
@@ -106,16 +108,11 @@ void MainWindow::levelButtonClicked() {
         ui->leUserName->setEnabled(false);
 
         //load user time choice into code
-        if(ui->rbEasy->isChecked() == true)
-        {
+        if(ui->rbEasy->isChecked() == true) {
             LevelManager::getInstance().selectTime(ui->rbEasy->text());
-        }
-        else if(ui->rbMedium->isCheckable() == true)
-        {
+        } else if(ui->rbMedium->isCheckable() == true) {
             LevelManager::getInstance().selectTime(ui->rbMedium->text());
-        }
-        else if (ui->rbHard->isCheckable() == true)
-        {
+        } else if (ui->rbHard->isCheckable() == true) {
             LevelManager::getInstance().selectTime(ui->rbHard->text());
         }
     }
@@ -131,4 +128,9 @@ void MainWindow::on_btCheat_clicked() {
 //    ui->rbMedium->setEnabled(false);
     ui->gameArea->setMouseTracking(true);
     ui->gameArea->installEventFilter(this);
+    timer->start();
+}
+
+void MainWindow::updateTime() {
+    LevelManager::getInstance().decrementTime();
 }

@@ -58,6 +58,10 @@ void Interface::deleteObject(LevelObject *obj) {
     }
 }
 
+void Interface::showTime(QString str) {
+    ui->timeLeft->setText(str);
+}
+
 void Interface::showVictory()
 {
     QMessageBox *banner = new QMessageBox(ui->gameArea);
@@ -65,8 +69,7 @@ void Interface::showVictory()
     banner->show();
 }
 
-void Interface::showDefeat(QString msg)
-{
+void Interface::showDefeat(QString msg){
     QMessageBox *banner = new QMessageBox(ui->gameArea);
     banner->setText(msg);
     banner->show();

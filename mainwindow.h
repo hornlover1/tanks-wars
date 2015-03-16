@@ -27,6 +27,7 @@ private slots:
     void on_pbLoad_clicked();
     void levelButtonClicked();
     void on_btCheat_clicked();
+    void updateTime();
 };
 
 #endif // MAINWINDOW_H
