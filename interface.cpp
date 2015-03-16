@@ -63,25 +63,40 @@ void Interface::showTime(QString str) {
 }
 
 void Interface::showVictory() {
-    //bool vic = LevelManager::getInstance().getVictory();
-    //if (vic == true){
         QMessageBox *banner = new QMessageBox(ui->gameArea);
 
         if(LevelManager::getInstance().getLevel() < 9){
+            //display the message
             banner->setText("Congratulations. You've completed this mission soldier.\n\n\n  ---New Mission Unlocked---");
             banner->show();
-        }
-        else{
-            banner->setText("Mission accomplished, soldier! You've done your country proud.");
-            banner->show();
-        }
-        int lvl = (LevelManager::getInstance().getLevel() + 1);
-        if(lvl < LevelManager::getLastUnlockedLevel()){}
-        else{
-        LevelManager::getInstance().setLastUnlockedLevel(lvl);
-        if(LevelManager::getInstance().getLastUnlockedLevel() == 2){ui->bt2->setEnabled(true);}
+
+            //increment the lastUnlockedLevel
+            LevelManager::getInstance().incrementLastUnlockedLevel();
+            updateGUI();
     }
-  //}
+}
+
+void Interface::updateGUI()
+{
+    //unlock the next button on the GUI
+    for (QObject* obj: ui->levels->children())
+    {
+        QPushButton* button = dynamic_cast<QPushButton*>(obj);
+        if (button != nullptr)
+        {
+            if (button->text().toInt() <= LevelManager::getLastUnlockedLevel())
+            {
+                button->setEnabled(true);
+            }
+        }
+     }
+
+    //reset variables for next level
+    ui->leUserName->setEnabled(true);
+    ui->rbEasy->setCheckable(true);
+    ui->rbMedium->setCheckable(true);
+    ui->rbHard->setCheckable(true);
+    ui->btCheat->setEnabled(true);
 }
 
 void Interface::howTo(){
@@ -94,5 +109,7 @@ void Interface::showDefeat(QString msg){
     QMessageBox *banner = new QMessageBox(ui->gameArea);
     banner->setText(msg);
     banner->show();
+
+    updateGUI();
 
 }

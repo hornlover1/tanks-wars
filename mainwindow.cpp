@@ -92,7 +92,7 @@ void MainWindow::on_pbLoad_clicked() {
                 button->setEnabled(false);
             }
         }
-        ui->leUserName->setEnabled(false); //need to reset to true after a successful game
+        ui->leUserName->setEnabled(false);
     }
 }
 
@@ -103,7 +103,10 @@ void MainWindow::levelButtonClicked() {
         int levelNum = button->text().toInt();
         LevelManager::getInstance().loadLevel(levelNum);
         qApp->installEventFilter(this);
+
+        //disenable certain wiki's
         ui->leUserName->setEnabled(false);
+        ui->btCheat->setEnabled(false);
 
         //load user time choice into code
         if(ui->rbEasy->isChecked() == true) {

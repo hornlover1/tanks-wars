@@ -161,7 +161,6 @@ Target::Target(int initX, int initY, QObject *parent):
 void Target::destroy() {
     LevelManager::getInstance().setStopTimer(true);
     QString s = "Enemy Tank destroyed";
-
     Interface::getInstance().showVictory();
     //code for winning game
 }

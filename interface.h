@@ -11,6 +11,8 @@ class Interface {
     Interface();
     static Interface instance;
     static Ui::MainWindow* ui;
+
+    void updateGUI();
 public:
     //singleton class
     static Interface getInstance();
