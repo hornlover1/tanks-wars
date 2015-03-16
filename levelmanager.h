@@ -43,10 +43,6 @@ public:
     int getMediumTime();
     int getHardTime();
 
-    void decrementEasyTime();
-    void decrementMediumTime();
-    void decrementHardTime();
-
     //sets a QString that tells the timer method which time to decrement
     void selectTime(QString s);
 

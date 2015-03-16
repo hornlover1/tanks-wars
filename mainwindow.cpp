@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Interface::getInstance().setUi(ui);
 
     //this timer will decrement the time selected by the user
+    timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(LevelManager::getInstance().decrementTime();));
 }
 

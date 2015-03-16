@@ -1,5 +1,6 @@
 #include "levelobject.h"
 #include "levelmanager.h"
+#include "interface.h"
 #include "mainwindow.h"
 #include <math.h>
 #include <QMessageBox>
@@ -84,6 +85,8 @@ void TankObject::setTurret(int angle) {
 }
 
 void TankObject::destroy() {
+    QString s = "Sorry, " + LevelManager::getUserName() + " lost";
+    Interface::getInstance().showDefeat(s);
     //TODO: define this method
 }
 

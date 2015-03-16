@@ -29,7 +29,7 @@ public:
 
     void showVictory();
 
-    void showDefeat();
+    void showDefeat(QString);
 };
 
 #endif // INTERFACE_H

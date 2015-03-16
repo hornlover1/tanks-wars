@@ -21,10 +21,6 @@ int LevelManager::getEasyTime() {return easyTime;}
 int LevelManager::getMediumTime() {return mediumTime;}
 int LevelManager::getHardTime() {return hardTime;}
 
-void LevelManager::decrementEasyTime() {easyTime--;}
-void LevelManager::decrementMediumTime() {mediumTime--;}
-void LevelManager::decrementHardTime() {hardTime--;}
-
 //called by a QTimer to decremented the user's selected time
 void LevelManager::decrementTime()
 {
@@ -43,7 +39,7 @@ void LevelManager::decrementTime()
 
     if(easyTime||mediumTime||hardTime == 0)
     {
-        Interface::getInstance().showDefeat();
+        Interface::getInstance().showDefeat("Sorry, time up.");
     }
 }
 

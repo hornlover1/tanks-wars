@@ -10,7 +10,7 @@ namespace Ui {
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
-    QTimer *timer = new QTimer(this);
+    QTimer *timer;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
