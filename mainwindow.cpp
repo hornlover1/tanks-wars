@@ -14,9 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Interface::getInstance().setUi(ui);
 
     //this timer will decrement the time selected by the user
-    QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(LevelManager::getInstance().decrementTime();));
-    timer->start(1000);
+    //connect(timer, SIGNAL(timeout()), this, SLOT(LevelManager::getInstance().decrementTime();));
 }
 
 MainWindow::~MainWindow() {
@@ -86,6 +84,9 @@ void MainWindow::on_pbLoad_clicked() {
             if (button->text().toInt() <= LevelManager::getLastUnlockedLevel()) {
                 button->setEnabled(true);
                 connect(button, SIGNAL(clicked()), this, SLOT(levelButtonClicked()));
+
+                //start the timer counting down till user defeat
+                //timer->start(1000);
             } else {
                 button->setEnabled(false);
             }
@@ -102,22 +103,21 @@ void MainWindow::levelButtonClicked() {
         LevelManager::getInstance().loadLevel(levelNum);
         qApp->installEventFilter(this);
         ui->leUserName->setEnabled(false);
+
+        //load user time choice into code
+        if(ui->rbEasy->isChecked() == true)
+        {
+            LevelManager::getInstance().selectTime(ui->rbEasy->text());
+        }
+        else if(ui->rbMedium->isCheckable() == true)
+        {
+            LevelManager::getInstance().selectTime(ui->rbMedium->text());
+        }
+        else if (ui->rbHard->isCheckable() == true)
+        {
+            LevelManager::getInstance().selectTime(ui->rbHard->text());
+        }
     }
-}
-
-void MainWindow::on_rbEasy_clicked()
-{
-    LevelManager::getInstance().selectTime(ui->rbEasy->text());
-}
-
-void MainWindow::on_rbMedium_clicked()
-{
-    LevelManager::getInstance().selectTime(ui->rbMedium->text());
-}
-
-void MainWindow::on_rbHard_clicked()
-{
-    LevelManager::getInstance().selectTime(ui->rbHard->text());
 }
 
 //enables testing of ideas

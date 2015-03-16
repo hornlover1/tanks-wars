@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTimer>
 
 namespace Ui {
     class MainWindow;
@@ -9,11 +10,13 @@ namespace Ui {
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
+//    QTimer *timer = new QTimer(this);
 
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    QTimer* getTimer();
 
 private:
     Ui::MainWindow *ui;
