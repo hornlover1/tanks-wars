@@ -35,13 +35,24 @@ class LevelManager {
     //used to find the correct level file to save the highScores to
     int levelNumber;
 
-    //boolean to hold victory condition
+    //boolean to hold whether game timer should be stopped
     bool stopTimer = false;
+
+    //this bool will control when bullets can be created. May be duplicated for opposing
+    //tank logic
+    bool bullet_obj;
+
 public:
 //to access times
     int getEasyTime();
     int getMediumTime();
     int getHardTime();
+
+//for other functionality
+    void decrementEasyTime();
+    void decrementMediumTime();
+    void decrementHardTime();
+    void setBullet_obj(bool x);
 
     //sets a QString that tells the timer method which time to decrement
     void selectTime(QString s);
@@ -52,6 +63,9 @@ public:
     //bool to manipulate the time flag
     void setStopTimer(bool);
     bool getStopTimer();
+
+    //returns which level the user was playing
+    int getLevel();
 
     //set userHighScore
     void setUserHighScore(int score);
@@ -72,7 +86,6 @@ public:
     static void setLastUnlockedLevel(int i);
 
     static int getLastUnlockedLevel();
-    //TODO: need to write the code incrementing this after each level completion
 
     //singleton method
     static LevelManager& getInstance();

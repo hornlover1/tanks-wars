@@ -23,10 +23,18 @@ int LevelManager::getEasyTime() {return easyTime;}
 int LevelManager::getMediumTime() {return mediumTime;}
 int LevelManager::getHardTime() {return hardTime;}
 
+void LevelManager::decrementEasyTime() {easyTime--;}
+void LevelManager::decrementMediumTime() {mediumTime--;}
+void LevelManager::decrementHardTime() {hardTime--;}
+void LevelManager::setBullet_obj(bool x) {bullet_obj = x;}
+
 //called by a QTimer to decremented the user's selected time
-void LevelManager::decrementTime()
-{
-    if(userTime == "Easy") {
+void LevelManager::decrementTime() {
+    if (easyTime <= 0 || mediumTime <= 0 || hardTime <= 0) {
+        //TODO:stop game
+        return;
+    }
+    if (userTime == "Easy") {
         easyTime--;
         Interface::getInstance().showTime(QString::number(easyTime));
     } else if(userTime == "Medium") {
@@ -92,6 +100,7 @@ void LevelManager::setStopTimer(bool b)
 }
 
 bool LevelManager::getStopTimer() {return stopTimer;}
+int LevelManager::getLevel() {return levelNumber;}
 
 void LevelManager::loadLevel(int levelNum) {
     for (LevelObject* obj: objectsInLevel) {
@@ -99,7 +108,7 @@ void LevelManager::loadLevel(int levelNum) {
         delete obj;
     }
     objectsInLevel.clear();
-
+    bool bullet_obj = false;
     //Jordan's line
     levelNumber = levelNum; //i need this number for saveHighScore()
 
@@ -177,10 +186,14 @@ void LevelManager::mouseClick() {
         if (diffX <= 0) {
             heading += pi; // add pi to rotate it 180 degrees so that it shoots in the right direction
         }
+        if(bullet_obj == false){
         BulletObject* Bobj = new BulletObject(tank->getX(), tank->getY(), heading, tank);
         objectsInLevel.push_back(Bobj);
+        setBullet_obj(true);
         Interface::getInstance().drawObject(Bobj);
         Bobj->startMotion();
+        }
+        else{}
     }
 }
 

@@ -10,6 +10,7 @@ namespace Ui {
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
+//    QTimer *timer = new QTimer(this);
     QTimer *timer;
 
 public:
@@ -27,7 +28,12 @@ private slots:
     void on_pbLoad_clicked();
     void levelButtonClicked();
     void on_btCheat_clicked();
+    void on_pushButton_2_clicked();
+    //void on_rbEasy_clicked();
+    //void on_rbMedium_clicked();
+    //void on_rbHard_clicked();
     void updateTime();
+
 };
 
 #endif // MAINWINDOW_H

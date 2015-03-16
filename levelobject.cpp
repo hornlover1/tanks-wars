@@ -27,6 +27,7 @@ QRect LevelObject::getGeometry() {
 void LevelObject::destroy() {
     if (isDestroyable) {
         LevelManager::getInstance().destroy(this);
+        LevelManager::getInstance().setBullet_obj(false);
     }
 }
 
@@ -85,11 +86,13 @@ void TankObject::setTurret(int angle) {
 }
 
 void TankObject::destroy() {
+
     //ending the game
     LevelManager::getInstance().setStopTimer(true);
-    QString s = "Sorry, " + LevelManager::getUserName() + " lost";
+    QString s = "Mission Failed: You have lost " + LevelManager::getUserName() + ".";
     Interface::getInstance().showDefeat(s);
-    //TODO: define this method
+
+    //TODO: define this method - possibly to show awsome graphics
 }
 
 void TankObject::onTimeOut() {
@@ -158,6 +161,7 @@ Target::Target(int initX, int initY, QObject *parent):
 void Target::destroy() {
     LevelManager::getInstance().setStopTimer(true);
     QString s = "Enemy Tank destroyed";
+
     Interface::getInstance().showVictory();
     //code for winning game
 }

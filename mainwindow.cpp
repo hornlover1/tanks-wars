@@ -15,9 +15,10 @@ MainWindow::MainWindow(QWidget *parent) :
     Interface::getInstance().setUi(ui);
 
     timer->setInterval(1000);
-    //this timer will decrement the time selected by the user
 
+    //this timer will decrement the time selected by the user
     connect(timer, SIGNAL(timeout()), this, SLOT(updateTime()));
+
 }
 
 MainWindow::~MainWindow() {
@@ -87,8 +88,6 @@ void MainWindow::on_pbLoad_clicked() {
             if (button->text().toInt() <= LevelManager::getLastUnlockedLevel()) {
                 button->setEnabled(true);
                 connect(button, SIGNAL(clicked()), this, SLOT(levelButtonClicked()));
-
-
             } else {
                 button->setEnabled(false);
             }
@@ -143,3 +142,9 @@ void MainWindow::updateTime() {
         LevelManager::getInstance().decrementTime();
     }
 }
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    Interface::getInstance().howTo();
+}
+

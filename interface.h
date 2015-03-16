@@ -31,6 +31,8 @@ public:
 
     void showVictory();
 
+    void howTo();
+
     void showDefeat(QString);
 };
 
