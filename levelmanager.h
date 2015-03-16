@@ -48,15 +48,12 @@ public:
     int getMediumTime();
     int getHardTime();
 
-<<<<<<< HEAD
 //for other functionality
     void decrementEasyTime();
     void decrementMediumTime();
     void decrementHardTime();
     void setBullet_obj(bool x);
 
-=======
->>>>>>> 7182fc5f7c2f2ad3797f5525c792560c6dacbe2d
     //sets a QString that tells the timer method which time to decrement
     void selectTime(QString s);
 

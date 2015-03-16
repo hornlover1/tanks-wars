@@ -31,15 +31,9 @@ public:
 
     void showVictory();
 
-<<<<<<< HEAD
-
     void howTo();
 
-    void showDefeat();
-
-=======
     void showDefeat(QString);
->>>>>>> 7182fc5f7c2f2ad3797f5525c792560c6dacbe2d
 };
 
 #endif // INTERFACE_H

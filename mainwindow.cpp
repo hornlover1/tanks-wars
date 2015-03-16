@@ -15,13 +15,10 @@ MainWindow::MainWindow(QWidget *parent) :
     Interface::getInstance().setUi(ui);
 
     timer->setInterval(1000);
-    //this timer will decrement the time selected by the user
-<<<<<<< HEAD
-    //connect(timer, SIGNAL(timeout()), this, SLOT(LevelManager::getInstance().decrementTime();));
-=======
 
+    //this timer will decrement the time selected by the user
     connect(timer, SIGNAL(timeout()), this, SLOT(updateTime()));
->>>>>>> 7182fc5f7c2f2ad3797f5525c792560c6dacbe2d
+
 }
 
 MainWindow::~MainWindow() {

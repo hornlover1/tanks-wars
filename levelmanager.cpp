@@ -23,14 +23,11 @@ int LevelManager::getEasyTime() {return easyTime;}
 int LevelManager::getMediumTime() {return mediumTime;}
 int LevelManager::getHardTime() {return hardTime;}
 
-<<<<<<< HEAD
 void LevelManager::decrementEasyTime() {easyTime--;}
 void LevelManager::decrementMediumTime() {mediumTime--;}
 void LevelManager::decrementHardTime() {hardTime--;}
 void LevelManager::setBullet_obj(bool x) {bullet_obj = x;}
 
-=======
->>>>>>> 7182fc5f7c2f2ad3797f5525c792560c6dacbe2d
 //called by a QTimer to decremented the user's selected time
 void LevelManager::decrementTime()
 {
