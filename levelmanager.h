@@ -37,6 +37,11 @@ class LevelManager {
 
     //boolean to hold victory condition
     bool victory;
+
+
+    //this bool will control when bullets can be created. May be duplicated for opposing
+    //tank logic
+    bool bullet_obj;
 public:
 //to access times
     int getEasyTime();
@@ -47,6 +52,7 @@ public:
     void decrementEasyTime();
     void decrementMediumTime();
     void decrementHardTime();
+    void setBullet_obj(bool x);
 
     //sets a QString that tells the timer method which time to decrement
     void selectTime(QString s);

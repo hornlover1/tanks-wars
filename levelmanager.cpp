@@ -24,6 +24,7 @@ int LevelManager::getHardTime() {return hardTime;}
 void LevelManager::decrementEasyTime() {easyTime--;}
 void LevelManager::decrementMediumTime() {mediumTime--;}
 void LevelManager::decrementHardTime() {hardTime--;}
+void LevelManager::setBullet_obj(bool x) {bullet_obj = x;}
 
 //called by a QTimer to decremented the user's selected time
 void LevelManager::decrementTime()
@@ -101,7 +102,7 @@ void LevelManager::loadLevel(int levelNum) {
         delete obj;
     }
     objectsInLevel.clear();
-
+    bool bullet_obj = false;
     //Jordan's line
     levelNumber = levelNum; //i need this number for saveHighScore()
 
@@ -186,10 +187,14 @@ void LevelManager::mouseClick() {
         if (diffX <= 0) {
             heading += pi; // add pi to rotate it 180 degrees so that it shoots in the right direction
         }
+        if(bullet_obj == false){
         BulletObject* Bobj = new BulletObject(tank->getX(), tank->getY(), heading, tank);
         objectsInLevel.push_back(Bobj);
+        setBullet_obj(true);
         Interface::getInstance().drawObject(Bobj);
         Bobj->startMotion();
+        }
+        else{}
     }
 }
 

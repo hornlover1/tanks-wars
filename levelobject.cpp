@@ -26,6 +26,7 @@ QRect LevelObject::getGeometry() {
 void LevelObject::destroy() {
     if (isDestroyable) {
         LevelManager::getInstance().destroy(this);
+        LevelManager::getInstance().setBullet_obj(false);
     }
 }
 
