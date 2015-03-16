@@ -27,9 +27,6 @@ private slots:
     void on_pbLoad_clicked();
     void levelButtonClicked();
     void on_btCheat_clicked();
-    void on_rbEasy_clicked();
-    void on_rbMedium_clicked();
-    void on_rbHard_clicked();
 };
 
 #endif // MAINWINDOW_H
