@@ -24,9 +24,12 @@ int LevelManager::getMediumTime() {return mediumTime;}
 int LevelManager::getHardTime() {return hardTime;}
 
 //called by a QTimer to decremented the user's selected time
-void LevelManager::decrementTime()
-{
-    if(userTime == "Easy") {
+void LevelManager::decrementTime() {
+    if (easyTime < 0 || mediumTime < 0 || hardTime < 0) {
+        //TODO:stop game
+        return;
+    }
+    if (userTime == "Easy") {
         easyTime--;
         Interface::getInstance().showTime(QString::number(easyTime));
     } else if(userTime == "Medium") {
