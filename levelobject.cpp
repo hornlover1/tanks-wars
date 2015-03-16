@@ -85,6 +85,8 @@ void TankObject::setTurret(int angle) {
 }
 
 void TankObject::destroy() {
+    //ending the game
+    LevelManager::getInstance().setStopTimer(true);
     QString s = "Sorry, " + LevelManager::getUserName() + " lost";
     Interface::getInstance().showDefeat(s);
     //TODO: define this method
@@ -154,6 +156,7 @@ Target::Target(int initX, int initY, QObject *parent):
     TankObject(initX, initY, parent){}
 
 void Target::destroy() {
+    LevelManager::getInstance().setStopTimer(true);
     QString s = "Enemy Tank destroyed";
     Interface::getInstance().showVictory();
     //code for winning game

@@ -36,7 +36,7 @@ class LevelManager {
     int levelNumber;
 
     //boolean to hold victory condition
-    bool victory;
+    bool stopTimer = false;
 public:
 //to access times
     int getEasyTime();
@@ -49,8 +49,9 @@ public:
     //called by a QTimer to decremented the user's selected time
     void decrementTime();
 
-    //bool to get victory
-    bool getVictory();
+    //bool to manipulate the time flag
+    void setStopTimer(bool);
+    bool getStopTimer();
 
     //set userHighScore
     void setUserHighScore(int score);

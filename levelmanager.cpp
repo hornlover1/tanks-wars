@@ -86,9 +86,12 @@ vector<LevelObject*> LevelManager::getObjects() {
     return objectsInLevel;
 }
 
-bool LevelManager::getVictory() {return victory;}
+void LevelManager::setStopTimer(bool b)
+{
+    stopTimer = b;
+}
 
-
+bool LevelManager::getStopTimer() {return stopTimer;}
 
 void LevelManager::loadLevel(int levelNum) {
     for (LevelObject* obj: objectsInLevel) {

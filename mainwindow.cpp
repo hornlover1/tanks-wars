@@ -88,8 +88,7 @@ void MainWindow::on_pbLoad_clicked() {
                 button->setEnabled(true);
                 connect(button, SIGNAL(clicked()), this, SLOT(levelButtonClicked()));
 
-                //start the timer counting down till user defeat
-                timer->start(1000);
+
             } else {
                 button->setEnabled(false);
             }
@@ -115,6 +114,9 @@ void MainWindow::levelButtonClicked() {
         } else if (ui->rbHard->isCheckable() == true) {
             LevelManager::getInstance().selectTime(ui->rbHard->text());
         }
+
+        //start the timer counting down till user defeat
+        timer->start(1000);
     }
 }
 
@@ -132,5 +134,12 @@ void MainWindow::on_btCheat_clicked() {
 }
 
 void MainWindow::updateTime() {
-    LevelManager::getInstance().decrementTime();
+    if(LevelManager::getInstance().getStopTimer() == true)
+    {
+        timer->stop();
+    }
+    else
+    {
+        LevelManager::getInstance().decrementTime();
+    }
 }
