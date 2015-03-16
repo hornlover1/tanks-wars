@@ -71,8 +71,8 @@ void Interface::showVictory() {
     }
 }
 
-void Interface::showDefeat() {
+void Interface::showDefeat(QString msg){
     QMessageBox *banner = new QMessageBox(ui->gameArea);
-    banner->setText("Sorry. You lose.");
+    banner->setText(msg);
     banner->show();
 }

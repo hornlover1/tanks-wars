@@ -23,10 +23,6 @@ int LevelManager::getEasyTime() {return easyTime;}
 int LevelManager::getMediumTime() {return mediumTime;}
 int LevelManager::getHardTime() {return hardTime;}
 
-void LevelManager::decrementEasyTime() {easyTime--;}
-void LevelManager::decrementMediumTime() {mediumTime--;}
-void LevelManager::decrementHardTime() {hardTime--;}
-
 //called by a QTimer to decremented the user's selected time
 void LevelManager::decrementTime()
 {
@@ -42,7 +38,7 @@ void LevelManager::decrementTime()
     }
 
     if (easyTime == 0 || mediumTime == 0 || hardTime == 0) {
-        Interface::getInstance().showDefeat();
+        Interface::getInstance().showDefeat("Sorry, time up.");
     }
 }
 
@@ -413,7 +409,7 @@ void LevelManager::loadFile() {
     LevelManager::setLastUnlockedLevel(1);
 }
 
-void LevelManager::Victory(){
+void LevelManager::Victory() {
     //replacement code
     if(FlagObject::getMaxFlagNum() == FlagObject::getFlagCounter())
     {

@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     timer->setInterval(1000);
     //this timer will decrement the time selected by the user
+
     connect(timer, SIGNAL(timeout()), this, SLOT(updateTime()));
 }
 
