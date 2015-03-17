@@ -78,16 +78,23 @@ void Interface::showVictory() {
         banner->setText("Congratulations. You've completed this mission soldier.\n\n\n  ---New Mission Unlocked---");
         banner->show();
 
-        //prepare for next level
-        LevelManager::getInstance().incrementLastUnlockedLevel(); //fix
-
-        LevelManager::getInstance().setHighScore();
-
-        LevelManager::getInstance().saveUserHighScore();
-
+        updateFiles();
         updateGUI();
+}
 
-        LevelManager::getInstance().saveFile();
+void Interface::updateFiles()
+{
+    //prepare for next level
+    if(LevelManager::getLastUnlockedLevel() == LevelManager::getInstance().getLevel())
+    {
+        LevelManager::getInstance().incrementLastUnlockedLevel();
+    }
+
+    LevelManager::getInstance().saveFile();
+
+    LevelManager::getInstance().setHighScore(); //works!
+
+    LevelManager::getInstance().saveUserHighScore(); //works!
 }
 
 void Interface::updateGUI()

@@ -276,18 +276,18 @@ void LevelManager::saveFile() {
     char c[20];
 
     //open the current saveFile
-    ifstream in("://Resources/saveFile.txt");
+    ifstream in("saveFile.txt");
 
     //create a new file to write data into
-    ofstream out("://Resources/tempFile.txt", ios_base::out);
+    ofstream out("tempFile.txt");
 
     //write new info into temp.txt
     QString s = LevelManager::getUserName();
-    out << s.begin() << endl;
+    out << s.toStdString().c_str() << endl;
     out << LevelManager::getLastUnlockedLevel() << endl;
 
     //loop through every line in file
-    while(in.peek() != EOF);
+    do
     {
         //read data and put into a QString for comparison
         in.getline(c,20);
@@ -309,16 +309,15 @@ void LevelManager::saveFile() {
             //read next line, but do not write
             in.getline(c,20);
         }
-    }
+    } while(in.peek() != EOF);
 
     in.close();
     out.close();
-    remove("://Resources/saveFile.txt");
-    rename("://Resources/tempFile.txt","://Resources/saveFile.txt");
+    remove("saveFile.txt");
+    rename("tempFile.txt","saveFile.txt");
 }
 
 //saves new HighScore; assumes an existing HighScore.txt
-//currently stores only the 5 highest scores in the whole game
 void LevelManager::saveUserHighScore() {
 
     char c[20];
