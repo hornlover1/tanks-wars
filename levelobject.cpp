@@ -152,11 +152,11 @@ Barricade::Barricade(int x, int y, QObject *parent):
 }
 
 void Barricade::destroy() {
-    //TODO: write this method
+    LevelObject::destroy();
 }
 
 Target::Target(int initX, int initY, QObject *parent):
-    TankObject(initX, initY, parent){}
+    TankObject(initX, initY, parent){isDestroyable = true;}
 
 void Target::destroy() {
     LevelManager::getInstance().setStopTimer(true);

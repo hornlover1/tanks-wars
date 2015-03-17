@@ -1,5 +1,6 @@
 #include "interface.h"
 #include "levelmanager.h"
+#include <cstring>
 #include <QString>
 #include <QDebug>
 #include <QLabel>
@@ -72,18 +73,16 @@ void Interface::showTime(QString str) {
 void Interface::showVictory() {
     blankUI();
     QMessageBox *banner = new QMessageBox(ui->gameArea);
+    //display the message
+    banner->setText("Congratulations. You've completed this mission soldier.\n\n\n  ---New Mission Unlocked---");
+    banner->show();
 
-    if(LevelManager::getInstance().getLevel() < 9){
-        //display the message
-        banner->setText("Congratulations. You've completed this mission soldier.\n\n\n  ---New Mission Unlocked---");
-        banner->show();
-
-        //house cleaning
-        LevelManager::getInstance().incrementLastUnlockedLevel();
-        LevelManager::getInstance().saveFile();
-        updateGUI();
+    //house cleaning
+    LevelManager::getInstance().incrementLastUnlockedLevel();
+    LevelManager::getInstance().saveHighScore();
+    LevelManager::getInstance().saveFile();
+    updateGUI();
        // LevelManager::getInstance().saveFile();
-    }
 }
 
 void Interface::updateGUI() {
@@ -138,4 +137,19 @@ void Interface::blankUI() {
     QPixmap picture(":/Resources/logo.png");
     lbl->setPixmap(picture);
     lbl->show();
+}
+
+int Interface::getTimeLeft(){
+    QString time = ui->timeLeft->text();
+    int highscore = time.toInt();
+    if(ui->rbEasy->isChecked()){
+        highscore = highscore * 10;
+    }
+    else if(ui->rbMedium->isChecked()){
+        highscore = highscore * 20;
+    }
+    else if(ui->rbHard->isChecked()){
+        highscore = highscore * 30;
+    }
+    return highscore;
 }

@@ -340,6 +340,7 @@ void LevelManager::saveHighScore() {
             }
 
             outStream << LevelManager::getUserName().begin() << endl;
+            userHighScore = Interface::getInstance().getTimeLeft();
             outStream << userHighScore << endl;
             outStream << endl;
             i++;

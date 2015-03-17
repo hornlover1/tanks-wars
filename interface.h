@@ -23,6 +23,9 @@ public:
     //draw the object on the screen
     void drawObject(LevelObject* obj);
 
+    //returns the time remaining as an int, so we can add the highscore
+    int getTimeLeft();
+
     //move the object around on the screen
     void moveObject(LevelObject* obj);
 
