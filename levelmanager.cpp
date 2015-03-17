@@ -381,6 +381,7 @@ void LevelManager::saveUserHighScore() {
         }
         else
         {
+            inStream.getline(c,20); //chuck out empty whitespace
             inStream.getline(c, 20); //chuck out the next name so we can get the number later
         }
 
