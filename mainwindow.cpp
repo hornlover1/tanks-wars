@@ -143,6 +143,10 @@ void MainWindow::updateTime() {
     if(LevelManager::getInstance().getStopTimer() == true) {
         timer->stop();
         LevelManager::getInstance().setFinalGameTime(timer->remainingTime());
+        for(LevelObject* obj : LevelManager::getInstance().getObjects())
+        {
+            obj->pause();
+        }
     } else {
         LevelManager::getInstance().decrementTime();
     }

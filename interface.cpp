@@ -86,6 +86,7 @@ void Interface::showVictory() {
             LevelManager::getInstance().saveHighScore();
 
             updateGUI();
+
             LevelManager::getInstance().saveFile();
 
 }
@@ -107,11 +108,11 @@ void Interface::updateGUI()
 
     //reset variables for next level
     ui->leUserName->setEnabled(true);
-    ui->rbEasy->setCheckable(true);
+   // ui->rbEasy->setCheckable(true);
     ui->rbEasy->setEnabled(true);
-    ui->rbMedium->setCheckable(true);
+//    ui->rbMedium->setCheckable(true);
     ui->rbMedium->setEnabled(true);
-    ui->rbHard->setCheckable(true);
+//    ui->rbHard->setCheckable(true);
     ui->rbHard->setEnabled(true);
     ui->btCheat->setEnabled(true);
 }
