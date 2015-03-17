@@ -78,20 +78,28 @@ void Interface::showVictory() {
         banner->setText("Congratulations. You've completed this mission soldier.\n\n\n  ---New Mission Unlocked---");
         banner->show();
 
-        //house cleaning
-        LevelManager::getInstance().incrementLastUnlockedLevel();
-        LevelManager::getInstance().saveFile();
-        updateGUI();
-       // LevelManager::getInstance().saveFile();
+            //prepare for next level
+            LevelManager::getInstance().incrementLastUnlockedLevel();
+
+            LevelManager::getInstance().setUserHighScore();
+
+            LevelManager::getInstance().saveHighScore();
+
+            updateGUI();
+            LevelManager::getInstance().saveFile();
     }
 }
 
-void Interface::updateGUI() {
+void Interface::updateGUI()
+{
     //unlock the next button on the GUI
-    for (QObject* obj: ui->levels->children()) {
+    for (QObject* obj: ui->levels->children())
+    {
         QPushButton* button = dynamic_cast<QPushButton*>(obj);
-        if (button != nullptr) {
-            if (button->text().toInt() <= LevelManager::getLastUnlockedLevel()) {
+        if (button != nullptr)
+        {
+            if (button->text().toInt() <= LevelManager::getLastUnlockedLevel())
+            {
                 button->setEnabled(true);
             }
         }

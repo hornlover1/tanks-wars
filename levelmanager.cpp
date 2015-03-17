@@ -55,14 +55,18 @@ void LevelManager::selectTime(QString s)
     userTime = s;
 }
 
-void LevelManager::setUserHighScore(int score) {
-    userHighScore = score;
+void LevelManager::setUserHighScore() {
+    userHighScore = 15 * finalGameTime;
 }
 
 int LevelManager::getUserHighScore() {
     return userHighScore;
 }
 
+void LevelManager::setFinalGameTime(int i)
+{
+    finalGameTime = i;
+}
 
 QString LevelManager::getUserName() {
     return LevelManager::userName;
@@ -264,10 +268,15 @@ void LevelManager::saveFile() {
     ifstream in("://Resources/saveFile.txt");
 
     //create a new file to write data into
-    ofstream out("tempFile.txt");
+    ofstream out("://Resources/tempFile.txt", ios_base::out);
+
+    //write new info into temp.txt
+    QString s = LevelManager::getUserName();
+    out << s.begin() << endl;
+    out << LevelManager::getLastUnlockedLevel() << endl;
 
     //loop through every line in file
-    while(in.peek() != EOF)
+    while(in.peek() != EOF);
     {
         //read data and put into a QString for comparison
         in.getline(c,20);
@@ -284,24 +293,17 @@ void LevelManager::saveFile() {
             out << c << endl;
         }
         //if line is userName, then do not write this line
-        if(info == LevelManager::getUserName())
+        else if(info == LevelManager::getUserName())
         {
             //read next line, but do not write
             in.getline(c,20);
         }
-        else
-        {
-            //write new info into temp.txt
-            QString s = LevelManager::getUserName();
-            out << s.begin() << endl;
-            out << LevelManager::getLastUnlockedLevel() << endl;
-        }
     }
 
     in.close();
-    remove("saveFile.txt");
     out.close();
-    rename("tempFile.txt","saveFile.txt");
+    remove("://Resources/saveFile.txt");
+    rename("://Resources/tempFile.txt","://Resources/saveFile.txt");
 }
 
 //saves new HighScore; assumes an existing HighScore.txt

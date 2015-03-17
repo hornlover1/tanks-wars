@@ -142,6 +142,7 @@ void MainWindow::on_btCheat_clicked() {
 void MainWindow::updateTime() {
     if(LevelManager::getInstance().getStopTimer() == true) {
         timer->stop();
+        LevelManager::getInstance().setFinalGameTime(timer->remainingTime());
     } else {
         LevelManager::getInstance().decrementTime();
     }
