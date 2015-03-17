@@ -30,7 +30,7 @@ class LevelManager {
     static QString userName;
 
     //current high score of the user
-    int finalGameTime;
+   // int finalGameTime;
     int userHighScore;
 
     //used to find the correct level file to save the highScores to
@@ -55,7 +55,7 @@ public:
     void decrementHardTime();
     void setBullet_obj(bool x);
 
-    void setFinalGameTime(int);
+    void setFinalGameTime();
 
     //sets a QString that tells the timer method which time to decrement
     void selectTime(QString s);
@@ -71,7 +71,7 @@ public:
     int getLevel();
 
     //set userHighScore
-    void setUserHighScore();
+    void setHighScore();
 
     //returns userHighScore
     int getUserHighScore();
@@ -122,7 +122,7 @@ public:
     void saveFile();
 
     //save highscore to a file
-    void saveHighScore();
+    void saveUserHighScore();
 
     //read in the saved file
     void loadFile();
