@@ -90,7 +90,7 @@ void Interface::updateFiles()
         LevelManager::getInstance().incrementLastUnlockedLevel();
     }
 
-    LevelManager::getInstance().saveFile();
+    LevelManager::getInstance().saveFile(); //works
 
     LevelManager::getInstance().setHighScore(); //works!
 

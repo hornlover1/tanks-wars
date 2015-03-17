@@ -67,6 +67,16 @@ void MainWindow::keyReleaseEvent(QKeyEvent* ev) {
 //TODO: write this file to call levelManager
 
 void MainWindow::on_pbLoad_clicked() {
+    //disenable buttons so they may be renabled according to lastUnlockedLevel
+  /*  for(QObject *obj : ui->levels->children())
+    {
+        QPushButton* button = dynamic_cast<QPushButton*>(obj);
+        if(button != nullptr)
+        {
+            button->setEnabled(false);
+        }
+    } */
+
     //safety check if user put in a name
 
     //get the name

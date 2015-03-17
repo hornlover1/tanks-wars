@@ -402,12 +402,9 @@ void LevelManager::saveUserHighScore() {
     }
 }
 
-//attempts to load a saved lastUnlockedLevel by comparing username to saveFile.txt
-//if found, then sets the static lastUnlockedLevel for use by the LevelLoading method
-//if returns false then program can start a new game.
 void LevelManager::loadFile() {
-    //to convert the char *a to a string
-    stringstream s;
+    //flag if name not found
+    bool nameFound = false;
 
     //open file for reading
     ifstream fs("saveFile.txt");
@@ -416,23 +413,28 @@ void LevelManager::loadFile() {
     //check if file open
     if(fs.is_open() == true) {
         //keep going till end of file
-        while (!fs.peek()==EOF) {
+        while (fs.peek() != EOF) {
             //read line of file, which should be a name
             fs.getline(a, 20);
 
             //if name equals userName, then load lastUnlockedLevelber and end loop
             if(LevelManager::getUserName() == QString(a)) {
+                nameFound = true;
                 //since we found user name, then read the user's lastUnlockedLevel
                 fs.getline(a, 20);
 
-                //convert to number
-                int i = *a;
+                //acurately change c_string to number
+                string stringValue = string(a);
+                stringstream conversion (stringValue);
+                int i = 0;
+                conversion >> i;
 
                 //load number into
                 LevelManager::setLastUnlockedLevel(i);
 
                 //close file
                 fs.close();
+                break;
 
             //if the name in the file is not what i want, then throw away the lastUnlockedLevel
             } else if (LevelManager::getUserName() != QString(a)){
@@ -440,8 +442,11 @@ void LevelManager::loadFile() {
             }
         }
     }
-    //set lastUnlockedLevel
-    LevelManager::setLastUnlockedLevel(1);
+    if(nameFound == false)
+    {
+        //set lastUnlockedLevel
+        LevelManager::setLastUnlockedLevel(1);
+    }
 }
 
 void LevelManager::fireBullet(int x, int y, int heading, TankObject* tank) {
