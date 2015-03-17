@@ -73,24 +73,33 @@ void Interface::showTime(QString str) {
 void Interface::showVictory() {
     blankUI();
     QMessageBox *banner = new QMessageBox(ui->gameArea);
-    //display the message
-    banner->setText("Congratulations. You've completed this mission soldier.\n\n\n  ---New Mission Unlocked---");
-    banner->show();
 
-    //house cleaning
-    LevelManager::getInstance().incrementLastUnlockedLevel();
-    LevelManager::getInstance().saveHighScore();
-    LevelManager::getInstance().saveFile();
-    updateGUI();
-       // LevelManager::getInstance().saveFile();
+        //display the message
+        banner->setText("Congratulations. You've completed this mission soldier.\n\n\n  ---New Mission Unlocked---");
+        banner->show();
+
+            //prepare for next level
+            LevelManager::getInstance().incrementLastUnlockedLevel();
+
+            LevelManager::getInstance().setUserHighScore();
+
+            LevelManager::getInstance().saveHighScore();
+
+            updateGUI();
+            LevelManager::getInstance().saveFile();
+
 }
 
-void Interface::updateGUI() {
+void Interface::updateGUI()
+{
     //unlock the next button on the GUI
-    for (QObject* obj: ui->levels->children()) {
+    for (QObject* obj: ui->levels->children())
+    {
         QPushButton* button = dynamic_cast<QPushButton*>(obj);
-        if (button != nullptr) {
-            if (button->text().toInt() <= LevelManager::getLastUnlockedLevel()) {
+        if (button != nullptr)
+        {
+            if (button->text().toInt() <= LevelManager::getLastUnlockedLevel())
+            {
                 button->setEnabled(true);
             }
         }
