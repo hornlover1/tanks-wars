@@ -20,6 +20,13 @@ void Interface::setUi(Ui::MainWindow *initUi) {
 }
 
 void Interface::drawObject(LevelObject* obj) {
+    for (QObject* obj: ui->gameArea->children()) {
+        QLabel* lbl = dynamic_cast<QLabel*>(obj);
+        if (lbl != nullptr && lbl->width() == 800 and lbl->height() == 600) {
+            lbl->hide();
+            lbl->deleteLater();
+        }
+    }
     int id = obj->getId();
     QWidget* area = (ui->gameArea);
     QLabel* lbl = new QLabel(area);
@@ -63,31 +70,28 @@ void Interface::showTime(QString str) {
 }
 
 void Interface::showVictory() {
-        QMessageBox *banner = new QMessageBox(ui->gameArea);
+    blankUI();
+    QMessageBox *banner = new QMessageBox(ui->gameArea);
 
-        if(LevelManager::getInstance().getLevel() < 9){
-            //display the message
-            banner->setText("Congratulations. You've completed this mission soldier.\n\n\n  ---New Mission Unlocked---");
-            banner->show();
+    if(LevelManager::getInstance().getLevel() < 9){
+        //display the message
+        banner->setText("Congratulations. You've completed this mission soldier.\n\n\n  ---New Mission Unlocked---");
+        banner->show();
 
-            //house cleaning
-            LevelManager::getInstance().incrementLastUnlockedLevel();
-            LevelManager::getInstance().saveFile();
-            updateGUI();
-           // LevelManager::getInstance().saveFile();
+        //house cleaning
+        LevelManager::getInstance().incrementLastUnlockedLevel();
+        LevelManager::getInstance().saveFile();
+        updateGUI();
+       // LevelManager::getInstance().saveFile();
     }
 }
 
-void Interface::updateGUI()
-{
+void Interface::updateGUI() {
     //unlock the next button on the GUI
-    for (QObject* obj: ui->levels->children())
-    {
+    for (QObject* obj: ui->levels->children()) {
         QPushButton* button = dynamic_cast<QPushButton*>(obj);
-        if (button != nullptr)
-        {
-            if (button->text().toInt() <= LevelManager::getLastUnlockedLevel())
-            {
+        if (button != nullptr) {
+            if (button->text().toInt() <= LevelManager::getLastUnlockedLevel()) {
                 button->setEnabled(true);
             }
         }
@@ -97,7 +101,9 @@ void Interface::updateGUI()
     ui->leUserName->setEnabled(true);
     ui->rbEasy->setCheckable(true);
     ui->rbMedium->setCheckable(true);
+    ui->rbMedium->setEnabled(true);
     ui->rbHard->setCheckable(true);
+    ui->rbHard->setEnabled(true);
     ui->btCheat->setEnabled(true);
 }
 
@@ -108,10 +114,27 @@ void Interface::howTo(){
 }
 
 void Interface::showDefeat(QString msg){
+    blankUI();
     QMessageBox *banner = new QMessageBox(ui->gameArea);
     banner->setText(msg);
     banner->show();
 
     updateGUI();
 
+}
+
+void Interface::blankUI() {
+    for (QObject* obj: ui->gameArea->children()) {
+        QLabel* lbl = dynamic_cast<QLabel*>(obj);
+        if (lbl != nullptr) {
+            lbl->hide();
+            lbl->deleteLater();
+        }
+    }
+    QLabel* lbl = new QLabel(ui->gameArea);
+    lbl->setGeometry(0, 0, 800, 600); // fill up the screen
+    lbl->setScaledContents(true);
+    QPixmap picture(":/Resources/logo.png");
+    lbl->setPixmap(picture);
+    lbl->show();
 }

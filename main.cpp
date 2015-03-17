@@ -3,12 +3,14 @@
 #include <vector>
 #include <string>
 #include "unittests.h"
+#include "interface.h"
+
 using namespace std;
 
 int main(int argc, char *argv[]) {
+
     QApplication a(argc, argv);
     MainWindow w;
-    w.show();
 
     vector<string> args(&argv[0], &argv[argc]);
     for (string s: args) {
@@ -16,6 +18,10 @@ int main(int argc, char *argv[]) {
             runUnitTests();
         }
     }
+
+    Interface::getInstance().blankUI();
+
+    w.show();
 
     return a.exec();
 }

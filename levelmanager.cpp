@@ -108,7 +108,7 @@ void LevelManager::loadLevel(int levelNum) {
         delete obj;
     }
     objectsInLevel.clear();
-    bool bullet_obj = false;
+    //bool bullet_obj = false;
     //Jordan's line
     levelNumber = levelNum; //i need this number for saveHighScore()
 
