@@ -323,7 +323,7 @@ void LevelManager::saveUserHighScore() {
 
     char c[20];
     ofstream outStream("temp.txt");
-    QString filename = QString(/*"://Resources/HighScore/*/ "highscore") + QString::number(levelNumber) + QString(".txt");
+    QString filename = QString("highscore") + QString::number(levelNumber) + QString(".txt");
     ifstream inStream(filename.toStdString().c_str());
 
     inStream.getline(c,20);//disregard first name
@@ -333,12 +333,21 @@ void LevelManager::saveUserHighScore() {
     while(inStream.peek() != EOF)
     {
         inStream.getline(c,20); //grab number
-        int number = *c; //appears to convert to askii characters, cause it ain't grabbing the correct number
+
+        //acurately change c_string to number
+        string stringValue = string(c);
+        stringstream conversion (stringValue);
+        int number = 0;
+        conversion >> number;
+
+        //int number = *c; //appears to convert to askii characters, cause it ain't grabbing the correct number
 
         if (userHighScore > number)
         {
             isInserted = true;
-            inStream.clear(); //reset stream state to start from clean slate
+            //reset stream state to start from clean slate
+            inStream.close();
+            inStream.open(filename.toStdString().c_str());
 
             int i = 0; //this value keeps track of how many sets of insertions have been made to temp.txt
             while (i < counter) //while temp does not have as many sets of insertions as highscore.txt keep inputing
@@ -346,15 +355,16 @@ void LevelManager::saveUserHighScore() {
                 for(int integer = 0; integer < 3; integer++) //input a set {username, highscore, blank space}
                 {
                     inStream.getline(c,20);
-                    outStream << c; //I assume this will write the whole line, no more no less
+                    outStream << c << endl; //I assume this will write the whole line, no more no less
                 }
                 i++;
             }
 
-            outStream << LevelManager::getUserName().begin() << endl;
+            //write new highScore
+            outStream << LevelManager::getUserName().toStdString().c_str() << endl;
            // userHighScore = Interface::getInstance().getTimeLeft();
-            outStream << userHighScore << endl;
-            outStream << endl;
+            outStream << userHighScore;
+            outStream << endl << endl;
             i++;
 
             while(i < 5)
@@ -362,7 +372,7 @@ void LevelManager::saveUserHighScore() {
                 for(int integer = 0; integer < 3; integer++)
                 {
                     inStream.getline(c,20);
-                    outStream << c; //I assume this will write the whole line, no more no less
+                    outStream << c << endl; //I assume this will write the whole line, no more no less
                 }
                 i++;
                 //break;
