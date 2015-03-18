@@ -78,16 +78,23 @@ void Interface::showVictory() {
         banner->setText("Congratulations. You've completed this mission soldier.\n\n\n  ---New Mission Unlocked---");
         banner->show();
 
-            //prepare for next level
-            LevelManager::getInstance().incrementLastUnlockedLevel();
+        updateFiles();
+        updateGUI();
+}
 
-            LevelManager::getInstance().setUserHighScore();
+void Interface::updateFiles()
+{
+    //prepare for next level
+    if(LevelManager::getLastUnlockedLevel() == LevelManager::getInstance().getLevel())
+    {
+        LevelManager::getInstance().incrementLastUnlockedLevel();
+    }
 
-            LevelManager::getInstance().saveHighScore();
+    LevelManager::getInstance().saveFile(); //works
 
-            updateGUI();
-            LevelManager::getInstance().saveFile();
+    LevelManager::getInstance().setHighScore(); //works!
 
+    LevelManager::getInstance().saveUserHighScore(); //works!
 }
 
 void Interface::updateGUI()
@@ -107,11 +114,11 @@ void Interface::updateGUI()
 
     //reset variables for next level
     ui->leUserName->setEnabled(true);
-    ui->rbEasy->setCheckable(true);
+   // ui->rbEasy->setCheckable(true);
     ui->rbEasy->setEnabled(true);
-    ui->rbMedium->setCheckable(true);
+//    ui->rbMedium->setCheckable(true);
     ui->rbMedium->setEnabled(true);
-    ui->rbHard->setCheckable(true);
+//    ui->rbHard->setCheckable(true);
     ui->rbHard->setEnabled(true);
     ui->btCheat->setEnabled(true);
 }

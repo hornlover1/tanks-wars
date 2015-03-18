@@ -67,6 +67,16 @@ void MainWindow::keyReleaseEvent(QKeyEvent* ev) {
 //TODO: write this file to call levelManager
 
 void MainWindow::on_pbLoad_clicked() {
+    //disenable buttons so they may be renabled according to lastUnlockedLevel
+  /*  for(QObject *obj : ui->levels->children())
+    {
+        QPushButton* button = dynamic_cast<QPushButton*>(obj);
+        if(button != nullptr)
+        {
+            button->setEnabled(false);
+        }
+    } */
+
     //safety check if user put in a name
 
     //get the name
@@ -142,7 +152,11 @@ void MainWindow::on_btCheat_clicked() {
 void MainWindow::updateTime() {
     if(LevelManager::getInstance().getStopTimer() == true) {
         timer->stop();
-        LevelManager::getInstance().setFinalGameTime(timer->remainingTime());
+       // LevelManager::getInstance().setFinalGameTime();
+        for(LevelObject* obj : LevelManager::getInstance().getObjects())
+        {
+            obj->pause();
+        }
     } else {
         LevelManager::getInstance().decrementTime();
     }

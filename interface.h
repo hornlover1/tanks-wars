@@ -13,6 +13,7 @@ class Interface {
     static Ui::MainWindow* ui;
 
     void updateGUI();
+    void updateFiles();
 public:
     //singleton class
     static Interface getInstance();
