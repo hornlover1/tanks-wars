@@ -156,6 +156,15 @@ void LevelManager::loadLevel(int levelNum) {
             LevelObject* obj = new Target(x, y);
             objectsInLevel.push_back(obj);
             Interface::getInstance().drawObject(obj);
+        } else if (argType == "barricade"){
+            int x, y;
+            strm >> x >> y;
+
+            qDebug() << "x" << x << "y" << y;
+
+            LevelObject* obj = new Barricade(x, y);
+            objectsInLevel.push_back(obj);
+            Interface::getInstance().drawObject(obj);
         }
     }
     //TODO: load the next level from file
