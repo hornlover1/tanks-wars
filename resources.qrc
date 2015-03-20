@@ -10,5 +10,6 @@
     </qresource>
     <qresource prefix="/images">
         <file>Resources/Tank-Wars Image.png</file>
+        <file>Resources/Tank Sprite1.png</file>
     </qresource>
 </RCC>

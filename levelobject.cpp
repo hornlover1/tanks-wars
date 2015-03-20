@@ -65,6 +65,8 @@ LevelObject* MovableObject::getContactedObject() {
 TankObject::TankObject(int x, int y, QObject *parent):
     MovableObject(x, y, 20, 20, parent), turretAngle(0) {
     isDestroyable = true;
+    //load the picture
+    QPixmap picture(":Resources/Tank Sprite1.png");
 }
 
 void TankObject::move(int newX, int newY) {
