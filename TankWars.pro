@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,7 +19,8 @@ SOURCES += main.cpp\
         levelmanager.cpp \
         movablelabel.cpp \
     unittests.cpp \
-    opponentmanager.cpp
+    opponentmanager.cpp \
+    networkmanager.cpp
 
 HEADERS  += mainwindow.h \
         levelobject.h \
@@ -27,7 +28,8 @@ HEADERS  += mainwindow.h \
         levelmanager.h \
         movablelabel.h \
     unittests.h \
-    opponentmanager.h
+    opponentmanager.h \
+    networkmanager.h
 
 FORMS    += mainwindow.ui
 
