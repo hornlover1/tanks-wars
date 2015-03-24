@@ -117,7 +117,7 @@ void LevelManager::setStopTimer(bool b)
 bool LevelManager::getStopTimer() {return stopTimer;}
 int LevelManager::getLevel() {return levelNumber;}
 
-void LevelManager::loadLevel(int levelNum) {
+void LevelManager::loadLevel(int levelNum, bool isPrimary) {
     for (LevelObject* obj: objectsInLevel) {
         Interface::getInstance().deleteObject(obj);
         delete obj;
@@ -149,7 +149,7 @@ void LevelManager::loadLevel(int levelNum) {
             LevelObject* obj = new WallObject(x, y, width, height);
             objectsInLevel.push_back(obj);
             Interface::getInstance().drawObject(obj);
-        } else if (argType == "tank") {
+        } else if ((argType == "tank" && isPrimary) || (argType == "tank2" && !isPrimary)) {
             int x, y;
             strm >> x >> y;
 
@@ -158,7 +158,7 @@ void LevelManager::loadLevel(int levelNum) {
             LevelObject* obj = new TankObject(x, y);
             objectsInLevel.push_back(obj);
             Interface::getInstance().drawObject(obj);
-        } else if (argType == "tank2") {
+        } else if ((argType == "tank2" && isPrimary) || (argType == "tank" && !isPrimary)) {
             int x, y;
             strm >> x >> y;
 
