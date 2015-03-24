@@ -1,13 +1,19 @@
 time 45 40 30
-wall 50 50 50 500
-wall 50 50 500 50
+wall -25 -25 25 615
+wall -25 -25 805 25
 tank 100 300
-wall 50 550 50 500
-wall 550 550 500 50
+wall 810 -25 25 620
+wall -25 610 820 25
 tank2 500 300
+wall 220 0 5 200
+wall 220 380 5 300
 wall 0 0 0 0
 wall 0 0 0 0
-wall 0 0 0 0
-wall 0 0 0 0
-wall 0 0 0 0
-barricade 240 290
+/barricade 240 290
+barricade 240 310
+/barricade 240 270
+barricade 240 250
+/barricade 220 230
+/barricade 220 210
+/barricade 220 330
+/barricade 220 350

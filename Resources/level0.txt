@@ -1,3 +1,4 @@
+//x, y, width, height
 time 30 25 20
 wall 0 0 200 200
 wall 0 400 200 200

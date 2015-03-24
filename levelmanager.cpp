@@ -177,6 +177,7 @@ void LevelManager::loadLevel(int levelNum) {
             objectsInLevel.push_back(obj);
             Interface::getInstance().drawObject(obj);
         }
+        setBullet_obj(false);
     }
     //TODO: load the next level from file
 }
