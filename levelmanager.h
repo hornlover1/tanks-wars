@@ -43,6 +43,10 @@ class LevelManager {
     //tank logic
     bool bullet_obj;
 
+    //This int will keep track of the barricade objects, just so that they can
+    //be deleted and still function.
+    int barNum;
+
 public:
     //to access times
     int getEasyTime();
@@ -54,7 +58,9 @@ public:
     void decrementMediumTime();
     void decrementHardTime();
     void setBullet_obj(bool x);
-
+    void upBarNum(){barNum++;}
+    int getBarNum(){return barNum;}
+    void downBarNum(){barNum--;}
     void setFinalGameTime();
 
     //sets a QString that tells the timer method which time to decrement

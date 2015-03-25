@@ -22,6 +22,7 @@ public:
     //getters and setters
 
     int getId();
+    bool getIsMovable() {return isMovable;}
     int getX() {return x;}
     int getY() {return y;}
 

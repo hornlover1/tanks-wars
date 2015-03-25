@@ -63,7 +63,7 @@ void NetworkManager::read() {
         } else if (operation == "turret") {
             double angle;
             s >> angle;
-            OpponentManager::getInstance().setTurret(angle);
+            //OpponentManager::getInstance().setTurret(angle);
         } else if (operation == "bullet") {
             int x, y;
             double angle;
@@ -72,14 +72,14 @@ void NetworkManager::read() {
         }
     }
 }
-
+/*
 void NetworkManager::connectToHost(QString ipAddr, int levelNum) {
     sock = new QTcpSocket(this);
     sock->write("level " + QString::number(levelNum));
     sock->connectToHost(ipAddr, remotePort);
     sock->waitForConnected();
 }
-
+*/
 void NetworkManager::bullet(int x, int y, double heading) {
     stringstream s;
     s << "bullet " << x << " " << y << " " << heading;

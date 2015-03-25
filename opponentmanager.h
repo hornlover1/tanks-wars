@@ -10,6 +10,7 @@ public:
     static OpponentManager getInstance();
     void startTankMoving(Direction d);
     void stopTankMoving();
+    void setTurret(double& num);
     void fireBullet(int x, int y, double heading);
 };
 

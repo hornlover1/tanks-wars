@@ -152,7 +152,9 @@ Barricade::Barricade(int x, int y, QObject *parent):
 }
 
 void Barricade::destroy() {
-    LevelObject::destroy();
+    LevelManager::getInstance().destroy(this);
+    LevelManager::getInstance().setBullet_obj(false);
+    LevelManager::getInstance().downBarNum();
 }
 
 Target::Target(int initX, int initY, QObject *parent):

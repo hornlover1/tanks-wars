@@ -172,7 +172,7 @@ void LevelManager::loadLevel(int levelNum, bool isPrimary) {
             strm >> x >> y;
 
             qDebug() << "x" << x << "y" << y;
-
+            upBarNum();
             LevelObject* obj = new Barricade(x, y);
             objectsInLevel.push_back(obj);
             Interface::getInstance().drawObject(obj);
@@ -184,10 +184,14 @@ void LevelManager::loadLevel(int levelNum, bool isPrimary) {
 
 void LevelManager::updateUI() {
     for (LevelObject* obj: objectsInLevel) {
-        MovableObject* mv = dynamic_cast<MovableObject*>(obj);
+        MovableObject* mv;
+        if(obj->getIsMovable() == true){
+            mv = dynamic_cast<MovableObject*>(obj);
         if (mv == nullptr) {
             continue;
         }
+        }
+        else{continue;}
         Interface::getInstance().moveObject(mv);
     }
 }
@@ -243,11 +247,14 @@ void LevelManager::keyPress(Direction d) {
     //start tank moving
     //update interface when tank moves - how to do?
     for (LevelObject* obj: objectsInLevel) {
-        TankObject* tank = dynamic_cast<TankObject*>(obj);
+        TankObject* tank;
+        if(obj->getIsMovable() == true){
+        tank = dynamic_cast<TankObject*>(obj);
         Target* target = dynamic_cast<Target*>(obj);
         if (tank == nullptr || target != nullptr) {
             //We're looking for the tank, not the tank2
             continue;
+        }
         }
         tank->startMotion(d);
     }
