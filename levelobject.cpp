@@ -19,6 +19,11 @@ int LevelObject::getId() {
     return id;
 }
 
+QString LevelObject::getImagePath()
+{
+    return imagePath;
+}
+
 QRect LevelObject::getGeometry() {
     QRect geometry(x,y,width,height);
     return geometry;
@@ -63,10 +68,11 @@ LevelObject* MovableObject::getContactedObject() {
 }
 
 TankObject::TankObject(int x, int y, QObject *parent):
-    MovableObject(x, y, 20, 20, parent), turretAngle(0) {
+    MovableObject(x, y, 20, 50, parent), turretAngle(0) {
     isDestroyable = true;
     //load the picture
-    QPixmap picture(":Resources/Tank Sprite1.png");
+    imagePath = ":/images/Resources/Tank1.png";
+
 }
 
 void TankObject::move(int newX, int newY) {
@@ -120,6 +126,7 @@ void TankObject::onTimeOut() {
 BulletObject::BulletObject(int initX, int initY, double initHeading, TankObject* initTank, QObject *parent):
     MovableObject(initX,initY, 20, 10, parent), heading(initHeading), tank(initTank) {
     isDestroyable = true;
+    imagePath = ":/images/Resources/Bullet.png";
 }
 
 void BulletObject::move(int newX, int newY) {
@@ -146,7 +153,10 @@ void BulletObject::onTimeOut() {
 }
 
 WallObject::WallObject(int x, int y, int width, int height, QObject *parent):
-    LevelObject(x, y, width, height, parent) {}
+    LevelObject(x, y, width, height, parent)
+{
+    imagePath = ":/images/Resources/Wall.jpg";
+}
 
 Barricade::Barricade(int x, int y, QObject *parent):
     LevelObject(x, y, 20, 20, parent) {

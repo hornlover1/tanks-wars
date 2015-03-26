@@ -6,7 +6,7 @@
 
 NetworkManager::NetworkManager(QObject *parent) :
     QObject(parent), server(new QTcpServer(this)), port(7573), remotePort(7573) {
-    sock == nullptr;
+    sock = nullptr;
     for (QHostAddress host: QNetworkInterface::allAddresses()) {
         ip4Addr = host.toString();
     }

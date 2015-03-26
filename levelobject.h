@@ -4,12 +4,14 @@
 #include <QObject>
 #include <QTimer>
 #include <QRect>
+//#include <QString>
 
 class LevelObject : public QObject {
     Q_OBJECT
 
 protected:
     int id;
+    QString imagePath;
     double x, y, width, height;
     bool isMovable;
     bool isDestroyable;
@@ -20,12 +22,13 @@ public:
     explicit LevelObject(int initX, int initY, int initWidth, int initHeight, QObject *parent = 0);
 
     //getters and setters
-
     int getId();
     void setId(int x){id = x;}
     bool getIsMovable() {return isMovable;}
     int getX() {return x;}
     int getY() {return y;}
+
+    QString getImagePath();
 
     //get a rectangle representing the object for calculations especially involving overlapping of objects
     QRect getGeometry();
