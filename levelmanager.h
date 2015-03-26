@@ -44,12 +44,12 @@ class LevelManager {
     bool bullet_obj;
 
 public:
-//to access times
+    //to access times
     int getEasyTime();
     int getMediumTime();
     int getHardTime();
 
-//for other functionality
+    //for other functionality
     void decrementEasyTime();
     void decrementMediumTime();
     void decrementHardTime();
@@ -98,7 +98,7 @@ public:
 
     //delete everything currently stored in level and load a new level from a file.
     //the level files will be in the root of the project directory with the names level1.txt, level2.txt...
-    void loadLevel(int levelNum);
+    void loadLevel(int levelNum, bool isPrimary = true);
 
     //on a mousemove, this will reposition the tank's turret
     void moveMouse(int x, int y);
