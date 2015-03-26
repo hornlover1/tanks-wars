@@ -22,6 +22,8 @@ public:
     //getters and setters
 
     int getId();
+    void setId(int x){id = x;}
+    bool getIsMovable() {return isMovable;}
     int getX() {return x;}
     int getY() {return y;}
 
@@ -131,9 +133,6 @@ class Barricade: public LevelObject {
 
 public:
     Barricade(int x, int y, QObject* parent = 0);
-
-    //get rid of the barricade
-    void destroy();
 };
 
 class Target: public TankObject {

@@ -7,6 +7,7 @@
         <file>Resources/HighScores/highscore0.txt</file>
         <file>Resources/HighScores/highscore1.txt</file>
         <file>Resources/saveFile.txt</file>
+        <file>Resources/level3.txt</file>
     </qresource>
     <qresource prefix="/images">
         <file>Resources/Tank-Wars Image.png</file>

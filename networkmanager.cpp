@@ -63,7 +63,7 @@ void NetworkManager::read() {
         } else if (operation == "turret") {
             double angle;
             s >> angle;
-            OpponentManager::getInstance().setTurret(angle);
+            //OpponentManager::getInstance().setTurret(angle);
         } else if (operation == "bullet") {
             int x, y;
             double angle;
