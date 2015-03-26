@@ -151,12 +151,6 @@ Barricade::Barricade(int x, int y, QObject *parent):
     isDestroyable = true;
 }
 
-void Barricade::destroy() {
-    LevelManager::getInstance().destroy(this);
-    LevelManager::getInstance().setBullet_obj(false);
-    LevelManager::getInstance().downBarNum();
-}
-
 Target::Target(int initX, int initY, QObject *parent):
     TankObject(initX, initY, parent){isDestroyable = true;}
 

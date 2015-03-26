@@ -53,15 +53,21 @@ Direction getDirection(int key) {
 }
 
 void MainWindow::keyPressEvent(QKeyEvent* ev) {
-    int key = ev->key();
-    Direction d = getDirection(key);
-    LevelManager::getInstance().keyPress(d);
+    if(LevelManager::getInstance().getObjects().size() > 2){
+        int key = ev->key();
+        Direction d = getDirection(key);
+        LevelManager::getInstance().keyPress(d);
+    }
+    else{}
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent* ev) {
-    int key = ev->key();
-    Direction d = getDirection(key);
-    LevelManager::getInstance().keyRelease(d);
+    if(LevelManager::getInstance().getObjects().size() > 2){
+        int key = ev->key();
+        Direction d = getDirection(key);
+        LevelManager::getInstance().keyRelease(d);
+    }
+    else{}
 }
 
 //TODO: write this file to call levelManager

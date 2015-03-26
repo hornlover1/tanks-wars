@@ -72,14 +72,14 @@ void NetworkManager::read() {
         }
     }
 }
-/*
+
 void NetworkManager::connectToHost(QString ipAddr, int levelNum) {
     sock = new QTcpSocket(this);
-    sock->write("level " + QString::number(levelNum));
+//    sock->write("level " + QString::number(levelNum));
     sock->connectToHost(ipAddr, remotePort);
     sock->waitForConnected();
 }
-*/
+
 void NetworkManager::bullet(int x, int y, double heading) {
     stringstream s;
     s << "bullet " << x << " " << y << " " << heading;

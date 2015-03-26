@@ -57,8 +57,8 @@ void LevelManager::selectTime(QString s)
 /*
 void LevelManager::setUserHighScore() {
     LevelManager::userHighScore = 15 * finalGameTime;
-}*/
-
+}
+*/
 int LevelManager::getUserHighScore() {
     return userHighScore;
 }
@@ -172,7 +172,7 @@ void LevelManager::loadLevel(int levelNum, bool isPrimary) {
             strm >> x >> y;
 
             qDebug() << "x" << x << "y" << y;
-            upBarNum();
+
             LevelObject* obj = new Barricade(x, y);
             objectsInLevel.push_back(obj);
             Interface::getInstance().drawObject(obj);
@@ -205,9 +205,13 @@ void LevelManager::moveMouse(int x, int y) {
 //Jordan manipulated obj
 void LevelManager::mouseClick() {
     //TODO: fire a bullet at the target
+    TankObject* tank;
+    Target* target;
     for (LevelObject* obj: objectsInLevel) {
-        TankObject* tank = dynamic_cast<TankObject*>(obj);
-        Target* target = dynamic_cast<Target*>(obj);
+        if(obj->getIsMovable() == true){
+            tank = dynamic_cast<TankObject*>(obj);
+            target = dynamic_cast<Target*>(obj);
+        }
         if (tank == nullptr || target != nullptr) {
             continue;
         }
@@ -224,6 +228,7 @@ void LevelManager::mouseClick() {
         setBullet_obj(true);
         Interface::getInstance().drawObject(Bobj);
         Bobj->startMotion();
+        break;
         }
         else{}
     }
@@ -246,35 +251,38 @@ void LevelManager::keyPress(Direction d) {
     //get tank
     //start tank moving
     //update interface when tank moves - how to do?
+    TankObject* tank;
     for (LevelObject* obj: objectsInLevel) {
-        TankObject* tank;
-        if(obj->getIsMovable() == true){
         tank = dynamic_cast<TankObject*>(obj);
         Target* target = dynamic_cast<Target*>(obj);
         if (tank == nullptr || target != nullptr) {
             //We're looking for the tank, not the tank2
             continue;
         }
-        }
-        tank->startMotion(d);
+        else{break;}
     }
+        tank->startMotion(d);
+
 }
 
 void LevelManager::keyRelease(Direction /*d*/) {
     //TODO: write this method
     //get tank
     //stop tank moving
+    TankObject* tank;
     for (LevelObject* obj: objectsInLevel) {
-        TankObject* tank = dynamic_cast<TankObject*>(obj);
+        tank = dynamic_cast<TankObject*>(obj);
         if (tank == nullptr) {
             continue;
         }
-        tank->stopMotion();
+        else{break;}
     }
+        tank->stopMotion();
+
 }
 
 void LevelManager::destroy(LevelObject *obj) {
-    for (auto i = objectsInLevel.begin(); i <= objectsInLevel.end(); i++) {
+    for (auto i = objectsInLevel.begin(); i </*=*/ objectsInLevel.end(); i++) {
         if ((*i)->getId() == obj->getId()) {
             Interface::getInstance().deleteObject(obj);
             objectsInLevel.erase(i);
