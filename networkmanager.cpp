@@ -6,6 +6,7 @@
 
 NetworkManager::NetworkManager(QObject *parent) :
     QObject(parent), server(new QTcpServer(this)), port(7573), remotePort(7573) {
+    sock == nullptr;
     for (QHostAddress host: QNetworkInterface::allAddresses()) {
         ip4Addr = host.toString();
     }
@@ -81,22 +82,34 @@ void NetworkManager::connectToHost(QString ipAddr, int levelNum) {
 }
 
 void NetworkManager::bullet(int x, int y, double heading) {
+    if (sock == nullptr) {
+        return;
+    }
     stringstream s;
     s << "bullet " << x << " " << y << " " << heading;
     sock->write(s.str().c_str());
 }
 
 void NetworkManager::startTank(Direction d) {
+    if (sock == nullptr) {
+        return;
+    }
     stringstream s;
     s << "startTank " << d;
     sock->write(s.str().c_str());
 }
 
 void NetworkManager::stopTank() {
+    if (sock == nullptr) {
+        return;
+    }
     sock->write("stopTank");
 }
 
 void NetworkManager::turret(double angle) {
+    if (sock == nullptr) {
+        return;
+    }
     stringstream s;
     s << "turret " << angle;
     sock->write(s.str().c_str());
