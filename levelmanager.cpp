@@ -3,10 +3,9 @@
 #include <QFile>
 #include <QTextStream>
 #include <math.h>
-#include <cassert>
 #include <iostream>
 #include <QDebug>
-#include <QMessageBox>
+#include "networkmanager.h"
 using namespace std;
 
 QString LevelManager::userName = "";
@@ -57,24 +56,19 @@ void LevelManager::selectTime(QString s)
 /*
 void LevelManager::setUserHighScore() {
     LevelManager::userHighScore = 15 * finalGameTime;
-}*/
-
+}
+*/
 int LevelManager::getUserHighScore() {
     return userHighScore;
 }
 
 void LevelManager::setHighScore()
 {
-    if(userTime == "Easy")
-    {
+    if(userTime == "Easy") {
         userHighScore = 10 * easyTime;
-    }
-    else if(userTime == "Medium")
-    {
+    } else if(userTime == "Medium") {
         userHighScore = 15 * mediumTime;
-    }
-    else if (userTime == "Hard")
-    {
+    } else if (userTime == "Hard") {
         userHighScore = 20 * hardTime;
     }
 }
@@ -109,8 +103,7 @@ vector<LevelObject*> LevelManager::getObjects() {
     return objectsInLevel;
 }
 
-void LevelManager::setStopTimer(bool b)
-{
+void LevelManager::setStopTimer(bool b) {
     stopTimer = b;
 }
 
@@ -167,15 +160,30 @@ void LevelManager::loadLevel(int levelNum, bool isPrimary) {
             LevelObject* obj = new Target(x, y);
             objectsInLevel.push_back(obj);
             Interface::getInstance().drawObject(obj);
+        } else if (argType == "barricade"){
+            int x, y;
+            strm >> x >> y;
+
+            qDebug() << "x" << x << "y" << y;
+
+            LevelObject* obj = new Barricade(x, y);
+            objectsInLevel.push_back(obj);
+            Interface::getInstance().drawObject(obj);
         }
+        setBullet_obj(false);
     }
     //TODO: load the next level from file
 }
 
 void LevelManager::updateUI() {
     for (LevelObject* obj: objectsInLevel) {
-        MovableObject* mv = dynamic_cast<MovableObject*>(obj);
-        if (mv == nullptr) {
+        MovableObject* mv;
+        if(obj->getIsMovable() == true){
+            mv = dynamic_cast<MovableObject*>(obj);
+            if (mv == nullptr) {
+                continue;
+            }
+        } else {
             continue;
         }
         Interface::getInstance().moveObject(mv);
@@ -185,15 +193,19 @@ void LevelManager::updateUI() {
 void LevelManager::moveMouse(int x, int y) {
     mouseX = x;
     mouseY = y;
-    //TODO: write logic to move the turret
+    //TODO: write logic to move the turret and send it over the network
 }
 
 //Jordan manipulated obj
 void LevelManager::mouseClick() {
     //TODO: fire a bullet at the target
+    TankObject* tank;
+    Target* target;
     for (LevelObject* obj: objectsInLevel) {
-        TankObject* tank = dynamic_cast<TankObject*>(obj);
-        Target* target = dynamic_cast<Target*>(obj);
+        if(obj->getIsMovable() == true){
+            tank = dynamic_cast<TankObject*>(obj);
+            target = dynamic_cast<Target*>(obj);
+        }
         if (tank == nullptr || target != nullptr) {
             continue;
         }
@@ -204,14 +216,17 @@ void LevelManager::mouseClick() {
         if (diffX <= 0) {
             heading += pi; // add pi to rotate it 180 degrees so that it shoots in the right direction
         }
-        if(bullet_obj == false){
-        BulletObject* Bobj = new BulletObject(tank->getX(), tank->getY(), heading, tank);
-        objectsInLevel.push_back(Bobj);
-        setBullet_obj(true);
-        Interface::getInstance().drawObject(Bobj);
-        Bobj->startMotion();
+        if (bullet_obj == false) {
+            BulletObject* Bobj = new BulletObject(tank->getX(), tank->getY(), heading, tank);
+            objectsInLevel.push_back(Bobj);
+            setBullet_obj(true);
+            Interface::getInstance().drawObject(Bobj);
+            Bobj->startMotion();
+            NetworkManager::getInstance().bullet(tank->getX(), tank->getY(), heading);
+            break;
+        } else {
+
         }
-        else{}
     }
 }
 
@@ -232,32 +247,40 @@ void LevelManager::keyPress(Direction d) {
     //get tank
     //start tank moving
     //update interface when tank moves - how to do?
+    TankObject* tank;
     for (LevelObject* obj: objectsInLevel) {
-        TankObject* tank = dynamic_cast<TankObject*>(obj);
+        tank = dynamic_cast<TankObject*>(obj);
         Target* target = dynamic_cast<Target*>(obj);
         if (tank == nullptr || target != nullptr) {
             //We're looking for the tank, not the tank2
             continue;
+        } else {
+            break;
         }
-        tank->startMotion(d);
     }
+    tank->startMotion(d);
+    NetworkManager::getInstance().startTank(d);
 }
 
 void LevelManager::keyRelease(Direction /*d*/) {
     //TODO: write this method
     //get tank
     //stop tank moving
+    TankObject* tank;
     for (LevelObject* obj: objectsInLevel) {
-        TankObject* tank = dynamic_cast<TankObject*>(obj);
+        tank = dynamic_cast<TankObject*>(obj);
         if (tank == nullptr) {
             continue;
+        } else {
+            break;
         }
-        tank->stopMotion();
     }
+    tank->stopMotion();
+    NetworkManager::getInstance().stopTank();
 }
 
 void LevelManager::destroy(LevelObject *obj) {
-    for (auto i = objectsInLevel.begin(); i <= objectsInLevel.end(); i++) {
+    for (auto i = objectsInLevel.begin(); i </*=*/ objectsInLevel.end(); i++) {
         if ((*i)->getId() == obj->getId()) {
             Interface::getInstance().deleteObject(obj);
             objectsInLevel.erase(i);

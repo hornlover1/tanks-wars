@@ -6,6 +6,7 @@
 #include "levelobject.h"
 #include <QDebug>
 #include <QMessageBox>
+#include "networkmanager.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -55,15 +56,21 @@ Direction getDirection(int key) {
 }
 
 void MainWindow::keyPressEvent(QKeyEvent* ev) {
-    int key = ev->key();
-    Direction d = getDirection(key);
-    LevelManager::getInstance().keyPress(d);
+    if(LevelManager::getInstance().getObjects().size() > 2){
+        int key = ev->key();
+        Direction d = getDirection(key);
+        LevelManager::getInstance().keyPress(d);
+    }
+    else{}
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent* ev) {
-    int key = ev->key();
-    Direction d = getDirection(key);
-    LevelManager::getInstance().keyRelease(d);
+    if(LevelManager::getInstance().getObjects().size() > 2){
+        int key = ev->key();
+        Direction d = getDirection(key);
+        LevelManager::getInstance().keyRelease(d);
+    }
+    else{}
 }
 
 //TODO: write this file to call levelManager
@@ -124,11 +131,16 @@ void MainWindow::levelButtonClicked() {
             LevelManager::getInstance().selectTime(ui->rbHard->text());
         }
 
+        ui->opponentIp->setEnabled(false);
+
         //start the timer counting down till user defeat
         timer->start();
         if (!ui->rbEasy->isChecked()) { ui->rbEasy->setEnabled(false); }
         if (!ui->rbMedium->isChecked()) { ui->rbMedium->setEnabled(false); }
         if (!ui->rbHard->isChecked()) { ui->rbHard->setEnabled(false); }
+        if (ui->opponentIp->text() != "") {
+            NetworkManager::getInstance().connectToHost(ui->opponentIp->text(), levelNum);
+        }
     }
 }
 
@@ -142,6 +154,7 @@ void MainWindow::on_btCheat_clicked() {
 //    ui->rbMedium->setEnabled(false);
     ui->gameArea->setMouseTracking(true);
     ui->gameArea->installEventFilter(this);
+    ui->opponentIp->setEnabled(false);
     timer->start();
 }
 
@@ -161,4 +174,3 @@ void MainWindow::updateTime() {
 void MainWindow::on_pushButton_2_clicked() {
     Interface::getInstance().howTo();
 }
-

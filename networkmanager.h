@@ -27,7 +27,7 @@ class NetworkManager : public QObject {
     static NetworkManager instance;
 public:
     static NetworkManager&  getInstance();
-    void connectToHost(QString ipAddr);
+    void connectToHost(QString ipAddr, int levelNum);
     void bullet(int x, int y, double heading);
     void startTank(Direction d);
     void stopTank();

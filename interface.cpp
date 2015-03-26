@@ -97,16 +97,12 @@ void Interface::updateFiles()
     LevelManager::getInstance().saveUserHighScore(); //works!
 }
 
-void Interface::updateGUI()
-{
+void Interface::updateGUI(){
     //unlock the next button on the GUI
-    for (QObject* obj: ui->levels->children())
-    {
+    for (QObject* obj: ui->levels->children()) {
         QPushButton* button = dynamic_cast<QPushButton*>(obj);
-        if (button != nullptr)
-        {
-            if (button->text().toInt() <= LevelManager::getLastUnlockedLevel())
-            {
+        if (button != nullptr) {
+            if (button->text().toInt() <= LevelManager::getLastUnlockedLevel()) {
                 button->setEnabled(true);
             }
         }
@@ -121,22 +117,22 @@ void Interface::updateGUI()
 //    ui->rbHard->setCheckable(true);
     ui->rbHard->setEnabled(true);
     ui->btCheat->setEnabled(true);
+    ui->opponentIp->setEnabled(true);
 }
 
-void Interface::howTo(){
+void Interface::howTo() {
     QMessageBox *explain = new QMessageBox(ui->gameArea);
     explain->setText("Before playing, please insert your name in the box above and hit load to begin your campaign.\nThis is a simple overview of the game's controls.\nControls:\n\n -Right arrow moves the tank right.\n -Down arrow moves the tank down.\n -Left arrow moves the tank left.\n -Up arrow moves the tank up.\n -Click the mouse on the playing field to shoot.\nNOTE: Your bullets will follow the mouse's current position.\n\nTo beat the game, simply be the last tank standing. Good luck.");
     explain->show();
 }
 
-void Interface::showDefeat(QString msg){
+void Interface::showDefeat(QString msg) {
     blankUI();
     QMessageBox *banner = new QMessageBox(ui->gameArea);
     banner->setText(msg);
     banner->show();
 
     updateGUI();
-
 }
 
 void Interface::blankUI() {
@@ -155,16 +151,14 @@ void Interface::blankUI() {
     lbl->show();
 }
 
-int Interface::getTimeLeft(){
+int Interface::getTimeLeft() {
     QString time = ui->timeLeft->text();
     int highscore = time.toInt();
     if(ui->rbEasy->isChecked()){
         highscore = highscore * 10;
-    }
-    else if(ui->rbMedium->isChecked()){
+    } else if(ui->rbMedium->isChecked()){
         highscore = highscore * 20;
-    }
-    else if(ui->rbHard->isChecked()){
+    } else if(ui->rbHard->isChecked()){
         highscore = highscore * 30;
     }
     return highscore;

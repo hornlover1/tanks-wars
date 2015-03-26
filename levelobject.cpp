@@ -153,10 +153,6 @@ Barricade::Barricade(int x, int y, QObject *parent):
     isDestroyable = true;
 }
 
-void Barricade::destroy() {
-    LevelObject::destroy();
-}
-
 Target::Target(int initX, int initY, QObject *parent):
     TankObject(initX, initY, parent){isDestroyable = true;}
 

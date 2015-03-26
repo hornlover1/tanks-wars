@@ -43,6 +43,8 @@ class LevelManager {
     //tank logic
     bool bullet_obj;
 
+    //
+
 public:
     //to access times
     int getEasyTime();
@@ -54,7 +56,6 @@ public:
     void decrementMediumTime();
     void decrementHardTime();
     void setBullet_obj(bool x);
-
     void setFinalGameTime();
 
     //sets a QString that tells the timer method which time to decrement
