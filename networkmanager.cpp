@@ -75,7 +75,7 @@ void NetworkManager::read() {
 
 void NetworkManager::connectToHost(QString ipAddr, int levelNum) {
     sock = new QTcpSocket(this);
-    sock->write("level " + QString::number(levelNum));
+    sock->write(("level " + QString::number(levelNum)).toStdString().c_str());
     sock->connectToHost(ipAddr, remotePort);
     sock->waitForConnected();
 }

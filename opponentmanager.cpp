@@ -34,3 +34,12 @@ void OpponentManager::fireBullet(int x, int y, double heading) {
         }
     }
 }
+
+void OpponentManager::setTurret(double angle) {
+    for (LevelObject* obj: LevelManager::getInstance().getObjects()) {
+        Target* targ = dynamic_cast<Target*>(obj);
+        if (targ != nullptr) {
+            targ->setTurret(angle);
+        }
+    }
+}

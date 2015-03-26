@@ -149,6 +149,29 @@
            </widget>
           </item>
           <item>
+           <widget class="QGroupBox" name="Opponent">
+            <property name="title">
+             <string>Opponent</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <item>
+              <widget class="QLineEdit" name="opponentIp">
+               <property name="placeholderText">
+                <string>Opponent's IP</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="yourIP">
+               <property name="text">
+                <string>Your IP:</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
            <widget class="QRadioButton" name="rbEasy">
             <property name="text">
              <string>Easy</string>
@@ -322,6 +345,7 @@
          <zorder>levels</zorder>
          <zorder>btCheat</zorder>
          <zorder>pushButton_2</zorder>
+         <zorder>Opponent</zorder>
         </widget>
        </item>
        <item>
@@ -393,7 +417,7 @@
      <x>0</x>
      <y>0</y>
      <width>1095</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

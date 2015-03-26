@@ -11,6 +11,7 @@ public:
     void startTankMoving(Direction d);
     void stopTankMoving();
     void fireBullet(int x, int y, double heading);
+    void setTurret(double angle);
 };
 
 #endif // OPPONENTMANAGER_H
