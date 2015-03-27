@@ -27,11 +27,13 @@ class NetworkManager : public QObject {
     static NetworkManager instance;
 public:
     static NetworkManager&  getInstance();
+    void startServer(QWidget* parent);
     void connectToHost(QString ipAddr, int levelNum);
     void bullet(int x, int y, double heading);
     void startTank(Direction d);
     void stopTank();
     void turret(double angle);
+    QString getIp4Addr() {return ip4Addr;}
 private slots:
     void newConnection();
     void disconnected();

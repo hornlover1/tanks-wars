@@ -56,18 +56,18 @@ void Interface::moveObject(LevelObject *obj) {
             //move the label to the new position,
             lbl->setGeometry(obj->getGeometry());
             //make it face the right direction - may go into own class
-
+/*
             TankObject* TankObj = dynamic_cast<TankObject*>(obj);
             if(TankObj != nullptr) {
-            QPixmap pixmap(*lbl->pixmap());
-            QMatrix rm;
+                QPixmap pixmap(*lbl->pixmap());
+                QMatrix rm;
 
-            int degrees = getDegrees(TankObj);
+                int degrees = getDegrees(TankObj);
 
-            rm.rotate(degrees);
-            pixmap = pixmap.transformed(rm);
-            lbl->setPixmap(pixmap);
-            }
+                rm.rotate(degrees);
+                pixmap = pixmap.transformed(rm);
+                lbl->setPixmap(pixmap);
+            }*/
         }
        /*     QPainter painter(lbl);
             QTransform trans;

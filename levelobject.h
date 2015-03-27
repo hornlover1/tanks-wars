@@ -66,7 +66,7 @@ public:
 
 };
 
-enum Direction {North, South, East, West};
+enum Direction {North, South, East, West, null};
 
 class TankObject: public MovableObject {
     Q_OBJECT
@@ -83,7 +83,7 @@ public:
     Direction d;
 
     //what direction the image is facing
-    Direction directionFaced = North;
+    Direction directionFaced;
 
     TankObject(int x, int y, QObject* parent = 0);
 

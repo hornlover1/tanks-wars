@@ -13,5 +13,6 @@
         <file>Resources/Tank-Wars Image.png</file>
         <file>Resources/Wall.jpg</file>
         <file>Resources/Bullet.png</file>
+        <file>Resources/Tank1.png</file>
     </qresource>
 </RCC>

@@ -27,6 +27,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QTcpServer* server = new QTcpServer(this);
     connect(server, SIGNAL(newConnection()), this, SLOT(connectToClient()));
     server->listen(QHostAddress::Any, 5000);
+
+    NetworkManager::getInstance().startServer(this);
+    ui->yourIP->setText("Your IP: " + NetworkManager::getInstance().getIp4Addr());
 }
 
 void MainWindow::connectToClient() {
