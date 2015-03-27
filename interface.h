@@ -42,6 +42,8 @@ public:
     void showDefeat(QString);
 
     void blankUI();
+
+    int getDegrees(TankObject* obj);
 };
 
 #endif // INTERFACE_H
