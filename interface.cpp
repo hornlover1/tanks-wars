@@ -41,7 +41,7 @@ void Interface::drawObject(LevelObject* obj) {
 
   //  lbl->setStyleSheet("QLabel {color:red; background-color: red;}");
     lbl->show();
-    obj->getGeometry().
+    obj->getGeometry();
 }
 
 void Interface::moveObject(LevelObject *obj) {

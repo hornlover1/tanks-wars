@@ -3,16 +3,20 @@
 #include <QtNetwork/QNetworkInterface>
 #include "opponentmanager.h"
 #include <sstream>
+#include <QApplication>
+#include "interface.h"
 
 NetworkManager::NetworkManager(QObject *parent) :
-    QObject(parent), server(new QTcpServer(this)), port(7573), remotePort(7573) {
+    QObject(parent), port(7573), remotePort(7573) {
     sock = nullptr;
     for (QHostAddress host: QNetworkInterface::allAddresses()) {
         ip4Addr = host.toString();
     }
-    server->listen(QHostAddress::Any, port);
+
+    server = new QTcpServer(parent);
     connect(server, SIGNAL(newConnection()), this, SLOT(newConnection()));
     connect(server, SIGNAL(destroyed()), this, SLOT(disconnected()));
+    server->listen(QHostAddress::Any, port);
 }
 
 NetworkManager NetworkManager::instance;
@@ -22,7 +26,7 @@ NetworkManager& NetworkManager::getInstance() {
 }
 
 void NetworkManager::newConnection() {
-    //TODO:write this method
+    qDebug() << "new connection";
     QTcpSocket* socket = server->nextPendingConnection();
     QString line;
     while (socket->canReadLine()) {

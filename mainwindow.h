@@ -33,6 +33,7 @@ private slots:
     //void on_rbMedium_clicked();
     //void on_rbHard_clicked();
     void updateTime();
+    void connectToClient();
 };
 
 #endif // MAINWINDOW_H
