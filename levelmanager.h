@@ -22,7 +22,7 @@ class LevelManager {
     //position of mouse
     int mouseX, mouseY;
 
-//User Information
+//User-Specific Information
     //counter to record which level is available
     static int lastUnlockedLevel;
 
@@ -30,9 +30,8 @@ class LevelManager {
     static QString userName;
 
     //current high score of the user
-   // int finalGameTime;
     int userHighScore;
-
+//
     //used to find the correct level file to save the highScores to
     int levelNumber;
 

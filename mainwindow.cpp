@@ -11,7 +11,9 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
+
     timer(new QTimer(this)) {
+
     ui->setupUi(this);
     Interface::getInstance().setUi(ui);
 
@@ -74,20 +76,14 @@ void MainWindow::keyReleaseEvent(QKeyEvent* ev) {
 //TODO: write this file to call levelManager
 
 void MainWindow::on_pbLoad_clicked() {
-    //disenable buttons so they may be renabled according to lastUnlockedLevel
-  /*  for(QObject *obj : ui->levels->children())
-    {
-        QPushButton* button = dynamic_cast<QPushButton*>(obj);
-        if(button != nullptr)
-        {
-            button->setEnabled(false);
-        }
-    } */
-
     //safety check if user put in a name
-
-    //get the name
+ //get the name
     QString name = ui->leUserName->text();
+    if(name.size() == 0)
+    {
+        QMessageBox::information(this, "Mistake", "Please input a username");
+        return;
+    }
 
     name = name.toUpper();
 

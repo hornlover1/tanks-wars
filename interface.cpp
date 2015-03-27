@@ -31,9 +31,15 @@ void Interface::drawObject(LevelObject* obj) {
     int id = obj->getId();
     QWidget* area = (ui->gameArea);
     QLabel* lbl = new QLabel(area);
-    lbl->setText(QString::number(id));
     lbl->setGeometry(obj->getGeometry());
-    lbl->setStyleSheet("QLabel {color:red; background-color: red;}");
+    lbl->setAccessibleName(QString::number(id)); //the loaded id will be used to link the label with its code instantiation
+
+    //code to load images to labels
+    QPixmap pic(obj->getImagePath().toStdString().c_str());
+    lbl->setPixmap(pic);
+    lbl->setScaledContents(true);
+
+  //  lbl->setStyleSheet("QLabel {color:red; background-color: red;}");
     lbl->show();
     obj->getGeometry().
 }
@@ -44,7 +50,7 @@ void Interface::moveObject(LevelObject *obj) {
         if (lbl == nullptr) {
             continue;
         }
-        if (lbl->text() == QString::number(obj->getId())) {
+        if (lbl->accessibleName() == QString::number(obj->getId())) {
             //correct label
             //move the label to the new position
             lbl->setGeometry(obj->getGeometry());
@@ -58,9 +64,10 @@ void Interface::deleteObject(LevelObject *obj) {
         if (lbl == nullptr) {
             continue;
         }
-        if (lbl->text() == QString::number(obj->getId())) {
+        if (lbl->accessibleName() == QString::number(obj->getId())) {
             //correct label
             //hide and then delete the label
+
             lbl->hide();
             lbl->deleteLater();
         }
@@ -76,7 +83,7 @@ void Interface::showVictory() {
     QMessageBox *banner = new QMessageBox(ui->gameArea);
 
         //display the message
-        banner->setText("Congratulations. You've completed this mission soldier.\n\n\n  ---New Mission Unlocked---");
+        banner->setText("Congratulations. You've completed this mission soldier.");
         banner->show();
 
         updateFiles();
