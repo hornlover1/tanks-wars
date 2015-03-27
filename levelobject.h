@@ -31,7 +31,7 @@ public:
     QString getImagePath();
 
     //get a rectangle representing the object for calculations especially involving overlapping of objects
-    QRect getGeometry();
+    QRect virtual getGeometry();//must be overriden by bullet and tank so the label size may be changed
 
     //for objects that are destroyable, blow them up, preferably with cool animation
     virtual void destroy();
@@ -52,7 +52,7 @@ protected slots:
 
 //an object that can move around on the screen, such as a tank or bullet
 class MovableObject: public LevelObject {
-    Q_OBJECT
+    Q_OBJECT 
 
     //isMovable = true;
 public:
@@ -74,13 +74,23 @@ class TankObject: public MovableObject {
     //isDestroyable=true
     //the angle, in degrees, that the turret is facing
     int turretAngle;
+
+
+
+public:
+
     //what direction to move
     Direction d;
-public:
+
+    //what direction the image is facing
+    Direction directionFaced = North;
+
     TankObject(int x, int y, QObject* parent = 0);
 
     //move the tank to the new location
     void move(int newX, int newY);
+
+    Direction getDirectionFaced();
 
     //when the user holds down a particular arrow key, start the tank moving
     void startMotion(Direction d);

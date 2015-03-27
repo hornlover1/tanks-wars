@@ -80,6 +80,10 @@ void TankObject::move(int newX, int newY) {
     y = newY;
 }
 
+Direction TankObject::getDirectionFaced(){
+    return directionFaced;
+}
+
 void TankObject::startMotion(Direction dToMove) {
     d = dToMove;
     timer->start();

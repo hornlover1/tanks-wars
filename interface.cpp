@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QLabel>
 #include <QMessageBox>
+#include <QPainter>
 
 Interface::Interface() {}
 
@@ -52,10 +53,66 @@ void Interface::moveObject(LevelObject *obj) {
         }
         if (lbl->accessibleName() == QString::number(obj->getId())) {
             //correct label
-            //move the label to the new position
+            //move the label to the new position,
             lbl->setGeometry(obj->getGeometry());
+            //make it face the right direction - may go into own class
+
+            TankObject* TankObj = dynamic_cast<TankObject*>(obj);
+            if(TankObj != nullptr) {
+            QPixmap pixmap(*lbl->pixmap());
+            QMatrix rm;
+
+            int degrees = getDegrees(TankObj);
+
+            rm.rotate(degrees);
+            pixmap = pixmap.transformed(rm);
+            lbl->setPixmap(pixmap);
+            }
         }
+       /*     QPainter painter(lbl);
+            QTransform trans;
+            trans.rotate(75);
+            painter.setTransform(trans);  */
     }
+}
+
+int Interface::getDegrees(TankObject* obj) {
+    int degrees;
+    if (obj->directionFaced == obj->d){
+           degrees = 0;
+       }
+
+   else if (obj->directionFaced == North){
+       switch (obj->d) {
+           case East: degrees = 90; obj->directionFaced = East; break;
+           case South: degrees = 180; obj->directionFaced = South; break;
+           case West: degrees = -90; obj->directionFaced = West; break;
+       }
+    }
+   else if (obj->directionFaced == West){
+       switch (obj->d) {
+           case East: degrees = 180; obj->directionFaced = East; break;
+           case South: degrees = -90; obj->directionFaced = South; break;
+           case North: degrees = 90; obj->directionFaced = North; break;
+       }
+    }
+
+   else if (obj->directionFaced == South){
+       switch (obj->d) {
+           case East: degrees = -90; obj->directionFaced = East; break;
+           case North: degrees = 180; obj->directionFaced = North; break;
+           case West: degrees = 90; obj->directionFaced = West; break;
+       }
+    }
+
+   else if (obj->directionFaced == East){
+       switch (obj->d) {
+           case North: degrees = -90; obj->directionFaced = North; break;
+           case West: degrees = 180; obj->directionFaced = West; break;
+           case South: degrees = 90; obj->directionFaced = South; break;
+       }
+    }
+   return degrees;
 }
 
 void Interface::deleteObject(LevelObject *obj) {
