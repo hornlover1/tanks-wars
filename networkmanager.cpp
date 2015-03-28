@@ -44,22 +44,7 @@ NetworkManager& NetworkManager::getInstance() {
 void NetworkManager::newConnection() {
     qDebug() << "new connection";
     QTcpSocket* socket = server->nextPendingConnection();
-    QString line;
-    while (socket->canReadLine()) {
-        line = socket->readLine();
-        qDebug() << "Connection text: " + line;
-        //the sender is sending something like "level 1" to initiate the connection
-        //this indicates that the sender is starting the connection and therefore they are the primary player
-        if (line.startsWith("level")) {
-            isPrimary = false;
-            //get the characters after "level "
-            line.chop(6);
-            int levelNum = line.toInt();
-            LevelManager::getInstance().loadLevel(levelNum, false);
-        } else {
-            isPrimary = true;
-        }
-    }
+    isPrimary = true;
     connect(socket, SIGNAL(readyRead()), this, SLOT(read()));
     connect(socket, SIGNAL(destroyed()), this, SLOT(disconnected()));
 }
@@ -93,15 +78,21 @@ void NetworkManager::read() {
             double angle;
             s >> x >> y >> angle;
             OpponentManager::getInstance().fireBullet(x, y, angle);
+        } else if (line.startsWith("level")) {
+            isPrimary = false;
+            //get the characters after "level "
+            line.chop(6);
+            int levelNum = line.toInt();
+            LevelManager::getInstance().loadLevel(levelNum, false);
         }
     }
 }
 
 void NetworkManager::connectToHost(QString ipAddr, int levelNum) {
     sock = new QTcpSocket(server->parent());
-    sock->write(("level " + QString::number(levelNum) + "\n").toStdString().c_str());
     sock->connectToHost(ipAddr, remotePort);
     sock->waitForConnected();
+    sock->write(("level " + QString::number(levelNum) + "\n").toStdString().c_str());
 }
 
 void NetworkManager::bullet(int x, int y, double heading) {
