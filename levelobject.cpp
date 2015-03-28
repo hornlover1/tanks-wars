@@ -56,6 +56,17 @@ MovableObject::MovableObject(int initX, int initY, int initWidth, int initHeight
     isMovable = true;
 }
 
+QRect MovableObject::getGeometry() {
+    if(directionFaced == West || directionFaced == East) {
+        QRect geometry(x,y,height,width);
+        return geometry;
+    }
+    else {
+        QRect geometry(x,y,width,height);
+        return geometry;
+    }
+}
+
 void MovableObject::move(int /*newX*/, int /*newY*/) {}
 
 LevelObject* MovableObject::getContactedObject() {
@@ -65,6 +76,22 @@ LevelObject* MovableObject::getContactedObject() {
         }
     }
     return nullptr;
+}
+
+void MovableObject::setDirectionFaced(Direction direction) {
+    directionFaced = direction;
+}
+
+void MovableObject::setD(Direction direction) {
+    d = direction;
+}
+
+Direction MovableObject::getD() {
+    return d;
+}
+
+Direction MovableObject::getDirectionFaced(){
+    return directionFaced;
 }
 
 TankObject::TankObject(int x, int y, QObject *parent):
@@ -78,10 +105,6 @@ TankObject::TankObject(int x, int y, QObject *parent):
 void TankObject::move(int newX, int newY) {
     x = newX;
     y = newY;
-}
-
-Direction TankObject::getDirectionFaced(){
-    return directionFaced;
 }
 
 void TankObject::startMotion(Direction dToMove) {

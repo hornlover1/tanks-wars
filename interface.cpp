@@ -53,62 +53,62 @@ void Interface::moveObject(LevelObject *obj) {
         if (lbl->accessibleName() == QString::number(obj->getId())) {
             //correct label
             //move the label to the new position,
-            lbl->setGeometry(obj->getGeometry());
+
             //make it face the right direction - may go into own class
 
             TankObject* TankObj = dynamic_cast<TankObject*>(obj);
             if(TankObj != nullptr) {
-            QPixmap pixmap(*lbl->pixmap());
-            QMatrix rm;
+                lbl->setGeometry(TankObj->getGeometry());
 
-            int degrees = getDegrees(TankObj);
+                QPixmap pixmap(*lbl->pixmap());
+                QMatrix rm;
 
-            rm.rotate(degrees);
-            pixmap = pixmap.transformed(rm);
-            lbl->setPixmap(pixmap);
+                int degrees = getDegrees(TankObj);
+
+                rm.rotate(degrees);
+                pixmap = pixmap.transformed(rm);
+                lbl->setPixmap(pixmap);
+            } else {
+                lbl->setGeometry(obj->getGeometry());
             }
         }
-       /*     QPainter painter(lbl);
-            QTransform trans;
-            trans.rotate(75);
-            painter.setTransform(trans);  */
     }
 }
 
 int Interface::getDegrees(TankObject* obj) {
-    int degrees;
-    if (obj->directionFaced == obj->d){
-           degrees = 0;
+    int degrees = 0;
+    if (obj->getDirectionFaced() == obj->getD()){
+            degrees = 0;
        }
 
-   else if (obj->directionFaced == North){
-       switch (obj->d) {
-           case East: degrees = 90; obj->directionFaced = East; break;
-           case South: degrees = 180; obj->directionFaced = South; break;
-           case West: degrees = -90; obj->directionFaced = West; break;
+   else if (obj->getDirectionFaced() == North){
+       switch (obj->getD()) {
+           case East: degrees = 90; obj->setDirectionFaced(East); break;
+           case South: degrees = 180; obj->setDirectionFaced(South); break;
+           case West: degrees = -90; obj->setDirectionFaced(West); break;
        }
     }
-   else if (obj->directionFaced == West){
-       switch (obj->d) {
-           case East: degrees = 180; obj->directionFaced = East; break;
-           case South: degrees = -90; obj->directionFaced = South; break;
-           case North: degrees = 90; obj->directionFaced = North; break;
-       }
-    }
-
-   else if (obj->directionFaced == South){
-       switch (obj->d) {
-           case East: degrees = -90; obj->directionFaced = East; break;
-           case North: degrees = 180; obj->directionFaced = North; break;
-           case West: degrees = 90; obj->directionFaced = West; break;
+   else if (obj->getDirectionFaced() == West){
+       switch (obj->getD()) {
+           case East: degrees = 180; obj->setDirectionFaced(East); break;
+           case South: degrees = -90; obj->setDirectionFaced(South); break;
+           case North: degrees = 90; obj->setDirectionFaced(North); break;
        }
     }
 
-   else if (obj->directionFaced == East){
-       switch (obj->d) {
-           case North: degrees = -90; obj->directionFaced = North; break;
-           case West: degrees = 180; obj->directionFaced = West; break;
-           case South: degrees = 90; obj->directionFaced = South; break;
+   else if (obj->getDirectionFaced() == South){
+       switch (obj->getD()) {
+           case East: degrees = -90; obj->setDirectionFaced(East); break;
+           case North: degrees = 180; obj->setDirectionFaced(North); break;
+           case West: degrees = 90; obj->setDirectionFaced(West); break;
+       }
+    }
+
+   else if (obj->getDirectionFaced() == East){
+       switch (obj->getD()) {
+           case North: degrees = -90; obj->setDirectionFaced(North); break;
+           case West: degrees = 180; obj->setDirectionFaced(West); break;
+           case South: degrees = 90; obj->setDirectionFaced(South); break;
        }
     }
    return degrees;
