@@ -42,6 +42,7 @@ void Interface::drawObject(LevelObject* obj) {
 
   //  lbl->setStyleSheet("QLabel {color:red; background-color: red;}");
     lbl->show();
+    obj->getGeometry();
 }
 
 void Interface::moveObject(LevelObject *obj) {
@@ -53,7 +54,7 @@ void Interface::moveObject(LevelObject *obj) {
         if (lbl->accessibleName() == QString::number(obj->getId())) {
             //correct label
             //move the label to the new position,
-
+           // lbl->setGeometry(obj->getGeometry());
             //make it face the right direction - may go into own class
 
             TankObject* TankObj = dynamic_cast<TankObject*>(obj);

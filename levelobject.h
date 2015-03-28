@@ -83,8 +83,6 @@ public:
     Direction getDirectionFaced();
 };
 
-
-
 class TankObject: public MovableObject {
     Q_OBJECT
 
@@ -93,7 +91,6 @@ class TankObject: public MovableObject {
     int turretAngle;
 
 public:
-
     TankObject(int x, int y, QObject* parent = 0);
 
     //move the tank to the new location

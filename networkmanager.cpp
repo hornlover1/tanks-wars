@@ -3,16 +3,36 @@
 #include <QtNetwork/QNetworkInterface>
 #include "opponentmanager.h"
 #include <sstream>
+#include <QApplication>
+#include "interface.h"
 
 NetworkManager::NetworkManager(QObject *parent) :
-    QObject(parent), server(new QTcpServer(this)), port(7573), remotePort(7573) {
+    QObject(parent), port(7573), remotePort(7573) {
     sock = nullptr;
     for (QHostAddress host: QNetworkInterface::allAddresses()) {
-        ip4Addr = host.toString();
+        if (host.toIPv4Address() > 0) {
+            int ip4 = host.toIPv4Address();
+            // % is a modulo operator. It functions as a remainder of the amount after division by 256
+            // it seems that the c++ modulo operator returns 256 less than an actual modulo operation, so I'm adding that 256 back in
+            // >> is a bitwise shift. It shifts the bits 8 bits to the right, basically dividing it by 256 (2^8)
+            int part0 = (ip4 % 256) + 256;
+            int part1 = ((ip4 >> 8) % 256) + 256;
+            int part2 = ((ip4 >> 16) % 256) + 256;
+            int part3 = ((ip4 >> 24) % 256) + 256;
+            ip4Addr = QString::number(part3) + "." +
+                      QString::number(part2) + "." +
+                      QString::number(part1) + "." +
+                      QString::number(part0);
+            //don't ask me how this works. I just guessed from how it was turning out, and it worked
+        }
     }
-    server->listen(QHostAddress::Any, port);
+}
+
+void NetworkManager::startServer(QWidget *parent) {
+    server = new QTcpServer(parent);
     connect(server, SIGNAL(newConnection()), this, SLOT(newConnection()));
     connect(server, SIGNAL(destroyed()), this, SLOT(disconnected()));
+    server->listen(QHostAddress::Any, port);
 }
 
 NetworkManager NetworkManager::instance;
@@ -22,7 +42,7 @@ NetworkManager& NetworkManager::getInstance() {
 }
 
 void NetworkManager::newConnection() {
-    //TODO:write this method
+    qDebug() << "new connection";
     QTcpSocket* socket = server->nextPendingConnection();
     QString line;
     while (socket->canReadLine()) {
@@ -48,10 +68,12 @@ void NetworkManager::disconnected() {
 }
 
 void NetworkManager::read() {
+    qDebug() << "message from other player";
     QString line;
     QTcpSocket* socket = dynamic_cast<QTcpSocket*>(sender());
     while (socket->canReadLine()) {
         line = socket->readLine();
+        qDebug() << "Data: " + line;
         stringstream s(line.toStdString());
         string operation;
         s >> operation;

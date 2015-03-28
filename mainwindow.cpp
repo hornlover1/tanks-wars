@@ -23,6 +23,17 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer, SIGNAL(timeout()), this, SLOT(updateTime()));
 
     Interface::getInstance().blankUI();
+
+    QTcpServer* server = new QTcpServer(this);
+    connect(server, SIGNAL(newConnection()), this, SLOT(connectToClient()));
+    server->listen(QHostAddress::Any, 5000);
+
+    NetworkManager::getInstance().startServer(this);
+    ui->yourIP->setText("Your IP: " + NetworkManager::getInstance().getIp4Addr());
+}
+
+void MainWindow::connectToClient() {
+    QMessageBox::information(this, "Hello", "connected");
 }
 
 MainWindow::~MainWindow() {
