@@ -99,7 +99,7 @@ TankObject::TankObject(int x, int y, QObject *parent):
     isDestroyable = true;
     //load the picture
     imagePath = ":/images/Resources/Tank1.png";
-
+    directionFaced = North;
 }
 
 void TankObject::move(int newX, int newY) {
@@ -154,6 +154,7 @@ BulletObject::BulletObject(int initX, int initY, double initHeading, TankObject*
     MovableObject(initX,initY, 20, 10, parent), heading(initHeading), tank(initTank) {
     isDestroyable = true;
     imagePath = ":/images/Resources/Bullet.png";
+    directionFaced = East;
 }
 
 void BulletObject::move(int newX, int newY) {

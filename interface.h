@@ -43,7 +43,7 @@ public:
 
     void blankUI();
 
-    int getDegrees(TankObject* obj);
+    int getDegrees(MovableObject* obj);
 };
 
 #endif // INTERFACE_H

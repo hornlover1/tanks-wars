@@ -69,6 +69,20 @@ void Interface::moveObject(LevelObject *obj) {
                 rm.rotate(degrees);
                 pixmap = pixmap.transformed(rm);
                 lbl->setPixmap(pixmap);
+            }
+
+            BulletObject* BulletObj = dynamic_cast<BulletObject*>(obj);
+            if(BulletObj != nullptr) {
+                lbl->setGeometry(BulletObj->getGeometry());
+
+                QPixmap pixmap(*lbl->pixmap());
+                QMatrix rm;
+
+                int degrees = getDegrees(BulletObj);
+
+                rm.rotate(degrees);
+                pixmap = pixmap.transformed(rm);
+                lbl->setPixmap(pixmap);
             } else {
                 lbl->setGeometry(obj->getGeometry());
             }
@@ -76,7 +90,7 @@ void Interface::moveObject(LevelObject *obj) {
     }
 }
 
-int Interface::getDegrees(TankObject* obj) {
+int Interface::getDegrees(MovableObject* obj) {
     int degrees = 0;
     if (obj->getDirectionFaced() == obj->getD()){
             degrees = 0;

@@ -62,13 +62,19 @@ protected:
     Direction d;
 
     //what direction the image is facing
-    Direction directionFaced = North;
+    Direction directionFaced;
 
 public:
-    MovableObject(int initX, int initY, int initWidth, int initHeight, QObject *parent);
+    //getters and setters for d and directionFaced
+    void setDirectionFaced(Direction direction);
+    void setD(Direction direction);
+    Direction getD();
+    Direction getDirectionFaced();
 
     //get a rectangle representing the object for calculations especially involving overlapping of objects
     QRect getGeometry(); //overriden for bullet and tank so the label size may be changed
+
+    MovableObject(int initX, int initY, int initWidth, int initHeight, QObject *parent);
 
     //moves the object to the new location
     virtual void move(int newX, int newY);
@@ -76,11 +82,7 @@ public:
     //if the object overlaps with another object, get the object it is in contact with, otherwise return nullptr
     LevelObject * getContactedObject();
 
-    //getters and setters for d and directionFaced
-    void setDirectionFaced(Direction direction);
-    void setD(Direction direction);
-    Direction getD();
-    Direction getDirectionFaced();
+
 };
 
 class TankObject: public MovableObject {
@@ -126,7 +128,7 @@ public:
     void move(int newX, int newY);
 
     //set the timer to start the bullet moving
-    void startMotion();
+    void startMotion(/*Direction dir*/);
 
 public slots:
     //move the bullet 5px in the direction specified by <heading>
