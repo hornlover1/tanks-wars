@@ -47,6 +47,7 @@ void NetworkManager::newConnection() {
     QString line;
     while (socket->canReadLine()) {
         line = socket->readLine();
+        qDebug() << "Connection text: " + line;
         //the sender is sending something like "level 1" to initiate the connection
         //this indicates that the sender is starting the connection and therefore they are the primary player
         if (line.startsWith("level")) {
@@ -97,8 +98,8 @@ void NetworkManager::read() {
 }
 
 void NetworkManager::connectToHost(QString ipAddr, int levelNum) {
-    sock = new QTcpSocket(this);
-    sock->write(("level " + QString::number(levelNum)).toStdString().c_str());
+    sock = new QTcpSocket(server->parent());
+    sock->write(("level " + QString::number(levelNum) + "\n").toStdString().c_str());
     sock->connectToHost(ipAddr, remotePort);
     sock->waitForConnected();
 }
@@ -108,8 +109,9 @@ void NetworkManager::bullet(int x, int y, double heading) {
         return;
     }
     stringstream s;
-    s << "bullet " << x << " " << y << " " << heading;
-    sock->write(s.str().c_str());
+    s << "bullet " << x << " " << y << " " << heading << "\n";
+    QString data = s.str().c_str();
+    sock->write(data.toLocal8Bit());
 }
 
 void NetworkManager::startTank(Direction d) {
@@ -117,15 +119,16 @@ void NetworkManager::startTank(Direction d) {
         return;
     }
     stringstream s;
-    s << "startTank " << d;
-    sock->write(s.str().c_str());
+    s << "startTank " << d << "\n";
+    QString data = s.str().c_str();
+    sock->write(data.toLocal8Bit());
 }
 
 void NetworkManager::stopTank() {
     if (sock == nullptr) {
         return;
     }
-    sock->write("stopTank");
+    sock->write("stopTank\n");
 }
 
 void NetworkManager::turret(double angle) {
@@ -133,6 +136,7 @@ void NetworkManager::turret(double angle) {
         return;
     }
     stringstream s;
-    s << "turret " << angle;
-    sock->write(s.str().c_str());
+    s << "turret " << angle << "\n";
+    QString data = s.str().c_str();
+    sock->write(data.toLocal8Bit());
 }
