@@ -50,12 +50,30 @@ protected slots:
     virtual void onTimeOut();
 };
 
+enum Direction {North, South, East, West};
+
 //an object that can move around on the screen, such as a tank or bullet
 class MovableObject: public LevelObject {
     Q_OBJECT 
 
     //isMovable = true;
+protected:
+    //what direction to move
+    Direction d;
+
+    //what direction the image is facing
+    Direction directionFaced;
+
 public:
+    //getters and setters for d and directionFaced
+    void setDirectionFaced(Direction direction);
+    void setD(Direction direction);
+    Direction getD();
+    Direction getDirectionFaced();
+
+    //get a rectangle representing the object for calculations especially involving overlapping of objects
+    QRect getGeometry(); //overriden for bullet and tank so the label size may be changed
+
     MovableObject(int initX, int initY, int initWidth, int initHeight, QObject *parent);
 
     //moves the object to the new location
@@ -64,9 +82,8 @@ public:
     //if the object overlaps with another object, get the object it is in contact with, otherwise return nullptr
     LevelObject * getContactedObject();
 
-};
 
-enum Direction {North, South, East, West, null};
+};
 
 class TankObject: public MovableObject {
     Q_OBJECT
@@ -75,22 +92,11 @@ class TankObject: public MovableObject {
     //the angle, in degrees, that the turret is facing
     int turretAngle;
 
-
-
 public:
-
-    //what direction to move
-    Direction d;
-
-    //what direction the image is facing
-    Direction directionFaced;
-
     TankObject(int x, int y, QObject* parent = 0);
 
     //move the tank to the new location
     void move(int newX, int newY);
-
-    Direction getDirectionFaced();
 
     //when the user holds down a particular arrow key, start the tank moving
     void startMotion(Direction d);
@@ -122,7 +128,7 @@ public:
     void move(int newX, int newY);
 
     //set the timer to start the bullet moving
-    void startMotion();
+    void startMotion(/*Direction dir*/);
 
 public slots:
     //move the bullet 5px in the direction specified by <heading>

@@ -209,6 +209,7 @@ void LevelManager::mouseClick() {
         if (tank == nullptr || target != nullptr) {
             continue;
         }
+        //may be able to use these values to calculate the bullets direction.
         double diffX = mouseX - tank->getX();
         double diffY = mouseY - tank->getY();
         double heading = atan(diffY/diffX);

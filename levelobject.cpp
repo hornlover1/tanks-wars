@@ -56,6 +56,17 @@ MovableObject::MovableObject(int initX, int initY, int initWidth, int initHeight
     isMovable = true;
 }
 
+QRect MovableObject::getGeometry() {
+    if(directionFaced == West || directionFaced == East) {
+        QRect geometry(x,y,height,width);
+        return geometry;
+    }
+    else {
+        QRect geometry(x,y,width,height);
+        return geometry;
+    }
+}
+
 void MovableObject::move(int /*newX*/, int /*newY*/) {}
 
 LevelObject* MovableObject::getContactedObject() {
@@ -67,21 +78,33 @@ LevelObject* MovableObject::getContactedObject() {
     return nullptr;
 }
 
+void MovableObject::setDirectionFaced(Direction direction) {
+    directionFaced = direction;
+}
+
+void MovableObject::setD(Direction direction) {
+    d = direction;
+}
+
+Direction MovableObject::getD() {
+    return d;
+}
+
+Direction MovableObject::getDirectionFaced(){
+    return directionFaced;
+}
+
 TankObject::TankObject(int x, int y, QObject *parent):
     MovableObject(x, y, 20, 50, parent), turretAngle(0) {
     isDestroyable = true;
     //load the picture
     imagePath = ":/images/Resources/Tank1.png";
-
+    directionFaced = North;
 }
 
 void TankObject::move(int newX, int newY) {
     x = newX;
     y = newY;
-}
-
-Direction TankObject::getDirectionFaced(){
-    return directionFaced;
 }
 
 void TankObject::startMotion(Direction dToMove) {
@@ -131,6 +154,7 @@ BulletObject::BulletObject(int initX, int initY, double initHeading, TankObject*
     MovableObject(initX,initY, 20, 10, parent), heading(initHeading), tank(initTank) {
     isDestroyable = true;
     imagePath = ":/images/Resources/Bullet.png";
+    directionFaced = East;
 }
 
 void BulletObject::move(int newX, int newY) {
