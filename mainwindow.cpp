@@ -136,9 +136,9 @@ void MainWindow::levelButtonClicked() {
         //load user time choice into code
         if(ui->rbEasy->isChecked() == true) {
             LevelManager::getInstance().selectTime(ui->rbEasy->text());
-        } else if(ui->rbMedium->isCheckable() == true) {
+        } else if(ui->rbMedium->isChecked() == true) {
             LevelManager::getInstance().selectTime(ui->rbMedium->text());
-        } else if (ui->rbHard->isCheckable() == true) {
+        } else if (ui->rbHard->isChecked() == true) {
             LevelManager::getInstance().selectTime(ui->rbHard->text());
         }
 
@@ -172,7 +172,7 @@ void MainWindow::on_btCheat_clicked() {
 void MainWindow::updateTime() {
     if(LevelManager::getInstance().getStopTimer() == true) {
         timer->stop();
-       // LevelManager::getInstance().setFinalGameTime();
+
         for(LevelObject* obj : LevelManager::getInstance().getObjects())
         {
             obj->pause();

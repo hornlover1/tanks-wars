@@ -189,6 +189,7 @@ WallObject::WallObject(int x, int y, int width, int height, QObject *parent):
 Barricade::Barricade(int x, int y, QObject *parent):
     LevelObject(x, y, 20, 20, parent) {
     isDestroyable = true;
+    imagePath = ":/images/Resources/Barracade.png";
 }
 
 Target::Target(int initX, int initY, QObject *parent):

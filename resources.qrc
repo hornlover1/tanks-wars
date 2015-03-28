@@ -14,5 +14,6 @@
         <file>Resources/Wall.jpg</file>
         <file>Resources/Bullet.png</file>
         <file>Resources/Tank1.png</file>
+        <file>Resources/Barracade.png</file>
     </qresource>
 </RCC>
