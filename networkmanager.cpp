@@ -81,7 +81,7 @@ void NetworkManager::read() {
         } else if (line.startsWith("level")) {
             isPrimary = false;
             //get the characters after "level "
-            line.chop(6);
+            line = line.mid(6, line.length() - 6);
             int levelNum = line.toInt();
             LevelManager::getInstance().loadLevel(levelNum, false);
         }
