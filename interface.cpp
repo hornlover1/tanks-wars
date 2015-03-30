@@ -242,3 +242,11 @@ int Interface::getTimeLeft() {
     }
     return highscore;
 }
+
+void Interface::disableWidgets() {
+    ui->leUserName->setEnabled(false);
+    ui->opponentIp->setEnabled(false);
+    ui->rbEasy->setChecked(true);
+    ui->rbMedium->setEnabled(false);
+    ui->rbHard->setEnabled(false);
+}

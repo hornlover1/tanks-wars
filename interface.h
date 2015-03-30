@@ -44,6 +44,8 @@ public:
     void blankUI();
 
     int getDegrees(MovableObject* obj);
+
+    void disableWidgets();
 };
 
 #endif // INTERFACE_H

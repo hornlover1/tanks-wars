@@ -88,10 +88,14 @@ void NetworkManager::read() {
             OpponentManager::getInstance().fireBullet(x, y, angle);
         } else if (line.startsWith("level")) {
             isPrimary = false;
-            //get the characters after "level "
-            line = line.mid(6, line.length() - 6);
-            int levelNum = line.toInt();
+            int levelNum;
+            string ipAddr;
+            s >> levelNum >> ipAddr;
             LevelManager::getInstance().loadLevel(levelNum, false);
+            sock = new QTcpSocket(server->parent());
+            sock->connectToHost(QString(ipAddr.c_str()), remotePort);
+            sock->waitForConnected();
+            Interface::getInstance().disableWidgets();
         }
     }
 }
@@ -100,7 +104,7 @@ void NetworkManager::connectToHost(QString ipAddr, int levelNum) {
     sock = new QTcpSocket(server->parent());
     sock->connectToHost(ipAddr, remotePort);
     sock->waitForConnected();
-    sock->write(("level " + QString::number(levelNum) + "\n").toStdString().c_str());
+    sock->write(("level " + QString::number(levelNum) + " " + ip4Addr + "\n").toStdString().c_str());
 }
 
 void NetworkManager::bullet(int x, int y, double heading) {
