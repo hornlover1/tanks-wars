@@ -13,12 +13,18 @@ NetworkManager::NetworkManager(QObject *parent) :
         if (host.toIPv4Address() > 0) {
             int ip4 = host.toIPv4Address();
             // % is a modulo operator. It functions as a remainder of the amount after division by 256
-            // it seems that the c++ modulo operator returns 256 less than an actual modulo operation, so I'm adding that 256 back in
             // >> is a bitwise shift. It shifts the bits 8 bits to the right, basically dividing it by 256 (2^8)
-            int part0 = (ip4 % 256) + 256;
-            int part1 = ((ip4 >> 8) % 256) + 256;
-            int part2 = ((ip4 >> 16) % 256) + 256;
-            int part3 = ((ip4 >> 24) % 256) + 256;
+            int part0 = (ip4 % 256);
+            int part1 = ((ip4 >> 8) % 256);
+            int part2 = ((ip4 >> 16) % 256);
+            int part3 = ((ip4 >> 24) % 256);
+            if (part0 < 0) {
+                //on linux, the modulus operator returns a negative number
+                part0 += 256;
+                part1 += 256;
+                part2 += 256;
+                part3 += 256;
+            }
             ip4Addr = QString::number(part3) + "." +
                       QString::number(part2) + "." +
                       QString::number(part1) + "." +
