@@ -70,11 +70,13 @@ void NetworkManager::read() {
         string operation;
         s >> operation;
         if (operation == "startTank") {
-            int d;
-            s >> d;
-            OpponentManager::getInstance().startTankMoving((Direction) d);
+            int x, y, d;
+            s >> x >> y >> d;
+            OpponentManager::getInstance().startTankMoving(x, y, (Direction) d);
         } else if (operation == "stopTank") {
-            OpponentManager::getInstance().stopTankMoving();
+            int x, y;
+            s >> x >> y;
+            OpponentManager::getInstance().stopTankMoving(x, y);
         } else if (operation == "turret") {
             double angle;
             s >> angle;
@@ -111,21 +113,24 @@ void NetworkManager::bullet(int x, int y, double heading) {
     sock->write(data.toLocal8Bit());
 }
 
-void NetworkManager::startTank(Direction d) {
+void NetworkManager::startTank(int x, int y, Direction d) {
     if (sock == nullptr) {
         return;
     }
     stringstream s;
-    s << "startTank " << d << "\n";
+    s << "startTank " << x << y << d << "\n";
     QString data = s.str().c_str();
     sock->write(data.toLocal8Bit());
 }
 
-void NetworkManager::stopTank() {
+void NetworkManager::stopTank(int x, int y) {
     if (sock == nullptr) {
         return;
     }
-    sock->write("stopTank\n");
+    stringstream s;
+    s << "stopTank " << x << y << "\n";
+    QString data = s.str().c_str();
+    sock->write(data.toLocal8Bit());
 }
 
 void NetworkManager::turret(double angle) {

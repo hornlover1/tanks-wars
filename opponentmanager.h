@@ -8,8 +8,8 @@ class OpponentManager {
     static OpponentManager instance;
 public:
     static OpponentManager getInstance();
-    void startTankMoving(Direction d);
-    void stopTankMoving();
+    void startTankMoving(int x, int y, Direction d);
+    void stopTankMoving(int x, int y);
     void setTurret(double& num);
     void fireBullet(int x, int y, double heading);
     void setTurret(double angle);

@@ -258,7 +258,7 @@ void LevelManager::keyPress(Direction d) {
         }
     }
     tank->startMotion(d);
-    NetworkManager::getInstance().startTank(d);
+    NetworkManager::getInstance().startTank(tank->getX(), tank->getY(), d);
 }
 
 void LevelManager::keyRelease(Direction /*d*/) {
@@ -275,7 +275,7 @@ void LevelManager::keyRelease(Direction /*d*/) {
         }
     }
     tank->stopMotion();
-    NetworkManager::getInstance().stopTank();
+    NetworkManager::getInstance().stopTank(tank->getX(), tank->getY());
 }
 
 void LevelManager::destroy(LevelObject *obj) {
