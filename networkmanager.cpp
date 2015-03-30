@@ -13,12 +13,18 @@ NetworkManager::NetworkManager(QObject *parent) :
         if (host.toIPv4Address() > 0) {
             int ip4 = host.toIPv4Address();
             // % is a modulo operator. It functions as a remainder of the amount after division by 256
-            // it seems that the c++ modulo operator returns 256 less than an actual modulo operation, so I'm adding that 256 back in
             // >> is a bitwise shift. It shifts the bits 8 bits to the right, basically dividing it by 256 (2^8)
-            int part0 = (ip4 % 256) + 256;
-            int part1 = ((ip4 >> 8) % 256) + 256;
-            int part2 = ((ip4 >> 16) % 256) + 256;
-            int part3 = ((ip4 >> 24) % 256) + 256;
+            int part0 = (ip4 % 256);
+            int part1 = ((ip4 >> 8) % 256);
+            int part2 = ((ip4 >> 16) % 256);
+            int part3 = ((ip4 >> 24) % 256);
+            if (part0 < 0) {
+                //on linux, the modulus operator returns a negative number
+                part0 += 256;
+                part1 += 256;
+                part2 += 256;
+                part3 += 256;
+            }
             ip4Addr = QString::number(part3) + "." +
                       QString::number(part2) + "." +
                       QString::number(part1) + "." +
@@ -64,11 +70,13 @@ void NetworkManager::read() {
         string operation;
         s >> operation;
         if (operation == "startTank") {
-            int d;
-            s >> d;
-            OpponentManager::getInstance().startTankMoving((Direction) d);
+            int x, y, d;
+            s >> x >> y >> d;
+            OpponentManager::getInstance().startTankMoving(x, y, (Direction) d);
         } else if (operation == "stopTank") {
-            OpponentManager::getInstance().stopTankMoving();
+            int x, y;
+            s >> x >> y;
+            OpponentManager::getInstance().stopTankMoving(x, y);
         } else if (operation == "turret") {
             double angle;
             s >> angle;
@@ -80,10 +88,14 @@ void NetworkManager::read() {
             OpponentManager::getInstance().fireBullet(x, y, angle);
         } else if (line.startsWith("level")) {
             isPrimary = false;
-            //get the characters after "level "
-            line = line.mid(6, line.length() - 6);
-            int levelNum = line.toInt();
+            int levelNum;
+            string ipAddr;
+            s >> levelNum >> ipAddr;
             LevelManager::getInstance().loadLevel(levelNum, false);
+            sock = new QTcpSocket(server->parent());
+            sock->connectToHost(QString(ipAddr.c_str()), remotePort);
+            sock->waitForConnected();
+            Interface::getInstance().disableWidgets();
         }
     }
 }
@@ -92,7 +104,7 @@ void NetworkManager::connectToHost(QString ipAddr, int levelNum) {
     sock = new QTcpSocket(server->parent());
     sock->connectToHost(ipAddr, remotePort);
     sock->waitForConnected();
-    sock->write(("level " + QString::number(levelNum) + "\n").toStdString().c_str());
+    sock->write(("level " + QString::number(levelNum) + " " + ip4Addr + "\n").toStdString().c_str());
 }
 
 void NetworkManager::bullet(int x, int y, double heading) {
@@ -105,21 +117,24 @@ void NetworkManager::bullet(int x, int y, double heading) {
     sock->write(data.toLocal8Bit());
 }
 
-void NetworkManager::startTank(Direction d) {
+void NetworkManager::startTank(int x, int y, Direction d) {
     if (sock == nullptr) {
         return;
     }
     stringstream s;
-    s << "startTank " << d << "\n";
+    s << "startTank " << x << " " << y << " " << d << "\n";
     QString data = s.str().c_str();
     sock->write(data.toLocal8Bit());
 }
 
-void NetworkManager::stopTank() {
+void NetworkManager::stopTank(int x, int y) {
     if (sock == nullptr) {
         return;
     }
-    sock->write("stopTank\n");
+    stringstream s;
+    s << "stopTank " << x << " " << y << "\n";
+    QString data = s.str().c_str();
+    sock->write(data.toLocal8Bit());
 }
 
 void NetworkManager::turret(double angle) {

@@ -49,8 +49,7 @@ void LevelManager::decrementTime() {
     }
 }
 
-void LevelManager::selectTime(QString s)
-{
+void LevelManager::selectTime(QString s) {
     userTime = s;
 }
 /*
@@ -62,8 +61,7 @@ int LevelManager::getUserHighScore() {
     return userHighScore;
 }
 
-void LevelManager::setHighScore()
-{
+void LevelManager::setHighScore() {
     if(userTime == "Easy") {
         userHighScore = 10 * easyTime;
     } else if(userTime == "Medium") {
@@ -82,7 +80,7 @@ void LevelManager::setUserName(QString name) {
 }
 
 void LevelManager::incrementLastUnlockedLevel() {
-    if(lastUnlockedLevel < 9){
+    if (lastUnlockedLevel < 9) {
         lastUnlockedLevel++;
     }
 }
@@ -160,7 +158,7 @@ void LevelManager::loadLevel(int levelNum, bool isPrimary) {
             LevelObject* obj = new Target(x, y);
             objectsInLevel.push_back(obj);
             Interface::getInstance().drawObject(obj);
-        } else if (argType == "barricade"){
+        } else if (argType == "barricade") {
             int x, y;
             strm >> x >> y;
 
@@ -179,7 +177,7 @@ void LevelManager::loadLevel(int levelNum, bool isPrimary) {
 void LevelManager::updateUI() {
     for (LevelObject* obj: objectsInLevel) {
         MovableObject* mv;
-        if(obj->getIsMovable() == true){
+        if (obj->getIsMovable() == true) {
             mv = dynamic_cast<MovableObject*>(obj);
             if (mv == nullptr) {
                 continue;
@@ -203,7 +201,7 @@ void LevelManager::mouseClick() {
     TankObject* tank;
     Target* target;
     for (LevelObject* obj: objectsInLevel) {
-        if(obj->getIsMovable() == true){
+        if (obj->getIsMovable() == true) {
             tank = dynamic_cast<TankObject*>(obj);
             target = dynamic_cast<Target*>(obj);
         }
@@ -261,7 +259,7 @@ void LevelManager::keyPress(Direction d) {
         }
     }
     tank->startMotion(d);
-    NetworkManager::getInstance().startTank(d);
+    NetworkManager::getInstance().startTank(tank->getX(), tank->getY(), d);
 }
 
 void LevelManager::keyRelease(Direction /*d*/) {
@@ -278,12 +276,12 @@ void LevelManager::keyRelease(Direction /*d*/) {
         }
     }
     tank->stopMotion();
-    NetworkManager::getInstance().stopTank();
+    NetworkManager::getInstance().stopTank(tank->getX(), tank->getY());
 }
 
 //deletes the object from the list of objectsInLevel
 void LevelManager::destroy(LevelObject *obj) {
-    for (auto i = objectsInLevel.begin(); i </*=*/ objectsInLevel.end(); i++) {
+    for (auto i = objectsInLevel.begin(); i < objectsInLevel.end(); i++) {
         if ((*i)->getId() == obj->getId()) {
             Interface::getInstance().deleteObject(obj); //hide label and delete later
             delete (*i); //delete the object itself
@@ -313,26 +311,22 @@ void LevelManager::saveFile() {
     out << LevelManager::getLastUnlockedLevel() << endl;
 
     //loop through every line in file
-    do
-    {
+    do {
         //read data and put into a QString for comparison
         in.getline(c,20);
         QString info = QString(c);
 
         //if line not the userName
-        if(info != LevelManager::getUserName())
-        {
+        if(info != LevelManager::getUserName()) {
             //write this line and the next one
             out << c << endl;
 
             in.getline(c,20);
 
             out << c << endl;
-        }
         //if line is userName, then do not write this line
-        else if(info == LevelManager::getUserName())
-        {
-            //read next line, but do not write
+        } else if(info == LevelManager::getUserName()) {
+             //read next line, but do not write
             in.getline(c,20);
         }
     } while(in.peek() != EOF);
@@ -355,8 +349,7 @@ void LevelManager::saveUserHighScore() {
     int counter = 0; //counts how many levels in the userHighScore will be put
     bool isInserted = false; //determines whether highscore was inserted
 
-    while(inStream.peek() != EOF)
-    {
+    while(inStream.peek() != EOF) {
         inStream.getline(c,20); //grab number
 
         //acurately change c_string to number
@@ -367,18 +360,15 @@ void LevelManager::saveUserHighScore() {
 
         //int number = *c; //appears to convert to askii characters, cause it ain't grabbing the correct number
 
-        if (userHighScore > number)
-        {
+        if (userHighScore > number) {
             isInserted = true;
             //reset stream state to start from clean slate
             inStream.close();
             inStream.open(filename.toStdString().c_str());
 
             int i = 0; //this value keeps track of how many sets of insertions have been made to temp.txt
-            while (i < counter) //while temp does not have as many sets of insertions as highscore.txt keep inputing
-            {
-                for(int integer = 0; integer < 3; integer++) //input a set {username, highscore, blank space}
-                {
+            while (i < counter) {//while temp does not have as many sets of insertions as highscore.txt keep inputing
+                for(int integer = 0; integer < 3; integer++) {//input a set {username, highscore, blank space}
                     inStream.getline(c,20);
                     outStream << c << endl; //I assume this will write the whole line, no more no less
                 }
@@ -392,10 +382,8 @@ void LevelManager::saveUserHighScore() {
             outStream << endl << endl;
             i++;
 
-            while(i < 5)
-            {
-                for(int integer = 0; integer < 3; integer++)
-                {
+            while(i < 5) {
+                for(int integer = 0; integer < 3; integer++) {
                     inStream.getline(c,20);
                     outStream << c << endl; //I assume this will write the whole line, no more no less
                 }
@@ -403,9 +391,7 @@ void LevelManager::saveUserHighScore() {
                 //break;
             }
             break;
-        }
-        else
-        {
+        } else {
             inStream.getline(c,20); //chuck out empty whitespace
             inStream.getline(c, 20); //chuck out the next name so we can get the number later
         }
@@ -416,14 +402,11 @@ void LevelManager::saveUserHighScore() {
     inStream.close();
     outStream.close();
 
-    if (isInserted == true)
-    {
+    if (isInserted == true) {
         remove("HighScore.txt");
         //QString filename = QString("HighScore") + QString::number(levelNumber) + QString(".txt");
         rename("temp.txt", filename.toStdString().c_str());
-    }
-    else
-    {
+    } else {
         remove("temp.txt");
     }
 }
@@ -468,8 +451,7 @@ void LevelManager::loadFile() {
             }
         }
     }
-    if(nameFound == false)
-    {
+    if(nameFound == false){
         //set lastUnlockedLevel
         LevelManager::setLastUnlockedLevel(1);
     }
@@ -481,5 +463,3 @@ void LevelManager::fireBullet(int x, int y, int heading, TankObject* tank) {
     Interface::getInstance().drawObject(Bobj);
     Bobj->startMotion();
 }
-
-

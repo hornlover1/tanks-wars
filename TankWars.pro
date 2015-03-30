@@ -20,7 +20,8 @@ SOURCES += main.cpp\
         movablelabel.cpp \
     unittests.cpp \
     opponentmanager.cpp \
-    networkmanager.cpp
+    networkmanager.cpp \
+    filemanager.cpp
 
 HEADERS  += mainwindow.h \
         levelobject.h \
@@ -29,7 +30,8 @@ HEADERS  += mainwindow.h \
         movablelabel.h \
     unittests.h \
     opponentmanager.h \
-    networkmanager.h
+    networkmanager.h \
+    filemanager.h
 
 FORMS    += mainwindow.ui
 
