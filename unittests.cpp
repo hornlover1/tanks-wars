@@ -27,7 +27,7 @@ flag 600 300
 void checkLevelOne() {
     vector<LevelObject*> objects = LevelManager::getInstance().getObjects();
     qDebug() << objects.size();
-    assert(objects.size() == 11); //time don't count
+    assert(objects.size() == 14); //time doesn't count
     //need getters
     assert(LevelManager::getInstance().getEasyTime() == 30);
     assert(LevelManager::getInstance().getMediumTime() == 25);
