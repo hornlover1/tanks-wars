@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QTimer>
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
+#include <QList>
 
 namespace Ui {
     class MainWindow;
@@ -12,6 +15,11 @@ class MainWindow : public QMainWindow {
     Q_OBJECT
 //    QTimer *timer = new QTimer(this);
     QTimer *timer;
+
+    //code to create sound
+    QMediaPlayer* player;// = new QMediaPlayer;
+    QMediaPlaylist *playlist;// = new QMediaPlaylist;
+
 
 public:
     explicit MainWindow(QWidget *parent = 0);
@@ -29,10 +37,8 @@ private slots:
     void levelButtonClicked();
     void on_btCheat_clicked();
     void on_pushButton_2_clicked();
-    //void on_rbEasy_clicked();
-    //void on_rbMedium_clicked();
-    //void on_rbHard_clicked();
     void updateTime();
+    void playTheList();
     void connectToClient();
     void startTimer() {
         timer->start();
