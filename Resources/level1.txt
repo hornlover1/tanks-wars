@@ -14,3 +14,4 @@ barricade 240 330
 barricade 240 250
 barricade 240 230
 barricade 240 350
+barricade 240 210

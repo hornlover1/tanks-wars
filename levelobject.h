@@ -128,7 +128,7 @@ public:
     void move(int newX, int newY);
 
     //set the timer to start the bullet moving
-    void startMotion(/*Direction dir*/);
+    void startMotion();
 
 public slots:
     //move the bullet 5px in the direction specified by <heading>

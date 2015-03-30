@@ -11,3 +11,6 @@ wall 0 -50 800 50
 wall -50 0 50 600
 wall 0 600 800 50
 wall 800 0 50 600
+barricade 240 310
+barricade 240 325
+barricade 240 350

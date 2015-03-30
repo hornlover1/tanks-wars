@@ -69,6 +69,7 @@ void Interface::moveObject(LevelObject *obj) {
                 rm.rotate(degrees);
                 pixmap = pixmap.transformed(rm);
                 lbl->setPixmap(pixmap);
+                break;
             }
 
             BulletObject* BulletObj = dynamic_cast<BulletObject*>(obj);
@@ -129,6 +130,7 @@ int Interface::getDegrees(MovableObject* obj) {
    return degrees;
 }
 
+//deletes the label off the GUI
 void Interface::deleteObject(LevelObject *obj) {
     for(QObject* obj2: ui->gameArea->children()) {
         QLabel* lbl = dynamic_cast<QLabel*>(obj2);
