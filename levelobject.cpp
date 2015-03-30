@@ -167,11 +167,15 @@ void BulletObject::startMotion() {
 }
 
 void BulletObject::onTimeOut() {
-    int amountToMove = 10;
-    int moveX = cos(heading) * amountToMove;
-    int moveY = sin(heading) * amountToMove;
+    double amountToMove = 10.0;
+    double moveX = cos(heading) * amountToMove;
+    double moveY = sin(heading) * amountToMove;
     x += moveX;
     y += moveY;
+    qDebug() << "moveX: " << moveX;
+    qDebug() << "moveY: " << moveY;
+    qDebug() << "x: " << x;
+    qDebug() << "y: " << y;
     LevelObject* objectHit = getContactedObject();
     if (objectHit != nullptr && objectHit != tank) { // don't shoot myself
         this->destroy();

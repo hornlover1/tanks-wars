@@ -79,7 +79,7 @@ public:
 
     void destroy(LevelObject* obj);
 
-    void fireBullet(int x, int y, int heading, TankObject* tank);
+    void fireBullet(int x, int y, double heading, TankObject* tank);
 
     //save game to a file
     void saveFile();

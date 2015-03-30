@@ -50,16 +50,16 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent*) {
-    int mouseX = cursor().pos().x() - ui->gameArea->pos().x();
-    int mouseY = cursor().pos().y() - ui->gameArea->pos().y();
+    int mouseX = cursor().pos().x() - ui->gameArea->geometry().topLeft().x();
+    int mouseY = cursor().pos().y() - ui->gameArea->geometry().topLeft().y();
     LevelManager::getInstance().moveMouse(mouseX, mouseY);
 }
 
 void MainWindow::mousePressEvent(QMouseEvent*) {
-    qDebug() << "cursor x: " << cursor().pos().x() << ", gameArea x: " + ui->gameArea->pos().x();
-    qDebug() << "cursor y: " << cursor().pos().y() << ", gameArea y: " + ui->gameArea->pos().y();
-    int mouseX = cursor().pos().x() - 275;//ui->gameArea->pos().x();
-    int mouseY = cursor().pos().y() - 208;//ui->gameArea->pos().y();
+    qDebug() << "cursor x: " << ui->gameArea->mapFromGlobal(cursor().pos()).x();
+    qDebug() << "cursor y: " << ui->gameArea->mapFromGlobal(cursor().pos()).y();
+    int mouseX = ui->gameArea->mapFromGlobal(cursor().pos()).x();
+    int mouseY = ui->gameArea->mapFromGlobal(cursor().pos()).y();
     LevelManager::getInstance().moveMouse(mouseX, mouseY);
     LevelManager::getInstance().mouseClick();
 }
@@ -81,7 +81,6 @@ void MainWindow::keyPressEvent(QKeyEvent* ev) {
         Direction d = getDirection(key);
         LevelManager::getInstance().keyPress(d);
     }
-    else{}
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent* ev) {
@@ -90,7 +89,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent* ev) {
         Direction d = getDirection(key);
         LevelManager::getInstance().keyRelease(d);
     }
-    else{}
 }
 
 //TODO: write this file to call levelManager

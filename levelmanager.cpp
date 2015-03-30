@@ -237,13 +237,13 @@ void LevelManager::mouseClick() {
         if (tank == nullptr || target != nullptr) {
             continue;
         }
-        //may be able to use these values to calculate the bullets direction.
+        //may be able to use these values to calculate the bullet's direction.
         double diffX = mouseX - tank->getX();
        // diffX -= 100;
         double diffY = mouseY - tank->getY();
-        //diffY
-        double heading = atan(diffY/diffX);
-        double pi = 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679;
+        double slope = diffY/diffX;
+        double heading = atan(slope);
+        double pi = 3.14159265358979323846264338327950288419716;
         if (diffX <= 0) {
             heading += pi; // add pi to rotate it 180 degrees so that it shoots in the right direction
         }
@@ -485,7 +485,7 @@ void LevelManager::loadFile() {
     }
 }
 
-void LevelManager::fireBullet(int x, int y, int heading, TankObject* tank) {
+void LevelManager::fireBullet(int x, int y, double heading, TankObject* tank) {
     BulletObject* Bobj = new BulletObject(x, y, heading, tank);
     objectsInLevel.push_back(Bobj);
     Interface::getInstance().drawObject(Bobj);
