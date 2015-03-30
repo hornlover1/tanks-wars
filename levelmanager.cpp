@@ -269,7 +269,8 @@ void LevelManager::keyRelease(Direction /*d*/) {
     TankObject* tank;
     for (LevelObject* obj: objectsInLevel) {
         tank = dynamic_cast<TankObject*>(obj);
-        if (tank == nullptr) {
+        Target* target = dynamic_cast<Target*>(obj);
+        if (tank == nullptr || target != nullptr) {
             continue;
         } else {
             break;
