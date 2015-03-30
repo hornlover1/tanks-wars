@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     NetworkManager::getInstance().startServer(this);
     ui->yourIP->setText("Your IP: " + NetworkManager::getInstance().getIp4Addr());
+    connect(&NetworkManager::getInstance(), SIGNAL(startLevel()), this, SLOT(startTimer()));
 }
 
 void MainWindow::connectToClient() {

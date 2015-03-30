@@ -216,11 +216,7 @@ void LevelManager::mouseClick() {
             heading += pi; // add pi to rotate it 180 degrees so that it shoots in the right direction
         }
         if (bullet_obj == false) {
-            BulletObject* Bobj = new BulletObject(tank->getX(), tank->getY(), heading, tank);
-            objectsInLevel.push_back(Bobj);
-            setBullet_obj(true);
-            Interface::getInstance().drawObject(Bobj);
-            Bobj->startMotion();
+            fireBullet(tank->getX(), tank->getY(), heading, tank);
             NetworkManager::getInstance().bullet(tank->getX(), tank->getY(), heading);
             break;
         } else {

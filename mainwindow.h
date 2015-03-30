@@ -34,6 +34,9 @@ private slots:
     //void on_rbHard_clicked();
     void updateTime();
     void connectToClient();
+    void startTimer() {
+        timer->start();
+    }
 };
 
 #endif // MAINWINDOW_H

@@ -38,6 +38,9 @@ private slots:
     void newConnection();
     void disconnected();
     void read();
+
+signals:
+    void startLevel();
 };
 
 #endif // NETWORKMANAGER_H
