@@ -6,7 +6,7 @@
 #include <QString>
 #include <QtNetwork/QTcpServer>
 #include <QtNetwork/QTcpSocket>
-#include <levelobject.h>
+#include "levelobject.h"
 
 class NetworkManager : public QObject {
     Q_OBJECT
