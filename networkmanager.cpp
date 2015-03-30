@@ -118,7 +118,7 @@ void NetworkManager::startTank(int x, int y, Direction d) {
         return;
     }
     stringstream s;
-    s << "startTank " << x << y << d << "\n";
+    s << "startTank " << x << " " << y << " " << d << "\n";
     QString data = s.str().c_str();
     sock->write(data.toLocal8Bit());
 }
@@ -128,7 +128,7 @@ void NetworkManager::stopTank(int x, int y) {
         return;
     }
     stringstream s;
-    s << "stopTank " << x << y << "\n";
+    s << "stopTank " << x << " " << y << "\n";
     QString data = s.str().c_str();
     sock->write(data.toLocal8Bit());
 }
