@@ -175,6 +175,7 @@ void LevelManager::loadLevel(int levelNum, bool isPrimary) {
     //TODO: load the next level from file
 }
 
+//loop through all objects. If movable, then call moveObject() to update position
 void LevelManager::updateUI() {
     for (LevelObject* obj: objectsInLevel) {
         MovableObject* mv;
@@ -220,7 +221,7 @@ void LevelManager::mouseClick() {
         if (bullet_obj == false) {
             BulletObject* Bobj = new BulletObject(tank->getX(), tank->getY(), heading, tank);
             objectsInLevel.push_back(Bobj);
-            setBullet_obj(true);
+           // setBullet_obj(true);
             Interface::getInstance().drawObject(Bobj);
             Bobj->startMotion();
             NetworkManager::getInstance().bullet(tank->getX(), tank->getY(), heading);
@@ -280,12 +281,13 @@ void LevelManager::keyRelease(Direction /*d*/) {
     NetworkManager::getInstance().stopTank();
 }
 
+//deletes the object from the list of objectsInLevel
 void LevelManager::destroy(LevelObject *obj) {
     for (auto i = objectsInLevel.begin(); i </*=*/ objectsInLevel.end(); i++) {
         if ((*i)->getId() == obj->getId()) {
-            Interface::getInstance().deleteObject(obj);
-            objectsInLevel.erase(i);
-            delete (*i);
+            Interface::getInstance().deleteObject(obj); //hide label and delete later
+            delete (*i); //delete the object itself
+            objectsInLevel.erase(i); //erase object from list of game objects
         }
     }
 }
