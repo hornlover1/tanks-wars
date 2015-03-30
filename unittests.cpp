@@ -3,7 +3,6 @@
 #include <vector>
 #include "levelobject.h"
 #include <cassert>
-#include <unistd.h>
 #include <QDebug>
 #include <QDateTime>
 #include <QThread>

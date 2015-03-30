@@ -24,7 +24,7 @@ void Interface::setUi(Ui::MainWindow *initUi) {
 void Interface::drawObject(LevelObject* obj) {
     for (QObject* obj: ui->gameArea->children()) {
         QLabel* lbl = dynamic_cast<QLabel*>(obj);
-        if (lbl != nullptr && lbl->width() == 800 and lbl->height() == 600) {
+        if (lbl != nullptr && lbl->width() == 800 && lbl->height() == 600) {
             lbl->hide();
             lbl->deleteLater();
         }
@@ -241,4 +241,12 @@ int Interface::getTimeLeft() {
         highscore = highscore * 30;
     }
     return highscore;
+}
+
+void Interface::disableWidgets() {
+    ui->leUserName->setEnabled(false);
+    ui->opponentIp->setEnabled(false);
+    ui->rbEasy->setChecked(true);
+    ui->rbMedium->setEnabled(false);
+    ui->rbHard->setEnabled(false);
 }

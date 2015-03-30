@@ -8,20 +8,22 @@ OpponentManager OpponentManager::getInstance() {
     return instance;
 }
 
-void OpponentManager::startTankMoving(Direction d) {
+void OpponentManager::startTankMoving(int x, int y, Direction d) {
     for (LevelObject* obj: LevelManager::getInstance().getObjects()) {
         Target* targ = dynamic_cast<Target*>(obj);
         if (targ != nullptr) {
+            targ->move(x, y);
             targ->startMotion(d);
         }
     }
 }
 
-void OpponentManager::stopTankMoving() {
+void OpponentManager::stopTankMoving(int x, int y) {
     for (LevelObject* obj: LevelManager::getInstance().getObjects()) {
         Target* targ = dynamic_cast<Target*>(obj);
         if (targ != nullptr) {
             targ->stopMotion();
+            targ->move(x, y);
         }
     }
 }

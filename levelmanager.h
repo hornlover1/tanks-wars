@@ -16,24 +16,8 @@ class LevelManager {
     //number of seconds given for a particular difficulty level
     int easyTime, mediumTime, hardTime;
 
-    //the time selected by the user
-    QString userTime;
-
     //position of mouse
     int mouseX, mouseY;
-
-//User-Specific Information
-    //counter to record which level is available
-    static int lastUnlockedLevel;
-
-    //The name of the user
-    static QString userName;
-
-    //current high score of the user
-    int userHighScore;
-//
-    //used to find the correct level file to save the highScores to
-    int levelNumber;
 
     //boolean to hold whether game timer should be stopped
     bool stopTimer;
@@ -43,8 +27,66 @@ class LevelManager {
     bool bullet_obj;
 
     //
+    //User-Specific Information
+        //counter to record which level is available
+        static int lastUnlockedLevel;
+
+        //The name of the user
+        static QString userName;
+
+        //current high score of the user
+        int userHighScore;
+    //
+        //used to find the correct level file to save the highScores to
+        int levelNumber;
+
+        //the time selected by the user
+        QString userTime;
 
 public:
+    //singleton method
+    static LevelManager& getInstance();
+
+    //get all objects in the level
+    vector<LevelObject*> getObjects();
+
+    //delete everything currently stored in level and load a new level from a file.
+    //the level files will be in the root of the project directory with the names level1.txt, level2.txt...
+    void loadLevel(int levelNum, bool isPrimary = true);
+
+    //on a mousemove, this will reposition the tank's turret
+    void moveMouse(int x, int y);
+
+    //start a bullet moving
+    void mouseClick();
+
+    //pause all timers in play
+    void pause();
+
+    //resume all the timers
+    void resume();
+
+    //start the tank moving in a particular direction
+    void keyPress(Direction d);
+
+    //stop the tank from moving
+    void keyRelease(Direction d);
+
+    void updateUI();
+
+    void destroy(LevelObject* obj);
+
+    void fireBullet(int x, int y, int heading, TankObject* tank);
+
+    //save game to a file
+    void saveFile();
+
+    //save highscore to a file
+    void saveUserHighScore();
+
+    //read in the saved file
+    void loadFile();
+
     //to access times
     int getEasyTime();
     int getMediumTime();
@@ -89,49 +131,6 @@ public:
     static void setLastUnlockedLevel(int i);
 
     static int getLastUnlockedLevel();
-
-    //singleton method
-    static LevelManager& getInstance();
-
-    //get all objects in the level
-    vector<LevelObject*> getObjects();
-
-    //delete everything currently stored in level and load a new level from a file.
-    //the level files will be in the root of the project directory with the names level1.txt, level2.txt...
-    void loadLevel(int levelNum, bool isPrimary = true);
-
-    //on a mousemove, this will reposition the tank's turret
-    void moveMouse(int x, int y);
-
-    //start a bullet moving
-    void mouseClick();
-
-    //pause all timers in play
-    void pause();
-
-    //resume all the timers
-    void resume();
-
-    //start the tank moving in a particular direction
-    void keyPress(Direction d);
-
-    //stop the tank from moving
-    void keyRelease(Direction d);
-
-    //save game to a file
-    void saveFile();
-
-    //save highscore to a file
-    void saveUserHighScore();
-
-    //read in the saved file
-    void loadFile();
-
-    void updateUI();
-
-    void destroy(LevelObject* obj);
-
-    void fireBullet(int x, int y, int heading, TankObject* tank);
 
     ~LevelManager();
 };
