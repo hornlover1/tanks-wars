@@ -7,6 +7,10 @@ wall -25 610 820 25
 tank2 500 300
 wall 220 0 5 200
 wall 220 380 5 300
-wall 0 0 0 0
-wall 0 0 0 0
+barricade 240 270
+barricade 240 290
 barricade 240 310
+barricade 240 330
+barricade 240 250
+barricade 240 230
+barricade 240 350
