@@ -23,7 +23,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //this timer will decrement the time selected by the user
     connect(timer, SIGNAL(timeout()), this, SLOT(updateTime()));
-   // connect(timer, SIGNAL(timeout()), this, SLOT(playTheList()));
 
     Interface::getInstance().blankUI();
 
@@ -161,6 +160,9 @@ void MainWindow::levelButtonClicked() {
         if (!ui->rbHard->isChecked()) { ui->rbHard->setEnabled(false); }
         if (ui->opponentIp->text() != "") {
             NetworkManager::getInstance().connectToHost(ui->opponentIp->text(), levelNum);
+        } else {
+            //timer will drive movement of AI
+            connect(timer, SIGNAL(timeout()), this, SLOT(driveAI()));
         }
     }
 }
@@ -190,6 +192,10 @@ void MainWindow::updateTime() {
     } else {
         LevelManager::getInstance().decrementTime();
     }
+}
+
+void MainWindow::driveAI() {
+    LevelManager::getInstance().AI();
 }
 
 void MainWindow::playTheList() {

@@ -47,6 +47,9 @@ public:
     //singleton method
     static LevelManager& getInstance();
 
+    //attempts at a basic AI in case it is required
+    void AI();
+
     //get all objects in the level
     vector<LevelObject*> getObjects();
 

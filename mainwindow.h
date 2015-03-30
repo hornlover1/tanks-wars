@@ -38,6 +38,7 @@ private slots:
     void on_btCheat_clicked();
     void on_pushButton_2_clicked();
     void updateTime();
+    void driveAI();
     void playTheList();
     void connectToClient();
     void startTimer() {
