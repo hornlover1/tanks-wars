@@ -29,9 +29,9 @@ void checkLevelOne() {
     qDebug() << objects.size();
     assert(objects.size() == 14); //time doesn't count
     //need getters
-    assert(LevelManager::getInstance().getEasyTime() == 30);
-    assert(LevelManager::getInstance().getMediumTime() == 25);
-    assert(LevelManager::getInstance().getHardTime() == 20);
+    assert(LevelManager::getInstance().getEasyTime() == 1000);
+    assert(LevelManager::getInstance().getMediumTime() == 100);
+    assert(LevelManager::getInstance().getHardTime() == 15);
 
     qDebug() << "The difficulty times were sucessfully loaded from the file.";
 

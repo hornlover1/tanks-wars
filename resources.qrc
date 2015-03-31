@@ -2,12 +2,18 @@
     <qresource prefix="/">
         <file>Resources/level0.txt</file>
         <file>Resources/level1.txt</file>
-        <file>Resources/logo.png</file>
         <file>Resources/level2.txt</file>
+        <file>Resources/level3.txt</file>
+        <file>Resources/level4.txt</file>
+        <file>Resources/level5.txt</file>
+        <file>Resources/level6.txt</file>
+        <file>Resources/level7.txt</file>
+        <file>Resources/level8.txt</file>
+        <file>Resources/level9.txt</file>
+        <file>Resources/logo.png</file>
         <file>Resources/HighScores/highscore0.txt</file>
         <file>Resources/HighScores/highscore1.txt</file>
         <file>Resources/saveFile.txt</file>
-        <file>Resources/level3.txt</file>
         <file>Resources/Sound/BattleMarch.mp3</file>
     </qresource>
     <qresource prefix="/images">
@@ -16,5 +22,8 @@
         <file>Resources/Bullet.png</file>
         <file>Resources/Tank1.png</file>
         <file>Resources/Barracade.png</file>
+    </qresource>
+    <qresource prefix="/sounds">
+        <file>Resources/boom4.mp3</file>
     </qresource>
 </RCC>
