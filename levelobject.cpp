@@ -173,8 +173,15 @@ void BulletObject::onTimeOut() {
     bool play = false;
     int moveX = cos(heading) * amountToMove;
     int moveY = sin(heading) * amountToMove;
+    double amountToMove = 10.0;
+    double moveX = cos(heading) * amountToMove;
+    double moveY = sin(heading) * amountToMove;
     x += moveX;
     y += moveY;
+    qDebug() << "moveX: " << moveX;
+    qDebug() << "moveY: " << moveY;
+    qDebug() << "x: " << x;
+    qDebug() << "y: " << y;
     LevelObject* objectHit = getContactedObject();
     if (objectHit != nullptr && objectHit != tank) { // don't shoot myself
         this->destroy();
@@ -213,7 +220,6 @@ Target::Target(int initX, int initY, QObject *parent):
 
 void Target::destroy() {
     LevelManager::getInstance().setStopTimer(true);
-    QString s = "Enemy Tank destroyed";
     Interface::getInstance().showVictory();
     //code for winning game
 }

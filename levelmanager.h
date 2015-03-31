@@ -47,6 +47,9 @@ public:
     //singleton method
     static LevelManager& getInstance();
 
+    //attempts at a basic AI in case it is required
+    void AI();
+
     //get all objects in the level
     vector<LevelObject*> getObjects();
 
@@ -76,7 +79,7 @@ public:
 
     void destroy(LevelObject* obj);
 
-    void fireBullet(int x, int y, int heading, TankObject* tank);
+    void fireBullet(int x, int y, double heading, TankObject* tank);
 
     //save game to a file
     void saveFile();

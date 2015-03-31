@@ -45,6 +45,7 @@ void LevelManager::decrementTime() {
     }
 
     if (easyTime == 0 || mediumTime == 0 || hardTime == 0) {
+        LevelManager::setStopTimer(true);
         Interface::getInstance().showDefeat("Sorry, time up.");
     }
 }
@@ -52,11 +53,7 @@ void LevelManager::decrementTime() {
 void LevelManager::selectTime(QString s) {
     userTime = s;
 }
-/*
-void LevelManager::setUserHighScore() {
-    LevelManager::userHighScore = 15 * finalGameTime;
-}
-*/
+
 int LevelManager::getUserHighScore() {
     return userHighScore;
 }
@@ -105,6 +102,41 @@ void LevelManager::setStopTimer(bool b) {
     stopTimer = b;
 }
 
+//this slot will call two methods to manipulate the Target object
+void LevelManager::AI() {
+    //fire on the user's tank
+    //Issue command to fire
+    TankObject* tank = nullptr;
+    Target* target = nullptr;
+    for (LevelObject* obj: objectsInLevel) {
+        if (obj->getIsMovable() == true) {
+            target = dynamic_cast<Target*>(obj);
+            tank = dynamic_cast<TankObject*>(obj);
+        }
+        if (tank != nullptr && target != nullptr) {
+            //may be able to use these values to calculate the bullet's direction.
+            double diffX = tank->getX() - target->getX();
+            double diffY = tank->getY() - target->getY();
+            double slope = diffY/diffX;
+            double heading = atan(slope);
+            double pi = 3.14159265358979323846264338327950288419716;
+            if (diffX <= 0) {
+                heading += pi; // add pi to rotate it 180 degrees so that it shoots in the right direction
+            }
+            if (diffX < 50 && diffY < 50) {
+                fireBullet(target->getX(), target->getY(), heading, target);
+                break;
+            } else {
+
+            }
+        }
+    }
+
+
+    //move in a basic square
+
+}
+
 bool LevelManager::getStopTimer() {return stopTimer;}
 int LevelManager::getLevel() {return levelNumber;}
 
@@ -119,7 +151,7 @@ void LevelManager::loadLevel(int levelNum, bool isPrimary) {
     objectsInLevel.clear();
     //bool bullet_obj = false;
     //Jordan's line
-    levelNumber = levelNum; //i need this number for saveHighScore()
+    levelNumber = levelNum; //I need this number for saveHighScore()
 
     //i.e. level2.txt
     //QFile levelX("://Resources/level1.txt");
@@ -197,35 +229,34 @@ void LevelManager::moveMouse(int x, int y) {
 
 //Jordan manipulated obj
 void LevelManager::mouseClick() {
-    //TODO: fire a bullet at the target
-    TankObject* tank;
-    Target* target;
-    for (LevelObject* obj: objectsInLevel) {
-        if (obj->getIsMovable() == true) {
-            tank = dynamic_cast<TankObject*>(obj);
-            target = dynamic_cast<Target*>(obj);
-        }
-        if (tank == nullptr || target != nullptr) {
-            continue;
-        }
-        //may be able to use these values to calculate the bullets direction.
-        double diffX = mouseX - tank->getX();
-        double diffY = mouseY - tank->getY();
-        double heading = atan(diffY/diffX);
-        double pi = 3.14159265358979323846264338327950288419716;
-        if (diffX <= 0) {
-            heading += pi; // add pi to rotate it 180 degrees so that it shoots in the right direction
-        }
-        if (bullet_obj == false) {
-            BulletObject* Bobj = new BulletObject(tank->getX(), tank->getY(), heading, tank);
-            objectsInLevel.push_back(Bobj);
-           // setBullet_obj(true);
-            Interface::getInstance().drawObject(Bobj);
-            Bobj->startMotion();
-            NetworkManager::getInstance().bullet(tank->getX(), tank->getY(), heading);
-            break;
-        } else {
+    if(stopTimer == false) {
+        //TODO: fire a bullet at the target
+        TankObject* tank;
+        Target* target;
+        for (LevelObject* obj: objectsInLevel) {
+            if (obj->getIsMovable() == true) {
+                tank = dynamic_cast<TankObject*>(obj);
+                target = dynamic_cast<Target*>(obj);
+            }
+            if (tank == nullptr || target != nullptr) {
+                continue;
+            }
+            //may be able to use these values to calculate the bullet's direction.
+            double diffX = mouseX - tank->getX();
+            double diffY = mouseY - tank->getY();
+            double slope = diffY/diffX;
+            double heading = atan(slope);
+            double pi = 3.14159265358979323846264338327950288419716;
+            if (diffX <= 0) {
+                heading += pi; // add pi to rotate it 180 degrees so that it shoots in the right direction
+            }
+            if (bullet_obj == false) {
+                fireBullet(tank->getX(), tank->getY(), heading, tank);
+                NetworkManager::getInstance().bullet(tank->getX(), tank->getY(), heading);
+                break;
+            } else {
 
+            }
         }
     }
 }
@@ -458,7 +489,7 @@ void LevelManager::loadFile() {
     }
 }
 
-void LevelManager::fireBullet(int x, int y, int heading, TankObject* tank) {
+void LevelManager::fireBullet(int x, int y, double heading, TankObject* tank) {
     BulletObject* Bobj = new BulletObject(x, y, heading, tank);
     objectsInLevel.push_back(Bobj);
     Interface::getInstance().drawObject(Bobj);

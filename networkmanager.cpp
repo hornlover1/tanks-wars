@@ -96,6 +96,7 @@ void NetworkManager::read() {
             sock->connectToHost(QString(ipAddr.c_str()), remotePort);
             sock->waitForConnected();
             Interface::getInstance().disableWidgets();
+            emit startLevel();
         }
     }
 }

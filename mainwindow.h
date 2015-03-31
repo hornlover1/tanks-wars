@@ -17,8 +17,12 @@ class MainWindow : public QMainWindow {
     QTimer *timer;
 
     //code to create sound
+<<<<<<< HEAD
     //QMediaPlayer* player;// = new QMediaPlayer;
     //QMediaPlaylist *playlist = new QMediaPlaylist;
+    QMediaPlayer* player;// = new QMediaPlayer;
+    QMediaPlaylist *playlist;// = new QMediaPlaylist;
+
 
 
 public:
@@ -38,8 +42,12 @@ private slots:
     void on_btCheat_clicked();
     void on_pushButton_2_clicked();
     void updateTime();
+    void driveAI();
     void playTheList();
     void connectToClient();
+    void startTimer() {
+        timer->start();
+    }
 };
 
 #endif // MAINWINDOW_H
