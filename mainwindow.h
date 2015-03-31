@@ -17,8 +17,12 @@ class MainWindow : public QMainWindow {
     QTimer *timer;
 
     //code to create sound
+<<<<<<< HEAD
+    //QMediaPlayer* player;// = new QMediaPlayer;
+    //QMediaPlaylist *playlist = new QMediaPlaylist;
     QMediaPlayer* player;// = new QMediaPlayer;
     QMediaPlaylist *playlist;// = new QMediaPlaylist;
+
 
 
 public:

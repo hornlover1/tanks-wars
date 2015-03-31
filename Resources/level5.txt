@@ -1,0 +1,42 @@
+time 75 60 50
+wall -25 -25 25 615
+wall -25 -25 805 25
+tank 100 500
+wall 810 -25 25 620
+wall -25 610 820 25
+tank2 500 100
+wall 240 -25 20 520
+wall 240 600 20 100
+barricade 240 -10
+barricade 240 10
+barricade 240 30
+barricade 240 50
+barricade 240 70
+barricade 240 90
+barricade 240 110
+barricade 240 130
+barricade 240 150
+barricade 240 170
+barricade 240 190
+barricade 240 210
+barricade 240 230
+barricade 240 250
+barricade 240 270
+barricade 240 290
+barricade 240 310
+barricade 240 330
+barricade 240 350
+barricade 240 370
+barricade 240 390
+barricade 240 410
+barricade 240 430
+barricade 240 450
+barricade 240 470
+barricade 240 490
+barricade 240 510
+barricade 240 530
+barricade 240 550
+barricade 240 570
+barricade 240 590
+barricade 240 610
+barriacde 240 630

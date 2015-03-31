@@ -32,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     NetworkManager::getInstance().startServer(this);
     ui->yourIP->setText("Your IP: " + NetworkManager::getInstance().getIp4Addr());
+
     connect(&NetworkManager::getInstance(), SIGNAL(startLevel()), this, SLOT(startTimer()));
 
     player = new QMediaPlayer;
@@ -39,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     player->setMedia(QUrl::fromLocalFile(":/Resources/Sound/BattleMarch.mp3"));
     player->setVolume(50);
     player->play();
+    */
 }
 
 void MainWindow::connectToClient() {
@@ -201,7 +203,7 @@ void MainWindow::playTheList() {
     if(firstPass == false) {
        // playlist->addMedia(QUrl::fromLocalFile(":/Resources/Sound/BattleMarch.mp3"));
         //playlist->setCurrentIndex(1);
-
+/*
         player->setMedia(QUrl::fromLocalFile(":/Resources/Sound/BattleMarch.mp3"));
        // player->setPlaylist(playlist);
 connect(player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));
@@ -209,6 +211,7 @@ connect(player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint
         player->play();
 
         firstPass = true;
+        */
     }
 }
 

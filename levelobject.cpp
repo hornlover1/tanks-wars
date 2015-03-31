@@ -4,6 +4,8 @@
 #include "mainwindow.h"
 #include <math.h>
 #include <QMessageBox>
+#include <QtMultimedia/QMediaPlayer>
+#include <QFileInfo>
 
 int LevelObject::nextId = 0;
 
@@ -167,6 +169,10 @@ void BulletObject::startMotion() {
 }
 
 void BulletObject::onTimeOut() {
+    int amountToMove = 10;
+    bool play = false;
+    int moveX = cos(heading) * amountToMove;
+    int moveY = sin(heading) * amountToMove;
     double amountToMove = 10.0;
     double moveX = cos(heading) * amountToMove;
     double moveY = sin(heading) * amountToMove;
@@ -180,8 +186,21 @@ void BulletObject::onTimeOut() {
     if (objectHit != nullptr && objectHit != tank) { // don't shoot myself
         this->destroy();
         objectHit->destroy();
+        play = true;
     }
-    LevelManager::getInstance().updateUI();
+    if(play == true){
+        /*
+        QMediaPlayer player;
+        player.setMedia(QUrl::fromLocalFile(QFileInfo(":/sounds/Resources/boom4.mp3").absoluteFilePath()));
+        player.setVolume(100);
+        player.setMuted(false);
+        player.play();
+        */
+        LevelManager::getInstance().updateUI();
+    }
+    else{
+        LevelManager::getInstance().updateUI();
+    }
 }
 
 WallObject::WallObject(int x, int y, int width, int height, QObject *parent):
@@ -193,7 +212,7 @@ WallObject::WallObject(int x, int y, int width, int height, QObject *parent):
 Barricade::Barricade(int x, int y, QObject *parent):
     LevelObject(x, y, 20, 20, parent) {
     isDestroyable = true;
-    imagePath = ":/images/Resources/Barracade.png";
+    imagePath = ":/images/Resources/barracade.png";
 }
 
 Target::Target(int initX, int initY, QObject *parent):

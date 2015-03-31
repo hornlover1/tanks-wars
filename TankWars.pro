@@ -37,5 +37,7 @@ FORMS    += mainwindow.ui
 
 QMAKE_CXXFLAGS += -std=c++0x
 
+QT += multimedia
+
 RESOURCES += \
     resources.qrc
