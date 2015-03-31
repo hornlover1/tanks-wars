@@ -6,7 +6,7 @@
 using namespace std;
 
 class LevelManager {
-    LevelManager();
+    //LevelManager();
     static LevelManager instance;
     //objects that exist in the level and should be shown on the screen
     vector<LevelObject*> objectsInLevel;
@@ -20,12 +20,7 @@ class LevelManager {
     //boolean to hold whether game timer should be stopped
     bool stopTimer;
 
-    //this bool will control when bullets can be created. May be duplicated for opposing
-    //tank logic
-    bool bullet_obj;
-
-    //
-    //User-Specific Information
+  /*  //User-Specific Information
         //counter to record which level is available
         static int lastUnlockedLevel;
 
@@ -40,7 +35,7 @@ class LevelManager {
 
         //the time selected by the user
         QString userTime;
-
+*/
 public:
     //singleton method
     static LevelManager& getInstance();
@@ -84,23 +79,16 @@ public:
     int getMediumTime();
     int getHardTime();
 
-    //for other functionality
-    void decrementEasyTime();
-    void decrementMediumTime();
-    void decrementHardTime();
-    void setBullet_obj(bool x);
-    void setFinalGameTime();
-
     //sets a QString that tells the timer method which time to decrement
     void selectTime(QString s);
 
     //called by a QTimer to decremented the user's selected time
     void decrementTime();
 
-    //bool to manipulate the time flag
+    //bool to manipulate the time flag that manipulates the entire gameplay
     void setStopTimer(bool);
     bool getStopTimer();
-
+/*
     //returns which level the user was playing
     int getLevel();
 
@@ -123,7 +111,7 @@ public:
     static void setLastUnlockedLevel(int i);
 
     static int getLastUnlockedLevel();
-
+*/
     ~LevelManager();
 };
 

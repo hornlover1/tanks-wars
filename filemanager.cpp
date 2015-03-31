@@ -1,5 +1,6 @@
 #include "filemanager.h"
 #include "levelmanager.h"
+#include "userinformation.h"
 
 FileManager::FileManager(QObject *parent): QObject(parent) {
 }
@@ -13,8 +14,8 @@ FileManager& FileManager::getInstance() {
 //writes userName and lastUnlockedLevel to a file. Accounts for previous saves.
 void FileManager::saveFile() {
 
-    if(LevelManager::getInstance().getUserName() == "") {
-        LevelManager::getInstance().setUserName("UNKNOWN");
+    if(UserInformation::getInstance().getUserName() == "") {
+        UserInformation::getInstance().setUserName("UNKNOWN");
     }
     //c_string to read bytes into
     char c[20];
@@ -26,9 +27,9 @@ void FileManager::saveFile() {
     ofstream out("tempFile.txt");
 
     //write new info into temp.txt
-    QString s = LevelManager::getUserName();
+    QString s = UserInformation::getUserName();
     out << s.toStdString().c_str() << endl;
-    out << LevelManager::getLastUnlockedLevel() << endl;
+    out << UserInformation::getLastUnlockedLevel() << endl;
 
     //loop through every line in file
     do {
@@ -37,7 +38,7 @@ void FileManager::saveFile() {
         QString info = QString(c);
 
         //if line not the userName
-        if(info != LevelManager::getUserName()) {
+        if(info != UserInformation::getUserName()) {
             //write this line and the next one
             out << c << endl;
 
@@ -45,7 +46,7 @@ void FileManager::saveFile() {
 
             out << c << endl;
         //if line is userName, then do not write this line
-        } else if(info == LevelManager::getUserName()) {
+        } else if(info == UserInformation::getUserName()) {
              //read next line, but do not write
             in.getline(c,20);
         }
@@ -59,13 +60,13 @@ void FileManager::saveFile() {
 
 //saves new HighScore; assumes an existing HighScore.txt
 void FileManager::saveUserHighScore() {
-    if(LevelManager::getInstance().getUserName() == "") {
-        LevelManager::getInstance().setUserName("UNKNOWN");
+    if(UserInformation::getInstance().getUserName() == "") {
+        UserInformation::getInstance().setUserName("UNKNOWN");
     }
 
     char c[20];
     ofstream outStream("temp.txt");
-    QString filename = QString("highscore") + QString::number(LevelManager::getInstance().getLevel()) + QString(".txt");
+    QString filename = QString("highscore") + QString::number(UserInformation::getInstance().getLevel()) + QString(".txt");
     ifstream inStream(filename.toStdString().c_str());
 
     inStream.getline(c,20);//disregard first name
@@ -83,7 +84,7 @@ void FileManager::saveUserHighScore() {
 
         //int number = *c; //appears to convert to askii characters, cause it ain't grabbing the correct number
 
-        if (LevelManager::getInstance().getUserHighScore() > number) {
+        if (UserInformation::getInstance().getUserHighScore() > number) {
             isInserted = true;
             //reset stream state to start from clean slate
             inStream.close();
@@ -99,9 +100,9 @@ void FileManager::saveUserHighScore() {
             }
 
             //write new highScore
-            outStream << LevelManager::getUserName().toStdString().c_str() << endl;
+            outStream << UserInformation::getUserName().toStdString().c_str() << endl;
            // userHighScore = Interface::getInstance().getTimeLeft();
-            outStream << LevelManager::getInstance().getUserHighScore();
+            outStream << UserInformation::getInstance().getUserHighScore();
             outStream << endl << endl;
             i++;
 
@@ -150,7 +151,7 @@ void FileManager::loadFile() {
             fs.getline(a, 20);
 
             //if name equals userName, then load lastUnlockedLevelber and end loop
-            if(LevelManager::getUserName() == QString(a)) {
+            if(UserInformation::getUserName() == QString(a)) {
                 nameFound = true;
                 //since we found user name, then read the user's lastUnlockedLevel
                 fs.getline(a, 20);
@@ -162,20 +163,20 @@ void FileManager::loadFile() {
                 conversion >> i;
 
                 //load number into
-                LevelManager::setLastUnlockedLevel(i);
+                UserInformation::setLastUnlockedLevel(i);
 
                 //close file
                 fs.close();
                 break;
 
             //if the name in the file is not what i want, then throw away the lastUnlockedLevel
-            } else if (LevelManager::getUserName() != QString(a)){
+            } else if (UserInformation::getInstance().getUserName() != QString(a)){
                 fs.getline(a, 20);
             }
         }
     }
     if(nameFound == false){
         //set lastUnlockedLevel
-        LevelManager::setLastUnlockedLevel(1);
+        UserInformation::setLastUnlockedLevel(1);
     }
 }

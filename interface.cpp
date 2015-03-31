@@ -1,6 +1,7 @@
 #include "interface.h"
 #include "levelmanager.h"
 #include "filemanager.h"
+#include "userinformation.h"
 
 #include <cstring>
 #include <QString>
@@ -168,14 +169,14 @@ void Interface::showVictory() {
 void Interface::updateFiles()
 {
     //prepare for next level
-    if(LevelManager::getLastUnlockedLevel() == LevelManager::getInstance().getLevel())
+    if(UserInformation::getLastUnlockedLevel() == UserInformation::getInstance().getLevel())
     {
-        LevelManager::getInstance().incrementLastUnlockedLevel();
+        UserInformation::getInstance().incrementLastUnlockedLevel();
     }
 
     FileManager::getInstance().saveFile(); //works
 
-    LevelManager::getInstance().setHighScore(); //works!
+    UserInformation::getInstance().setHighScore(); //works!
 
     FileManager::getInstance().saveUserHighScore(); //works!
 }
@@ -185,7 +186,7 @@ void Interface::updateGUI(){
     for (QObject* obj: ui->levels->children()) {
         QPushButton* button = dynamic_cast<QPushButton*>(obj);
         if (button != nullptr) {
-            if (button->text().toInt() <= LevelManager::getLastUnlockedLevel()) {
+            if (button->text().toInt() <= UserInformation::getLastUnlockedLevel()) {
                 button->setEnabled(true);
             }
         }

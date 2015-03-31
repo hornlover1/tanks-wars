@@ -2,6 +2,8 @@
 #include "levelmanager.h"
 #include "interface.h"
 #include "mainwindow.h"
+#include "userinformation.h"
+
 #include <math.h>
 #include <QMessageBox>
 #include <QtMultimedia/QMediaPlayer>
@@ -34,7 +36,6 @@ QRect LevelObject::getGeometry() {
 void LevelObject::destroy() {
     if (isDestroyable) {
         LevelManager::getInstance().destroy(this);
-        LevelManager::getInstance().setBullet_obj(false);
     }
 }
 
@@ -126,7 +127,7 @@ void TankObject::destroy() {
 
     //ending the game
     LevelManager::getInstance().setStopTimer(true);
-    QString s = "Mission Failed: You have lost " + LevelManager::getUserName() + ".";
+    QString s = "Mission Failed: You have lost " + UserInformation::getUserName() + ".";
     Interface::getInstance().showDefeat(s);
 
     //TODO: define this method - possibly to show awsome graphics

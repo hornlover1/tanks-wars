@@ -6,8 +6,10 @@
 #include <iostream>
 #include <QDebug>
 #include "networkmanager.h"
+#include "userinformation.h"
+#include "userinformation.h"
 using namespace std;
-
+/*
 QString LevelManager::userName = "";
 
 int LevelManager::lastUnlockedLevel = 1;
@@ -15,17 +17,12 @@ int LevelManager::lastUnlockedLevel = 1;
 LevelManager::LevelManager() {
     userTime = "Easy";
 }
-
+*/
 LevelManager LevelManager::instance;
 
 int LevelManager::getEasyTime() {return easyTime;}
 int LevelManager::getMediumTime() {return mediumTime;}
 int LevelManager::getHardTime() {return hardTime;}
-
-void LevelManager::decrementEasyTime() {easyTime--;}
-void LevelManager::decrementMediumTime() {mediumTime--;}
-void LevelManager::decrementHardTime() {hardTime--;}
-void LevelManager::setBullet_obj(bool x) {bullet_obj = x;}
 
 //called by a QTimer to decremented the user's selected time
 void LevelManager::decrementTime() {
@@ -33,13 +30,13 @@ void LevelManager::decrementTime() {
         //TODO:stop game
         return;
     }
-    if (userTime == "Easy") {
+    if (UserInformation::getInstance().getUserTime() == "Easy") {
         easyTime--;
         Interface::getInstance().showTime(QString::number(easyTime));
-    } else if(userTime == "Medium") {
+    } else if(UserInformation::getInstance().getUserTime() == "Medium") {
         mediumTime--;
         Interface::getInstance().showTime(QString::number(mediumTime));
-    } else if (userTime == "Hard") {
+    } else if (UserInformation::getInstance().getUserTime() == "Hard") {
         hardTime--;
         Interface::getInstance().showTime(QString::number(hardTime));
     }
@@ -49,7 +46,7 @@ void LevelManager::decrementTime() {
         Interface::getInstance().showDefeat("Sorry, time up.");
     }
 }
-
+/*
 void LevelManager::selectTime(QString s) {
     userTime = s;
 }
@@ -89,7 +86,7 @@ void LevelManager::setLastUnlockedLevel(int i) {
 int LevelManager::getLastUnlockedLevel() {
     return lastUnlockedLevel;
 }
-
+*/
 LevelManager& LevelManager::getInstance() {
     return instance;
 }
@@ -138,7 +135,7 @@ void LevelManager::AI() {
 }
 
 bool LevelManager::getStopTimer() {return stopTimer;}
-int LevelManager::getLevel() {return levelNumber;}
+//int LevelManager::getLevel() {return levelNumber;}
 
 void LevelManager::loadLevel(int levelNum, bool isPrimary) {
     for (LevelObject* obj: objectsInLevel) {
@@ -149,9 +146,8 @@ void LevelManager::loadLevel(int levelNum, bool isPrimary) {
     stopTimer = false;
 
     objectsInLevel.clear();
-    //bool bullet_obj = false;
-    //Jordan's line
-    levelNumber = levelNum; //I need this number for saveHighScore()
+
+    UserInformation::getInstance().setLevelNumber(levelNum); //I need this number for saveHighScore()
 
     //i.e. level2.txt
     //QFile levelX("://Resources/level1.txt");
@@ -200,7 +196,6 @@ void LevelManager::loadLevel(int levelNum, bool isPrimary) {
             objectsInLevel.push_back(obj);
             Interface::getInstance().drawObject(obj);
         }
-        setBullet_obj(false);
     }
     //TODO: load the next level from file
 }
@@ -250,13 +245,9 @@ void LevelManager::mouseClick() {
             if (diffX <= 0) {
                 heading += pi; // add pi to rotate it 180 degrees so that it shoots in the right direction
             }
-            if (bullet_obj == false) {
-                fireBullet(tank->getX(), tank->getY(), heading, tank);
-                NetworkManager::getInstance().bullet(tank->getX(), tank->getY(), heading);
-                break;
-            } else {
-
-            }
+            fireBullet(tank->getX(), tank->getY(), heading, tank);
+            NetworkManager::getInstance().bullet(tank->getX(), tank->getY(), heading);
+            break;
         }
     }
 }
