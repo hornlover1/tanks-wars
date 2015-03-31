@@ -111,7 +111,7 @@ void LevelManager::AI() {
     Target* target = nullptr;
     for (LevelObject* obj: objectsInLevel) {
         if (obj->getIsMovable() == true) {
-            if(loadedTank == false) {
+            if (loadedTank == false) {
                 tank = dynamic_cast<TankObject*>(obj);
                 loadedTank = true;
             } else {
