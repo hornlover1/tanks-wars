@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     player->setMedia(QUrl::fromLocalFile(":/Resources/Sound/BattleMarch.mp3"));
     player->setVolume(50);
     player->play();
-    */
+
 }
 
 void MainWindow::connectToClient() {

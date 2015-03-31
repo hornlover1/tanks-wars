@@ -169,10 +169,7 @@ void BulletObject::startMotion() {
 }
 
 void BulletObject::onTimeOut() {
-    int amountToMove = 10;
     bool play = false;
-    int moveX = cos(heading) * amountToMove;
-    int moveY = sin(heading) * amountToMove;
     double amountToMove = 10.0;
     double moveX = cos(heading) * amountToMove;
     double moveY = sin(heading) * amountToMove;
@@ -212,7 +209,7 @@ WallObject::WallObject(int x, int y, int width, int height, QObject *parent):
 Barricade::Barricade(int x, int y, QObject *parent):
     LevelObject(x, y, 20, 20, parent) {
     isDestroyable = true;
-    imagePath = ":/images/Resources/barracade.png";
+    imagePath = ":/images/Resources/Barracade.png";
 }
 
 Target::Target(int initX, int initY, QObject *parent):
