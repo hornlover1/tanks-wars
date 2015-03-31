@@ -1,7 +1,16 @@
-time 45 40 30
+time 45 30 30
 wall -25 -25 25 615
 wall -25 -25 805 25
-tank 100 500
+tank 50 250
 wall 810 -25 25 620
 wall -25 610 820 25
-tank2 500 100
+tank2 700 250
+wall 100 200 10 100
+wall 200 75 10 130
+wall 200 295 10 130
+wall 650 200 10 100
+wall 550 75 10 130
+wall 550 295 10 130
+barricade 365 250
+barricade 365 230
+barricade 365 270

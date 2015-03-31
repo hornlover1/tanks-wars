@@ -21,7 +21,7 @@
         <file>Resources/Wall.jpg</file>
         <file>Resources/Bullet.png</file>
         <file>Resources/Tank1.png</file>
-        <file>Resources/Barracade.png</file>
+        <file>Resources/barracade.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file>Resources/boom4.mp3</file>

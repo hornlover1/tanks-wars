@@ -9,3 +9,21 @@ wall 25 25 10 590
 wall 25 25 630 10
 wall 650 25 10 620
 wall 25 590 660 10
+barricade 200 35
+barricade 300 40
+barricade 40 300
+barricade 200 200
+barricade 100 60
+barricade 100 450
+barricade 500 150
+barriacde 60 329
+barricade 430 490
+barricade 510 400
+barricade 200 400
+barricade 215 300
+barricade 400 389
+barriacde 389 492
+barricade 215 380
+barricade 305 307
+barricade 420 456
+barricade 376 412
