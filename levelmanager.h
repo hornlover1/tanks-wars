@@ -2,8 +2,6 @@
 #define LEVELMANAGER_H
 
 #include "levelobject.h"
-#include <fstream>
-#include <sstream>
 #include <QTimer>
 using namespace std;
 
@@ -80,15 +78,6 @@ public:
     void destroy(LevelObject* obj);
 
     void fireBullet(int x, int y, double heading, TankObject* tank);
-
-    //save game to a file
-    void saveFile();
-
-    //save highscore to a file
-    void saveUserHighScore();
-
-    //read in the saved file
-    void loadFile();
 
     //to access times
     int getEasyTime();

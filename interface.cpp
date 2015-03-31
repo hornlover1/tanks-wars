@@ -1,5 +1,7 @@
 #include "interface.h"
 #include "levelmanager.h"
+#include "filemanager.h"
+
 #include <cstring>
 #include <QString>
 #include <QDebug>
@@ -171,11 +173,11 @@ void Interface::updateFiles()
         LevelManager::getInstance().incrementLastUnlockedLevel();
     }
 
-    LevelManager::getInstance().saveFile(); //works
+    FileManager::getInstance().saveFile(); //works
 
     LevelManager::getInstance().setHighScore(); //works!
 
-    LevelManager::getInstance().saveUserHighScore(); //works!
+    FileManager::getInstance().saveUserHighScore(); //works!
 }
 
 void Interface::updateGUI(){

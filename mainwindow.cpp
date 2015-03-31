@@ -9,6 +9,7 @@
 #include "interface.h"
 #include "levelobject.h"
 #include "networkmanager.h"
+#include "filemanager.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -111,7 +112,7 @@ void MainWindow::on_pbLoad_clicked() {
 
     //check for a savedfile. if found values will be set. if not
     //will use default values
-    LevelManager::getInstance().loadFile();
+    FileManager::getInstance().loadFile();
 
     //free up the buttons based on lastUnlockedLevel so
     //that the player may start a game by selecting that button.
