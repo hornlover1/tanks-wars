@@ -179,7 +179,7 @@ void MainWindow::on_btCheat_clicked() {
     ui->gameArea->installEventFilter(this);
     ui->opponentIp->setEnabled(false);
     timer->start();
-   // connect(timer, SIGNAL(timeout()), this, SLOT(driveAI()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(driveAI()));
 }
 
 void MainWindow::updateTime() {
