@@ -159,8 +159,8 @@ void MainWindow::levelButtonClicked() {
         if (ui->opponentIp->text() != "") {
             NetworkManager::getInstance().connectToHost(ui->opponentIp->text(), levelNum);
         } else {
-            //timer will drive movement of AI
-            connect(timer, SIGNAL(timeout()), this, SLOT(driveAI()));
+            //timer will drive actions of AI
+            //connect(timer, SIGNAL(timeout()), this, SLOT(driveAI()));
         }
     }
 }

@@ -152,15 +152,15 @@ void Interface::showTime(QString str) {
 }
 
 void Interface::showVictory() {
-    blankUI();
+    LevelManager::getInstance().setStopTimer(true);
     QMessageBox *banner = new QMessageBox(ui->gameArea);
-
         //display the message
         banner->setText("Congratulations. You've completed this mission soldier.");
         banner->show();
 
-        updateFiles();
-        updateGUI();
+    updateFiles();
+    blankUI();
+    updateGUI();
 }
 
 void Interface::updateFiles()
@@ -191,11 +191,8 @@ void Interface::updateGUI(){
 
     //reset variables for next level
     ui->leUserName->setEnabled(true);
-   // ui->rbEasy->setCheckable(true);
     ui->rbEasy->setEnabled(true);
-//    ui->rbMedium->setCheckable(true);
     ui->rbMedium->setEnabled(true);
-//    ui->rbHard->setCheckable(true);
     ui->rbHard->setEnabled(true);
     ui->btCheat->setEnabled(true);
     ui->opponentIp->setEnabled(true);
@@ -208,11 +205,12 @@ void Interface::howTo() {
 }
 
 void Interface::showDefeat(QString msg) {
-    blankUI();
+    LevelManager::getInstance().setStopTimer(true);
     QMessageBox *banner = new QMessageBox(ui->gameArea);
     banner->setText(msg);
     banner->show();
 
+    blankUI();
     updateGUI();
 }
 

@@ -110,21 +110,24 @@ void LevelManager::AI() {
     Target* target = nullptr;
     for (LevelObject* obj: objectsInLevel) {
         if (obj->getIsMovable() == true) {
-            tank = dynamic_cast<TankObject*>(obj);
             target = dynamic_cast<Target*>(obj);
+            tank = dynamic_cast<TankObject*>(obj);
         }
         if (tank != nullptr && target != nullptr) {
-            double diffX = target->getX() - tank->getX();
-            double diffY = target->getY() - tank->getY();
-            double heading = atan(diffY/diffX);
-            double pi = 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679;
+            //may be able to use these values to calculate the bullet's direction.
+            double diffX = tank->getX() - target->getX();
+            double diffY = tank->getY() - target->getY();
+            double slope = diffY/diffX;
+            double heading = atan(slope);
+            double pi = 3.14159265358979323846264338327950288419716;
             if (diffX <= 0) {
                 heading += pi; // add pi to rotate it 180 degrees so that it shoots in the right direction
             }
-            if (diffX < 100 && diffY , 100) {
+            if (diffX < 50 && diffY < 50) {
                 fireBullet(target->getX(), target->getY(), heading, target);
-                NetworkManager::getInstance().bullet(target->getX(), target->getY(), heading);
                 break;
+            } else {
+
             }
         }
     }
@@ -226,33 +229,34 @@ void LevelManager::moveMouse(int x, int y) {
 
 //Jordan manipulated obj
 void LevelManager::mouseClick() {
-    //TODO: fire a bullet at the target
-    TankObject* tank;
-    Target* target;
-    for (LevelObject* obj: objectsInLevel) {
-        if (obj->getIsMovable() == true) {
-            tank = dynamic_cast<TankObject*>(obj);
-            target = dynamic_cast<Target*>(obj);
-        }
-        if (tank == nullptr || target != nullptr) {
-            continue;
-        }
-        //may be able to use these values to calculate the bullet's direction.
-        double diffX = mouseX - tank->getX();
-       // diffX -= 100;
-        double diffY = mouseY - tank->getY();
-        double slope = diffY/diffX;
-        double heading = atan(slope);
-        double pi = 3.14159265358979323846264338327950288419716;
-        if (diffX <= 0) {
-            heading += pi; // add pi to rotate it 180 degrees so that it shoots in the right direction
-        }
-        if (bullet_obj == false) {
-            fireBullet(tank->getX(), tank->getY(), heading, tank);
-            NetworkManager::getInstance().bullet(tank->getX(), tank->getY(), heading);
-            break;
-        } else {
+    if(stopTimer == false) {
+        //TODO: fire a bullet at the target
+        TankObject* tank;
+        Target* target;
+        for (LevelObject* obj: objectsInLevel) {
+            if (obj->getIsMovable() == true) {
+                tank = dynamic_cast<TankObject*>(obj);
+                target = dynamic_cast<Target*>(obj);
+            }
+            if (tank == nullptr || target != nullptr) {
+                continue;
+            }
+            //may be able to use these values to calculate the bullet's direction.
+            double diffX = mouseX - tank->getX();
+            double diffY = mouseY - tank->getY();
+            double slope = diffY/diffX;
+            double heading = atan(slope);
+            double pi = 3.14159265358979323846264338327950288419716;
+            if (diffX <= 0) {
+                heading += pi; // add pi to rotate it 180 degrees so that it shoots in the right direction
+            }
+            if (bullet_obj == false) {
+                fireBullet(tank->getX(), tank->getY(), heading, tank);
+                NetworkManager::getInstance().bullet(tank->getX(), tank->getY(), heading);
+                break;
+            } else {
 
+            }
         }
     }
 }
