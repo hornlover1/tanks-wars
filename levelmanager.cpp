@@ -106,12 +106,17 @@ void LevelManager::setStopTimer(bool b) {
 void LevelManager::AI() {
     //fire on the user's tank
     //Issue command to fire
+    bool loadedTank = false;
     TankObject* tank = nullptr;
     Target* target = nullptr;
     for (LevelObject* obj: objectsInLevel) {
         if (obj->getIsMovable() == true) {
-            target = dynamic_cast<Target*>(obj);
-            tank = dynamic_cast<TankObject*>(obj);
+            if(loadedTank == false) {
+                tank = dynamic_cast<TankObject*>(obj);
+                loadedTank = true;
+            } else {
+                target = dynamic_cast<Target*>(obj);
+            }
         }
         if (tank != nullptr && target != nullptr) {
             //may be able to use these values to calculate the bullet's direction.
@@ -123,15 +128,10 @@ void LevelManager::AI() {
             if (diffX <= 0) {
                 heading += pi; // add pi to rotate it 180 degrees so that it shoots in the right direction
             }
-            if (diffX < 50 && diffY < 50) {
-                fireBullet(target->getX(), target->getY(), heading, target);
-                break;
-            } else {
-
-            }
+            fireBullet(target->getX(), target->getY(), heading, target);
+            break;
         }
     }
-
 
     //move in a basic square
 

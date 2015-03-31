@@ -1,4 +1,4 @@
-//x, y, width, height
+//x, y, width, height / tank must always come before tank2
 time 1000 100 15
 wall 0 0 200 200
 wall 0 400 200 200
