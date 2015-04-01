@@ -20,22 +20,6 @@ class LevelManager {
     //boolean to hold whether game timer should be stopped
     bool stopTimer;
 
-  /*  //User-Specific Information
-        //counter to record which level is available
-        static int lastUnlockedLevel;
-
-        //The name of the user
-        static QString userName;
-
-        //current high score of the user
-        int userHighScore;
-    //
-        //used to find the correct level file to save the highScores to
-        int levelNumber;
-
-        //the time selected by the user
-        QString userTime;
-*/
 public:
     //singleton method
     static LevelManager& getInstance();
@@ -79,39 +63,13 @@ public:
     int getMediumTime();
     int getHardTime();
 
-    //sets a QString that tells the timer method which time to decrement
-    void selectTime(QString s);
-
     //called by a QTimer to decremented the user's selected time
     void decrementTime();
 
     //bool to manipulate the time flag that manipulates the entire gameplay
     void setStopTimer(bool);
     bool getStopTimer();
-/*
-    //returns which level the user was playing
-    int getLevel();
 
-    //set userHighScore
-    void setHighScore();
-
-    //returns userHighScore
-    int getUserHighScore();
-
-    //get the username
-    static QString getUserName();
-
-    //set the username
-    static void setUserName(QString name);
-
-    //increment levelUnlockedLevel
-    static void incrementLastUnlockedLevel();
-
-    //code used by the load method to set the variable.
-    static void setLastUnlockedLevel(int i);
-
-    static int getLastUnlockedLevel();
-*/
     ~LevelManager();
 };
 

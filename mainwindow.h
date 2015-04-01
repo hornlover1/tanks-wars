@@ -16,14 +16,6 @@ class MainWindow : public QMainWindow {
 //    QTimer *timer = new QTimer(this);
     QTimer *timer;
 
-    //code to create sound
-    //QMediaPlayer* player;// = new QMediaPlayer;
-    //QMediaPlaylist *playlist = new QMediaPlaylist;
-    QMediaPlayer* player;// = new QMediaPlayer;
-    QMediaPlaylist *playlist;// = new QMediaPlaylist;
-
-
-
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
@@ -42,11 +34,8 @@ private slots:
     void on_pushButton_2_clicked();
     void updateTime();
     void driveAI();
-    void playTheList();
     void connectToClient();
-    void startTimer() {
-        timer->start();
-    }
+    void startTimer() { timer->start(); }
 };
 
 #endif // MAINWINDOW_H

@@ -27,7 +27,7 @@ void FileManager::saveFile() {
     ofstream out("tempFile.txt");
 
     //write new info into temp.txt
-    QString s = UserInformation::getUserName();
+    QString s = UserInformation::getInstance().getUserName();
     out << s.toStdString().c_str() << endl;
     out << UserInformation::getLastUnlockedLevel() << endl;
 
@@ -38,7 +38,7 @@ void FileManager::saveFile() {
         QString info = QString(c);
 
         //if line not the userName
-        if(info != UserInformation::getUserName()) {
+        if(info != UserInformation::getInstance().getUserName()) {
             //write this line and the next one
             out << c << endl;
 
@@ -46,7 +46,7 @@ void FileManager::saveFile() {
 
             out << c << endl;
         //if line is userName, then do not write this line
-        } else if(info == UserInformation::getUserName()) {
+        } else if(info == UserInformation::getInstance().getUserName()) {
              //read next line, but do not write
             in.getline(c,20);
         }
@@ -100,7 +100,7 @@ void FileManager::saveUserHighScore() {
             }
 
             //write new highScore
-            outStream << UserInformation::getUserName().toStdString().c_str() << endl;
+            outStream << UserInformation::getInstance().getUserName().toStdString().c_str() << endl;
            // userHighScore = Interface::getInstance().getTimeLeft();
             outStream << UserInformation::getInstance().getUserHighScore();
             outStream << endl << endl;
@@ -151,7 +151,7 @@ void FileManager::loadFile() {
             fs.getline(a, 20);
 
             //if name equals userName, then load lastUnlockedLevelber and end loop
-            if(UserInformation::getUserName() == QString(a)) {
+            if(UserInformation::getInstance().getUserName() == QString(a)) {
                 nameFound = true;
                 //since we found user name, then read the user's lastUnlockedLevel
                 fs.getline(a, 20);

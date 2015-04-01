@@ -9,15 +9,7 @@
 #include "userinformation.h"
 #include "userinformation.h"
 using namespace std;
-/*
-QString LevelManager::userName = "";
 
-int LevelManager::lastUnlockedLevel = 1;
-
-LevelManager::LevelManager() {
-    userTime = "Easy";
-}
-*/
 LevelManager LevelManager::instance;
 
 int LevelManager::getEasyTime() {return easyTime;}
@@ -46,47 +38,7 @@ void LevelManager::decrementTime() {
         Interface::getInstance().showDefeat("Sorry, time up.");
     }
 }
-/*
-void LevelManager::selectTime(QString s) {
-    userTime = s;
-}
 
-int LevelManager::getUserHighScore() {
-    return userHighScore;
-}
-
-void LevelManager::setHighScore() {
-    if(userTime == "Easy") {
-        userHighScore = 10 * easyTime;
-    } else if(userTime == "Medium") {
-        userHighScore = 15 * mediumTime;
-    } else if (userTime == "Hard") {
-        userHighScore = 20 * hardTime;
-    }
-}
-
-QString LevelManager::getUserName() {
-    return LevelManager::userName;
-}
-
-void LevelManager::setUserName(QString name) {
-       LevelManager::userName = name;
-}
-
-void LevelManager::incrementLastUnlockedLevel() {
-    if (lastUnlockedLevel < 9) {
-        lastUnlockedLevel++;
-    }
-}
-
-void LevelManager::setLastUnlockedLevel(int i) {
-  lastUnlockedLevel = i;
-}
-
-int LevelManager::getLastUnlockedLevel() {
-    return lastUnlockedLevel;
-}
-*/
 LevelManager& LevelManager::getInstance() {
     return instance;
 }

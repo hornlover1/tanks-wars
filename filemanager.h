@@ -24,11 +24,6 @@ public:
 
     //read in the saved file
     void loadFile();
-
-signals:
-    
-public slots:
-    
 };
 
 #endif // FILEMANAGER_H

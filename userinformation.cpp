@@ -20,10 +20,10 @@ void UserInformation::selectTime(QString s) {
 }
 
 void UserInformation::setLevelNumber(int levelNum) {
-    levelNumber = levelNum;
+    currentLevelNumber = levelNum;
 }
 
-int UserInformation::getLevel() {return levelNumber;}
+int UserInformation::getLevel() {return currentLevelNumber;}
 
 int UserInformation::lastUnlockedLevel = 1;
 
