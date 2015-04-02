@@ -3,8 +3,6 @@
 
 #include <QMainWindow>
 #include <QTimer>
-#include <QMediaPlayer>
-#include <QMediaPlaylist>
 #include <QList>
 
 namespace Ui {
