@@ -155,9 +155,9 @@ void MainWindow::levelButtonClicked() {
 
         //start the timer counting down till user defeat
         timer->start();
-        if (!ui->rbEasy->isChecked()) { ui->rbEasy->setEnabled(false); }
-        if (!ui->rbMedium->isChecked()) { ui->rbMedium->setEnabled(false); }
-        if (!ui->rbHard->isChecked()) { ui->rbHard->setEnabled(false); }
+        if (!ui->rbEasy->isChecked()) { ui->rbEasy->setEnabled(false); } else { ui->rbEasy->setFocus(); }
+        if (!ui->rbMedium->isChecked()) { ui->rbMedium->setEnabled(false); } else { ui->rbMedium->setFocus(); }
+        if (!ui->rbHard->isChecked()) { ui->rbHard->setEnabled(false); } else { ui->rbHard->setFocus(); }
         if (ui->opponentIp->text() != "") {
             NetworkManager::getInstance().connectToHost(ui->opponentIp->text(), levelNum);
         } else {
