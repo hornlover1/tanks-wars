@@ -37,12 +37,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(&NetworkManager::getInstance(), SIGNAL(startLevel()), this, SLOT(startTimer()));
 
-    player = new QMediaPlayer;
-    //connect(player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));
-    player->setMedia(QUrl::fromLocalFile(":/Resources/Sound/BattleMarch.mp3"));
-    player->setVolume(50);
-    player->play();
-
 }
 
 void MainWindow::connectToClient() {
@@ -109,7 +103,7 @@ void MainWindow::on_pbLoad_clicked() {
 
     name = name.toUpper();
 
-    UserInformation::setUserName(name);
+    UserInformation::getInstance().setUserName(name);
 
     //check for a savedfile. if found values will be set. if not
     //will use default values
@@ -146,11 +140,11 @@ void MainWindow::levelButtonClicked() {
 
         //load user time choice into code
         if(ui->rbEasy->isChecked() == true) {
-            LevelManager::getInstance().selectTime(ui->rbEasy->text());
+            UserInformation::getInstance().selectTime(ui->rbEasy->text());
         } else if(ui->rbMedium->isChecked() == true) {
-            LevelManager::getInstance().selectTime(ui->rbMedium->text());
+            UserInformation::getInstance().selectTime(ui->rbMedium->text());
         } else if (ui->rbHard->isChecked() == true) {
-            LevelManager::getInstance().selectTime(ui->rbHard->text());
+            UserInformation::getInstance().selectTime(ui->rbHard->text());
         }
 
         ui->opponentIp->setEnabled(false);
@@ -192,6 +186,9 @@ void MainWindow::updateTime() {
         {
             obj->pause();
         }
+
+        Interface::getInstance().blankUI();
+
     } else {
         LevelManager::getInstance().decrementTime();
     }
@@ -199,23 +196,6 @@ void MainWindow::updateTime() {
 
 void MainWindow::driveAI() {
     LevelManager::getInstance().AI();
-}
-
-void MainWindow::playTheList() {
-    bool firstPass = false;
-    if(firstPass == false) {
-       // playlist->addMedia(QUrl::fromLocalFile(":/Resources/Sound/BattleMarch.mp3"));
-        //playlist->setCurrentIndex(1);
-/*
-        player->setMedia(QUrl::fromLocalFile(":/Resources/Sound/BattleMarch.mp3"));
-       // player->setPlaylist(playlist);
-connect(player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));
-        player->setVolume(50);
-        player->play();
-
-        firstPass = true;
-        */
-    }
 }
 
 void MainWindow::on_pushButton_2_clicked() {

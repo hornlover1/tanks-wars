@@ -127,7 +127,7 @@ void TankObject::destroy() {
 
     //ending the game
     LevelManager::getInstance().setStopTimer(true);
-    QString s = "Mission Failed: You have lost " + UserInformation::getUserName() + ".";
+    QString s = "Mission Failed: You have lost " + UserInformation::getInstance().getUserName() + ".";
     Interface::getInstance().showDefeat(s);
 
     //TODO: define this method - possibly to show awsome graphics

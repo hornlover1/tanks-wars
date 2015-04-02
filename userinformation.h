@@ -16,13 +16,13 @@ class UserInformation : public QObject {
     static int lastUnlockedLevel;
 
     //The name of the user
-    static QString userName;
+    QString userName;
 
     //current high score of the user
     int userHighScore;
 
     //used to find the correct level file to save the highScores to
-    int levelNumber;
+    int currentLevelNumber;
 
     //the time selected by the user
     QString userTime;
@@ -46,10 +46,10 @@ public:
     int getUserHighScore();
 
     //get the username
-    static QString getUserName();
+    QString getUserName();
 
     //set the username
-    static void setUserName(QString name);
+    void setUserName(QString name);
 
     //increment levelUnlockedLevel
     static void incrementLastUnlockedLevel();
@@ -58,11 +58,6 @@ public:
     static void setLastUnlockedLevel(int i);
 
     static int getLastUnlockedLevel();
-
-signals:
-
-public slots:
-
 };
 
 #endif // USERINFORMATION
