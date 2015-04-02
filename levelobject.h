@@ -50,7 +50,7 @@ protected slots:
     virtual void onTimeOut();
 };
 
-enum Direction {North, South, East, West};
+enum Direction {North, South, East, West, nullDirection};
 
 //an object that can move around on the screen, such as a tank or bullet
 class MovableObject: public LevelObject {

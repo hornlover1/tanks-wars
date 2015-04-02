@@ -16,7 +16,7 @@ class UserInformation : public QObject {
     static int lastUnlockedLevel;
 
     //The name of the user
-    QString userName = "";
+    static QString userName;
 
     //current high score of the user
     int userHighScore;

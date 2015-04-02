@@ -69,7 +69,7 @@ void MainWindow::mousePressEvent(QMouseEvent*) {
 }
 
 Direction getDirection(int key) {
-    Direction d;
+    Direction d = nullDirection;
     switch (key) {
     case Qt::Key_Left:  d = West;  break; // left  key
     case Qt::Key_Up:    d = North; break; // up    key

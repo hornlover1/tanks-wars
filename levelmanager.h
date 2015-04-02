@@ -112,6 +112,8 @@ public:
 
     static int getLastUnlockedLevel();
 */
+    void deleteAllObjects();
+
     ~LevelManager();
 };
 

@@ -323,3 +323,10 @@ void LevelManager::fireBullet(int x, int y, double heading, TankObject* tank) {
     Interface::getInstance().drawObject(Bobj);
     Bobj->startMotion();
 }
+
+void LevelManager::deleteAllObjects() {
+    for (LevelObject* obj: objectsInLevel) {
+        delete obj;
+    }
+    objectsInLevel.clear();
+}

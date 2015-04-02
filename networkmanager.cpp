@@ -10,7 +10,7 @@ NetworkManager::NetworkManager(QObject *parent) :
     QObject(parent), port(7573), remotePort(7573) {
     sock = nullptr;
     for (QHostAddress host: QNetworkInterface::allAddresses()) {
-        if (host.toIPv4Address() > 0) {
+        if (host.toIPv4Address() > 0 && host != QHostAddress::LocalHost) {
             int ip4 = host.toIPv4Address();
             // % is a modulo operator. It functions as a remainder of the amount after division by 256
             // >> is a bitwise shift. It shifts the bits 8 bits to the right, basically dividing it by 256 (2^8)
