@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     unittests.cpp \
     opponentmanager.cpp \
     networkmanager.cpp \
-    filemanager.cpp
+    filemanager.cpp \
+    userinformation.cpp
 
 HEADERS  += mainwindow.h \
         levelobject.h \
@@ -31,7 +32,8 @@ HEADERS  += mainwindow.h \
     unittests.h \
     opponentmanager.h \
     networkmanager.h \
-    filemanager.h
+    filemanager.h \
+    userinformation.h
 
 FORMS    += mainwindow.ui
 

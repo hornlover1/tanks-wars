@@ -9,6 +9,8 @@
 #include "interface.h"
 #include "levelobject.h"
 #include "networkmanager.h"
+#include "filemanager.h"
+#include "userinformation.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -107,11 +109,11 @@ void MainWindow::on_pbLoad_clicked() {
 
     name = name.toUpper();
 
-    LevelManager::setUserName(name);
+    UserInformation::setUserName(name);
 
     //check for a savedfile. if found values will be set. if not
     //will use default values
-    LevelManager::getInstance().loadFile();
+    FileManager::getInstance().loadFile();
 
     //free up the buttons based on lastUnlockedLevel so
     //that the player may start a game by selecting that button.
@@ -119,7 +121,7 @@ void MainWindow::on_pbLoad_clicked() {
     for (QObject* obj: ui->levels->children()) {
         QPushButton* button = dynamic_cast<QPushButton*>(obj);
         if (button != nullptr) {
-            if (button->text().toInt() <= LevelManager::getLastUnlockedLevel()) {
+            if (button->text().toInt() <= UserInformation::getLastUnlockedLevel()) {
                 button->setEnabled(true);
             } else {
                 button->setEnabled(false);

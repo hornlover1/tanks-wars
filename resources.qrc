@@ -11,8 +11,6 @@
         <file>Resources/level8.txt</file>
         <file>Resources/level9.txt</file>
         <file>Resources/logo.png</file>
-        <file>Resources/HighScores/highscore0.txt</file>
-        <file>Resources/HighScores/highscore1.txt</file>
         <file>Resources/saveFile.txt</file>
         <file>Resources/Sound/BattleMarch.mp3</file>
     </qresource>
