@@ -25,8 +25,19 @@ void Interface::setUi(Ui::MainWindow *initUi) {
 }
 
 void Interface::drawObject(LevelObject* obj) {
-    for (QObject* obj: ui->gameArea->children()) {
-        QLabel* lbl = dynamic_cast<QLabel*>(obj);
+    qDebug() << obj->getId();
+    qDebug() << obj->getImagePath();
+    qDebug() << obj->getX();
+    qDebug() << obj->getY();
+    BulletObject* bullet = dynamic_cast<BulletObject*>(obj);
+    if (bullet != nullptr && LevelManager::getInstance().getObjects().size() == 0) {
+        //don't fire a bullet after the level has ended
+        return;
+    }
+    qDebug() << LevelManager::getInstance().getObjects().size();
+    qDebug() << "not working";
+    for (QObject* object: ui->gameArea->children()) {
+        QLabel* lbl = dynamic_cast<QLabel*>(object);
         if (lbl != nullptr && lbl->width() == 800 && lbl->height() == 600) {
             lbl->hide();
             lbl->deleteLater();
@@ -166,8 +177,7 @@ void Interface::showVictory() {
     updateGUI();
 }
 
-void Interface::updateFiles()
-{
+void Interface::updateFiles() {
     //prepare for next level
     if(UserInformation::getLastUnlockedLevel() == UserInformation::getInstance().getLevel())
     {
@@ -218,6 +228,7 @@ void Interface::showDefeat(QString msg) {
 }
 
 void Interface::blankUI() {
+    qDebug() << "blankUI called";
     for (QObject* obj: ui->gameArea->children()) {
         QLabel* lbl = dynamic_cast<QLabel*>(obj);
         if (lbl != nullptr) {
@@ -225,6 +236,7 @@ void Interface::blankUI() {
             lbl->deleteLater();
         }
     }
+    LevelManager::getInstance().deleteAllObjects();
     QLabel* lbl = new QLabel(ui->gameArea);
     lbl->setGeometry(0, 0, 800, 600); // fill up the screen
     lbl->setScaledContents(true);
