@@ -1,3 +1,8 @@
+//turn off qDebug
+#ifndef QT_NO_DEBUG_OUTPUT
+#define QT_NO_DEBUG_OUTPUT
+#endif
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
