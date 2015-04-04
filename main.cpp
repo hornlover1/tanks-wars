@@ -4,12 +4,13 @@
 // Desc: This file executes the program and runs a unit test.
 //--------------------------------------------------------------
 
-#include "mainwindow.h"
 #include <QApplication>
 #include <vector>
 #include <string>
+
 #include "unittests.h"
 #include "interface.h"
+#include "mainwindow.h"
 
 using namespace std;
 

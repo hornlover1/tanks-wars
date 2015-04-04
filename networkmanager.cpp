@@ -5,12 +5,13 @@
 //      for mulitplayer gameplay.
 //--------------------------------------------------------------
 
-#include "networkmanager.h"
 #include <QtNetwork/QHostAddress>
 #include <QtNetwork/QNetworkInterface>
-#include "opponentmanager.h"
 #include <sstream>
 #include <QApplication>
+
+#include "networkmanager.h"
+#include "opponentmanager.h"
 #include "interface.h"
 
 NetworkManager::NetworkManager(QObject *parent) :

@@ -178,8 +178,6 @@ void MainWindow::on_btCheat_clicked() {
     ui->gameArea->installEventFilter(this);
     ui->opponentIp->setEnabled(false);
     timer->start();
-    //don't run AI during cheat mode.
-    //connect(timer, SIGNAL(timeout()), this, SLOT(driveAI()));
 }
 
 void MainWindow::updateTime() {

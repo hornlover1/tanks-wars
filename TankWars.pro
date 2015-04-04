@@ -17,7 +17,6 @@ SOURCES += main.cpp\
         levelobject.cpp \
         interface.cpp \
         levelmanager.cpp \
-        movablelabel.cpp \
         unittests.cpp \
         opponentmanager.cpp \
         networkmanager.cpp \
@@ -28,7 +27,6 @@ HEADERS  += mainwindow.h \
         levelobject.h \
         interface.h \
         levelmanager.h \
-        movablelabel.h \
         unittests.h \
         opponentmanager.h \
         networkmanager.h \

@@ -5,17 +5,17 @@
 //      contains clocks, the vector of objects, and the level
 //      information.
 //--------------------------------------------------------------
-
-#include "levelmanager.h"
-#include "interface.h"
 #include <QFile>
 #include <QTextStream>
 #include <math.h>
 #include <iostream>
 #include <QDebug>
+
 #include "networkmanager.h"
 #include "userinformation.h"
 #include "userinformation.h"
+#include "levelmanager.h"
+#include "interface.h"
 using namespace std;
 
 LevelManager LevelManager::instance;

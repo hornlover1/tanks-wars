@@ -6,14 +6,15 @@
 //      for the test.
 //--------------------------------------------------------------
 
-#include "levelmanager.h"
-#include "unittests.h"
-#include <vector>
-#include "levelobject.h"
 #include <cassert>
 #include <QDebug>
 #include <QDateTime>
 #include <QThread>
+#include <vector>
+
+#include "levelobject.h"
+#include "levelmanager.h"
+#include "unittests.h"
 
 /*
 Level 0 should look like:

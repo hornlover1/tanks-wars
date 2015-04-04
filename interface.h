@@ -10,7 +10,6 @@
 #define INTERFACE_H
 
 #include "levelobject.h"
-#include "movablelabel.h"
 #include "ui_mainwindow.h"
 #include "mainwindow.h"
 #include <QString>
