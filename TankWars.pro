@@ -18,22 +18,22 @@ SOURCES += main.cpp\
         interface.cpp \
         levelmanager.cpp \
         movablelabel.cpp \
-    unittests.cpp \
-    opponentmanager.cpp \
-    networkmanager.cpp \
-    filemanager.cpp \
-    userinformation.cpp
+        unittests.cpp \
+        opponentmanager.cpp \
+        networkmanager.cpp \
+        filemanager.cpp \
+        userinformation.cpp
 
 HEADERS  += mainwindow.h \
         levelobject.h \
         interface.h \
         levelmanager.h \
         movablelabel.h \
-    unittests.h \
-    opponentmanager.h \
-    networkmanager.h \
-    filemanager.h \
-    userinformation.h
+        unittests.h \
+        opponentmanager.h \
+        networkmanager.h \
+        filemanager.h \
+        userinformation.h
 
 FORMS    += mainwindow.ui
 
@@ -41,5 +41,6 @@ QMAKE_CXXFLAGS += -std=c++0x
 
 QT += multimedia
 
-RESOURCES += \
-    resources.qrc
+RESOURCES += resources.qrc
+
+DEFINES += QT_NO_DEBUG_OUTPUT

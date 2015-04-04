@@ -171,14 +171,15 @@ void MainWindow::on_btCheat_clicked() {
     LevelManager::getInstance().loadLevel(0);
     qApp->installEventFilter(this);
     ui->leUserName->setEnabled(false);
-    ui->rbEasy->setEnabled(false);
-    ui->rbHard->setEnabled(false);
-//    ui->rbMedium->setEnabled(false);
+    if (!ui->rbEasy->isChecked()) { ui->rbEasy->setEnabled(false); } else { ui->rbEasy->setFocus(); }
+    if (!ui->rbMedium->isChecked()) { ui->rbMedium->setEnabled(false); } else { ui->rbMedium->setFocus(); }
+    if (!ui->rbHard->isChecked()) { ui->rbHard->setEnabled(false); } else { ui->rbHard->setFocus(); }
     ui->gameArea->setMouseTracking(true);
     ui->gameArea->installEventFilter(this);
     ui->opponentIp->setEnabled(false);
     timer->start();
-    connect(timer, SIGNAL(timeout()), this, SLOT(driveAI()));
+    //don't run AI during cheat mode.
+    //connect(timer, SIGNAL(timeout()), this, SLOT(driveAI()));
 }
 
 void MainWindow::updateTime() {
