@@ -91,7 +91,6 @@ void LevelManager::AI() {
 }
 
 bool LevelManager::getStopTimer() {return stopTimer;}
-//int LevelManager::getLevel() {return levelNumber;}
 
 void LevelManager::loadLevel(int levelNum, bool isPrimary) {
     for (LevelObject* obj: objectsInLevel) {

@@ -1,6 +1,6 @@
 //--------------------------------------------------------------
 // File:   levelobject.cpp
-// Author: Jordan Fleck  Team: Barnabas  Class: CpS 111
+// Author: Nathan Collins  Team: Barnabas  Class: CpS 111
 // Desc: This file creates the objects in the world and adds it
 //      to the levelmanager.
 //--------------------------------------------------------------
@@ -191,13 +191,7 @@ void BulletObject::onTimeOut() {
         play = true;
     }
     if(play == true){
-        /*
-        QMediaPlayer player;
-        player.setMedia(QUrl::fromLocalFile(QFileInfo(":/sounds/Resources/boom4.mp3").absoluteFilePath()));
-        player.setVolume(100);
-        player.setMuted(false);
-        player.play();
-        */
+
         LevelManager::getInstance().updateUI();
     }
     else{
