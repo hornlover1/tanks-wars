@@ -88,8 +88,6 @@ void FileManager::saveUserHighScore() {
         int number = 0;
         conversion >> number;
 
-        //int number = *c; //appears to convert to askii characters, cause it ain't grabbing the correct number
-
         if (UserInformation::getInstance().getUserHighScore() > number) {
             isInserted = true;
             //reset stream state to start from clean slate

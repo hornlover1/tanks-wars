@@ -35,7 +35,7 @@ barricade 240 325
 barricade 240 350
 */
 
-void checkLevelOne() {
+void checkLevelZero() {
     vector<LevelObject*> objects = LevelManager::getInstance().getObjects();
     qDebug() << objects.size();
     assert(objects.size() == 14); //time doesn't count
@@ -77,36 +77,60 @@ void checkLevelOne() {
         qDebug() << "obj 4";
 
         // tests for tank2 go here
+    Target* target = dynamic_cast<Target*>(objects.at(5));
+        assert(target->getX() == 550);
+        assert(target->getY() == 200);
+
+        qDebug() << "obj 5";
 
     wall = dynamic_cast<WallObject*>(objects.at(6));
         assert(wall->getX() == 600);
         assert(wall->getY() == 400);
 
-        qDebug() << "obj 5";
+        qDebug() << "obj 6";
 
     wall = dynamic_cast<WallObject*>(objects.at(7));
         assert(wall->getX() == 0);
         assert(wall->getY() == -50);
 
-         qDebug() << "obj 6";
+         qDebug() << "obj 7";
 
     wall = dynamic_cast<WallObject*>(objects.at(8));
         assert(wall->getX() == -50);
         assert(wall->getY() == 0);
 
-         qDebug() << "obj 7";
+         qDebug() << "obj 8";
 
     wall = dynamic_cast<WallObject*>(objects.at(9));
         assert(wall->getX() == 0);
         assert(wall->getY() == 600);
 
-         qDebug() << "obj 8";
+         qDebug() << "obj 9";
 
     wall = dynamic_cast<WallObject*>(objects.at(10));
         assert(wall->getX() == 800);
         assert(wall->getY() == 0);
 
-        qDebug() << "obj 9";
+        qDebug() << "obj 10";
+
+    Barricade* barricade = dynamic_cast<Barricade*>(objects.at(11));
+        assert(barricade->getX() == 240);
+        assert(barricade->getY() == 310);
+
+        qDebug() << "obj 11";
+
+    barricade = dynamic_cast<Barricade*>(objects.at(12));
+        assert(barricade->getX() == 240);
+        assert(barricade->getY() == 325);
+
+        qDebug() << "obj 12";
+
+    barricade = dynamic_cast<Barricade*>(objects.at(13));
+        assert(barricade->getX() == 240);
+        assert(barricade->getY() == 350);
+
+        qDebug() << "obj 13";
+
         qDebug() << "Objects loaded and ready for use.";
 }
 
@@ -130,7 +154,7 @@ void checkFiringBullet() {
 
 void runUnitTests() {
     LevelManager::getInstance().loadLevel(0);
-    checkLevelOne();
+    checkLevelZero();
     checkMovingTank();
     checkFiringBullet();
 }
