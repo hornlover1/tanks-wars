@@ -1,3 +1,11 @@
+//--------------------------------------------------------------
+// File:   opponentmanager.cpp
+// Author: Nathan Collins  Team: Barnabas  Class: CpS 111
+// Desc: This file contains the info for the other player in
+//      multiplayer, allowing the program to compute 2 tanks
+//      moving and shooting.
+//--------------------------------------------------------------
+
 #include "opponentmanager.h"
 
 OpponentManager::OpponentManager() {}

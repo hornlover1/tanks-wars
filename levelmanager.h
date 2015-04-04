@@ -1,3 +1,11 @@
+//--------------------------------------------------------------
+// File:   levelmanager.h
+// Author: Nathan Collins  Team: Barnabas  Class: CpS 111
+// Desc: This file contains the code to edit the level. It
+//      contains clocks, the vector of objects, and the level
+//      information.
+//--------------------------------------------------------------
+
 #ifndef LEVELMANAGER_H
 #define LEVELMANAGER_H
 

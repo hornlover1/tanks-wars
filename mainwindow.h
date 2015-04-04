@@ -1,3 +1,11 @@
+//--------------------------------------------------------------
+// File:   mainwindow.h
+// Author: Nathan Collins  Team: Barnabas  Class: CpS 111
+// Desc: This file contains access to the gui, as well as
+//      updating the gui when events happen in game, such as a
+//      key press, mouse click, or button click.
+//--------------------------------------------------------------
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 

@@ -1,3 +1,10 @@
+//--------------------------------------------------------------
+// File:   levelobject.h
+// Author: Nathan Collins  Team: Barnabas  Class: CpS 111
+// Desc: This file creates the objects in the world and adds it
+//      to the levelmanager.
+//--------------------------------------------------------------
+
 #ifndef LEVELOBJECT_H
 #define LEVELOBJECT_H
 
@@ -31,9 +38,9 @@ public:
     QString getImagePath();
 
     //get a rectangle representing the object for calculations especially involving overlapping of objects
-    QRect virtual getGeometry();//must be overriden by bullet and tank so the label size may be changed
+    QRect virtual getGeometry();//overriden by bullet and tank so the label size may be changed
 
-    //for objects that are destroyable, blow them up, preferably with cool animation
+    //for objects that are destroyable, blow them up
     virtual void destroy();
 
     //pause the timer to stop animation
@@ -44,6 +51,7 @@ public:
 
     ~LevelObject();
 
+    //this 'flag' is a bool that determines if the object is the key to win the game
     virtual bool hasFlag() {return false;}
 protected slots:
     //called when the timer goes off
@@ -56,7 +64,6 @@ enum Direction {North, South, East, West, nullDirection};
 class MovableObject: public LevelObject {
     Q_OBJECT 
 
-    //isMovable = true;
 protected:
     //what direction to move
     Direction d;
@@ -88,7 +95,6 @@ public:
 class TankObject: public MovableObject {
     Q_OBJECT
 
-    //isDestroyable=true
     //the angle, in degrees, that the turret is facing
     int turretAngle;
 
@@ -107,7 +113,7 @@ public:
     //aim the turret in that direction
     void setTurret(int angle);
 
-    //blow up the tank, preferably with cool animation
+    //blow up the tank
     void destroy();
 public slots:
     //move 5px in the direction specified
@@ -117,7 +123,6 @@ public slots:
 class BulletObject: public MovableObject  {
     Q_OBJECT
 
-    //isDestroyable=true
     //the angle, in degrees, that the bullet is moving
     double heading;
     TankObject* tank;
@@ -138,17 +143,12 @@ public slots:
 class WallObject: public LevelObject {
     Q_OBJECT
 
-    //isMovable=false
-    //isDestroyable=false
 public:
     WallObject(int x, int y, int width, int height, QObject* parent = 0);
 };
 
 class Barricade: public LevelObject {
     Q_OBJECT
-
-    //isMovable=false
-    //isDestroyable=true
 
 public:
     Barricade(int x, int y, QObject* parent = 0);

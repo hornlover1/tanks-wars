@@ -1,3 +1,10 @@
+//--------------------------------------------------------------
+// File:   filemanager.cpp
+// Author: Jordan Fleck  Team: Barnabas  Class: CpS 111
+// Desc: This file is in charge of keeping track of the highscore
+//      and save files for the game.
+//--------------------------------------------------------------
+
 #include "filemanager.h"
 #include "levelmanager.h"
 #include "userinformation.h"
@@ -31,7 +38,6 @@ void FileManager::saveFile() {
     out << s.toStdString().c_str() << endl;
     out << UserInformation::getLastUnlockedLevel() << endl;
 
-    //loop through every line in file
     do {
         //read data and put into a QString for comparison
         in.getline(c,20);
@@ -109,15 +115,14 @@ void FileManager::saveUserHighScore() {
             while(i < 5) {
                 for(int integer = 0; integer < 3; integer++) {
                     inStream.getline(c,20);
-                    outStream << c << endl; //I assume this will write the whole line, no more no less
+                    outStream << c << endl;
                 }
-                i++;
-                //break;
+                i++;                
             }
             break;
         } else {
-            inStream.getline(c,20); //chuck out empty whitespace
-            inStream.getline(c, 20); //chuck out the next name so we can get the number later
+            inStream.getline(c,20); //remove empty whitespace
+            inStream.getline(c, 20); //remove the next name so we can get the number later
         }
 
         counter++; //this goes up every time a set of data is read. {name, highscore, whiteSpace}
@@ -128,7 +133,6 @@ void FileManager::saveUserHighScore() {
 
     if (isInserted == true) {
         remove("HighScore.txt");
-        //QString filename = QString("HighScore") + QString::number(levelNumber) + QString(".txt");
         rename("temp.txt", filename.toStdString().c_str());
     } else {
         remove("temp.txt");

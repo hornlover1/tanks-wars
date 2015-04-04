@@ -1,3 +1,11 @@
+//--------------------------------------------------------------
+// File:   interface.h
+// Author: Nathan Collins  Team: Barnabas  Class: CpS 111
+// Desc: This file contains the singleton for the interface,
+//      the psuedo observer that connects the model to the view
+//      and updates the gui.
+//--------------------------------------------------------------
+
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
@@ -33,14 +41,19 @@ public:
     //take the object representing the LevelObject off the screen
     void deleteObject(LevelObject* obj);
 
+    //shows the current time on the gui
     void showTime(QString);
 
+    //shows the victory message when the user wins.
     void showVictory();
 
+    //displays the instructions to the game
     void howTo();
 
+    //shows the defeat message when the user loses
     void showDefeat(QString);
 
+    //clears the UI
     void blankUI();
 
     int getDegrees(MovableObject* obj);

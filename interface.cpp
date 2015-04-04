@@ -1,3 +1,11 @@
+//--------------------------------------------------------------
+// File:   interface.cpp
+// Author: Nathan Collins  Team: Barnabas  Class: CpS 111
+// Desc: This file contains the singleton for the interface,
+//      the psuedo observer that connects the model to the view
+//      and updates the gui.
+//--------------------------------------------------------------
+
 #include "interface.h"
 #include "levelmanager.h"
 #include "filemanager.h"
@@ -53,8 +61,6 @@ void Interface::drawObject(LevelObject* obj) {
     QPixmap pic(obj->getImagePath().toStdString().c_str());
     lbl->setPixmap(pic);
     lbl->setScaledContents(true);
-
-  //  lbl->setStyleSheet("QLabel {color:red; background-color: red;}");
     lbl->show();
     obj->getGeometry();
 }
@@ -66,10 +72,6 @@ void Interface::moveObject(LevelObject *obj) {
             continue;
         }
         if (lbl->accessibleName() == QString::number(obj->getId())) {
-            //correct label
-            //move the label to the new position,
-           // lbl->setGeometry(obj->getGeometry());
-            //make it face the right direction - may go into own class
 
             TankObject* TankObj = dynamic_cast<TankObject*>(obj);
             if(TankObj != nullptr) {
@@ -154,7 +156,6 @@ void Interface::deleteObject(LevelObject *obj) {
         if (lbl->accessibleName() == QString::number(obj->getId())) {
             //correct label
             //hide and then delete the label
-
             lbl->hide();
             lbl->deleteLater();
         }
@@ -184,11 +185,11 @@ void Interface::updateFiles() {
         UserInformation::getInstance().incrementLastUnlockedLevel();
     }
 
-    FileManager::getInstance().saveFile(); //works
+    FileManager::getInstance().saveFile();
 
-    UserInformation::getInstance().setHighScore(); //works!
+    UserInformation::getInstance().setHighScore();
 
-    FileManager::getInstance().saveUserHighScore(); //works!
+    FileManager::getInstance().saveUserHighScore();
 }
 
 void Interface::updateGUI(){
@@ -213,7 +214,7 @@ void Interface::updateGUI(){
 
 void Interface::howTo() {
     QMessageBox *explain = new QMessageBox(ui->gameArea);
-    explain->setText("Before playing, please insert your name in the box above and hit load to begin your campaign.\nThis is a simple overview of the game's controls.\nControls:\n\n -Right arrow moves the tank right.\n -Down arrow moves the tank down.\n -Left arrow moves the tank left.\n -Up arrow moves the tank up.\n -Click the mouse on the playing field to shoot.\nNOTE: Your bullets will follow the mouse's current position.\n\nTo beat the game, simply be the last tank standing. Good luck.");
+    explain->setText("Before playing, please insert your name in the box above and hit load to begin your campaign.\n\nThis is a simple overview of the game's controls.\nControls:\n\n -Right arrow moves the tank right.\n -Down arrow moves the tank down.\n -Left arrow moves the tank left.\n -Up arrow moves the tank up.\n -Click the mouse on the playing field to shoot.\nNOTE: Your bullets will follow the mouse's current position.\n\nTo beat the game, simply be the last tank standing. Good luck.");
     explain->show();
 }
 

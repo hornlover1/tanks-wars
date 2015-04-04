@@ -1,3 +1,10 @@
+//--------------------------------------------------------------
+// File:   networkmanager.cpp
+// Author: Nathan Collins  Team: Barnabas  Class: CpS 111
+// Desc: This file manages the connection to other players
+//      for mulitplayer gameplay.
+//--------------------------------------------------------------
+
 #include "networkmanager.h"
 #include <QtNetwork/QHostAddress>
 #include <QtNetwork/QNetworkInterface>
@@ -29,7 +36,6 @@ NetworkManager::NetworkManager(QObject *parent) :
                       QString::number(part2) + "." +
                       QString::number(part1) + "." +
                       QString::number(part0);
-            //don't ask me how this works. I just guessed from how it was turning out, and it worked
         }
     }
 }
@@ -56,7 +62,6 @@ void NetworkManager::newConnection() {
 }
 
 void NetworkManager::disconnected() {
-    //TODO:write this method
 }
 
 void NetworkManager::read() {

@@ -1,3 +1,10 @@
+//--------------------------------------------------------------
+// File:   levelobject.cpp
+// Author: Jordan Fleck  Team: Barnabas  Class: CpS 111
+// Desc: This file creates the objects in the world and adds it
+//      to the levelmanager.
+//--------------------------------------------------------------
+
 #include "levelobject.h"
 #include "levelmanager.h"
 #include "interface.h"
@@ -11,7 +18,6 @@
 
 int LevelObject::nextId = 0;
 
-//TODO: write this file
 LevelObject::LevelObject(int initX, int initY, int initWidth, int initHeight, QObject *parent) :
     QObject(parent), id(++nextId), x(initX), y(initY), width(initWidth), height(initHeight),
     isMovable(false), isDestroyable(false), timer(new QTimer(this)) {
@@ -129,8 +135,6 @@ void TankObject::destroy() {
     LevelManager::getInstance().setStopTimer(true);
     QString s = "Mission Failed: You have lost " + UserInformation::getInstance().getUserName() + ".";
     Interface::getInstance().showDefeat(s);
-
-    //TODO: define this method - possibly to show awsome graphics
 }
 
 void TankObject::onTimeOut() {
@@ -219,5 +223,4 @@ Target::Target(int initX, int initY, QObject *parent):
 void Target::destroy() {
     LevelManager::getInstance().setStopTimer(true);
     Interface::getInstance().showVictory();
-    //code for winning game
 }

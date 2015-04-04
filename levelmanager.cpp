@@ -1,3 +1,11 @@
+//--------------------------------------------------------------
+// File:   levelmanager.cpp
+// Author: Nathan Collins  Team: Barnabas  Class: CpS 111
+// Desc: This file contains the code to edit the level. It
+//      contains clocks, the vector of objects, and the level
+//      information.
+//--------------------------------------------------------------
+
 #include "levelmanager.h"
 #include "interface.h"
 #include <QFile>
@@ -19,7 +27,6 @@ int LevelManager::getHardTime() {return hardTime;}
 //called by a QTimer to decremented the user's selected time
 void LevelManager::decrementTime() {
     if (easyTime <= 0 || mediumTime <= 0 || hardTime <= 0) {
-        //TODO:stop game
         return;
     }
     if (UserInformation::getInstance().getUserTime() == "Easy") {
@@ -81,9 +88,6 @@ void LevelManager::AI() {
             break;
         }
     }
-
-    //move in a basic square
-
 }
 
 bool LevelManager::getStopTimer() {return stopTimer;}
@@ -149,7 +153,6 @@ void LevelManager::loadLevel(int levelNum, bool isPrimary) {
             Interface::getInstance().drawObject(obj);
         }
     }
-    //TODO: load the next level from file
 }
 
 //loop through all objects. If movable, then call moveObject() to update position
@@ -171,13 +174,10 @@ void LevelManager::updateUI() {
 void LevelManager::moveMouse(int x, int y) {
     mouseX = x;
     mouseY = y;
-    //TODO: write logic to move the turret and send it over the network
 }
 
-//Jordan manipulated obj
 void LevelManager::mouseClick() {
     if(stopTimer == false) {
-        //TODO: fire a bullet at the target
         TankObject* tank;
         Target* target;
         for (LevelObject* obj: objectsInLevel) {
@@ -217,7 +217,6 @@ void LevelManager::resume() {
 }
 
 void LevelManager::keyPress(Direction d) {
-    //TODO: write this method
     //get tank
     //start tank moving
     //update interface when tank moves - how to do?
@@ -237,7 +236,6 @@ void LevelManager::keyPress(Direction d) {
 }
 
 void LevelManager::keyRelease(Direction /*d*/) {
-    //TODO: write this method
     //get tank
     //stop tank moving
     TankObject* tank;

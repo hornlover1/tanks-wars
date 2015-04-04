@@ -1,3 +1,11 @@
+//--------------------------------------------------------------
+// File:   unittests.cpp
+// Author: Nathan Collins  Team: Barnabas  Class: CpS 111
+// Desc: This file's only purpose is to run the unit test. This
+//      file in particular contains the various debug statements
+//      for the test.
+//--------------------------------------------------------------
+
 #include "levelmanager.h"
 #include "unittests.h"
 #include <vector>
@@ -9,7 +17,7 @@
 
 /*
 Level 0 should look like:
-time 30 25 20
+time 1000 100 15
 wall 0 0 200 200
 wall 0 400 200 200
 tank 50 300
@@ -21,21 +29,22 @@ wall 0 -50 800 50
 wall -50 0 50 600
 wall 0 600 800 50
 wall 800 0 50 600
-flag 600 300
+barricade 240 310
+barricade 240 325
+barricade 240 350
 */
 
 void checkLevelOne() {
     vector<LevelObject*> objects = LevelManager::getInstance().getObjects();
     qDebug() << objects.size();
     assert(objects.size() == 14); //time doesn't count
-    //need getters
+
     assert(LevelManager::getInstance().getEasyTime() == 1000);
     assert(LevelManager::getInstance().getMediumTime() == 100);
     assert(LevelManager::getInstance().getHardTime() == 15);
 
     qDebug() << "The difficulty times were sucessfully loaded from the file.";
 
-    //write more tests to test the other lines in the file
     WallObject* wall = dynamic_cast<WallObject*>(objects.at(0));
         assert(wall->getX() == 0);
         assert(wall->getY() == 0);

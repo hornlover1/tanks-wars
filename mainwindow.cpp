@@ -1,3 +1,11 @@
+//--------------------------------------------------------------
+// File:   mainwindow.cpp
+// Author: Nathan Collins  Team: Barnabas  Class: CpS 111
+// Desc: This file contains access to the gui, as well as
+//      updating the gui when events happen in game, such as a
+//      key press, mouse click, or button click.
+//--------------------------------------------------------------
+
 #include <QKeyEvent>
 #include <QDebug>
 #include <QMessageBox>
@@ -89,8 +97,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent* ev) {
     }
 }
 
-//TODO: write this file to call levelManager
-
 void MainWindow::on_pbLoad_clicked() {
     //safety check if user put in a name
  //get the name
@@ -111,8 +117,7 @@ void MainWindow::on_pbLoad_clicked() {
 
     //free up the buttons based on lastUnlockedLevel so
     //that the player may start a game by selecting that button.
-    //and stop repetitive coding
-    for (QObject* obj: ui->levels->children()) {
+      for (QObject* obj: ui->levels->children()) {
         QPushButton* button = dynamic_cast<QPushButton*>(obj);
         if (button != nullptr) {
             if (button->text().toInt() <= UserInformation::getLastUnlockedLevel()) {
@@ -133,8 +138,6 @@ void MainWindow::levelButtonClicked() {
         int levelNum = button->text().toInt();
         LevelManager::getInstance().loadLevel(levelNum);
         qApp->installEventFilter(this);
-
-        //disenable certain wiki's
         ui->leUserName->setEnabled(false);
         ui->btCheat->setEnabled(false);
 

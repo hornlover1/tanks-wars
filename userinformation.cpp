@@ -1,3 +1,11 @@
+//--------------------------------------------------------------
+// File:   userinformation.cpp
+// Author: Jordan Fleck  Team: Barnabas  Class: CpS 111
+// Desc: This file contains all the information needed to store
+//      user save information, as well as highscore, highest
+//      level reached, and what level the user is currently on.
+//--------------------------------------------------------------
+
 #include "userinformation.h"
 #include "levelmanager.h"
 

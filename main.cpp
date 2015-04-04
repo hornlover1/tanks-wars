@@ -1,3 +1,9 @@
+//--------------------------------------------------------------
+// File:   main.cpp
+// Author: Nathan Collins  Team: Barnabas  Class: CpS 111
+// Desc: This file executes the program and runs a unit test.
+//--------------------------------------------------------------
+
 #include "mainwindow.h"
 #include <QApplication>
 #include <vector>

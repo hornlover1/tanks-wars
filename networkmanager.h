@@ -1,3 +1,10 @@
+//--------------------------------------------------------------
+// File:   networkmanager.h
+// Author: Nathan Collins  Team: Barnabas  Class: CpS 111
+// Desc: This file manages the connection to other players
+//      for mulitplayer gameplay.
+//--------------------------------------------------------------
+
 #ifndef NETWORKMANAGER_H
 #define NETWORKMANAGER_H
 

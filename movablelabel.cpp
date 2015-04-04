@@ -23,7 +23,6 @@ void MovableLabel::mousePressEvent(QMouseEvent *ev) {
     offset = ev->pos(); // location where mouse was clicked within the label
 }
 
-//TODO: refine this class for this game
 void MovableLabel::mouseReleaseEvent(QMouseEvent* /*ev*/) {
     mouseDragging = false;
 }
